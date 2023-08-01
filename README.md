@@ -1,2 +1,0 @@
-# MeerTools
-Qitmeer tools
