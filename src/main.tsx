@@ -1,4 +1,5 @@
 import * as ReactDOM from "react-dom";
+import App from "./App";
 import TransferTool from "./TransferTool/TransferTool";
 import './index.css'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -9,7 +10,8 @@ ReactDOM.render(
   <BrowserRouter>
       <I18nextProvider i18n={i18n}>
         <Switch>
-          <Route path="/" component={TransferTool} />
+          <Route path="/" component={App} />
+          <Route path="/trans" component={TransferTool} />
         </Switch>
       </I18nextProvider>
   </BrowserRouter>,
