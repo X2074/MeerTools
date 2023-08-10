@@ -18,6 +18,7 @@ import styles from './App.module.css';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// 可能用于组件样式的颜色表
 const theme = createTheme({
   palette: {
     primary: {
@@ -33,154 +34,70 @@ const theme = createTheme({
 });
 
 function App() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  // 决定页面是否英文的flag
+  const [engFlag, setEngFlag] = React.useState<boolean|HTMLElement>(false);
+  // 水龙头/生态/工具集的切换值（亦称选中值）
+  const [topBtnIdx, setTopBtnIdx] = React.useState<number|HTMLElement>(0);
+  const [topDiaIdx, setTopDiaIdx] = React.useState<number|HTMLElement>(0);
+  const [flagone, setFlagOne] = React.useState<boolean|HTMLElement>(false);
+  const [flagtwo, setFlagTwo] = React.useState<boolean|HTMLElement>(false);
+  const [flagthr, setFlagThr] = React.useState<boolean|HTMLElement>(false);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+  const handleTop = (idx : number) => {
+    setTopBtnIdx(idx);
+    switch(idx) {
+      case 0:
+        setFlagOne(true);
+        setFlagTwo(false);
+        setFlagThr(false);
+        break;
+      case 1:
+        setFlagOne(false);
+        setFlagTwo(true);
+        setFlagThr(false);
+        break;
+      case 2:
+        setFlagOne(false);
+        setFlagTwo(false);
+        setFlagThr(true);
+        break;
+      default:
+        break;
+    }
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  
+  const handleDia = (idx : number) => {
+    setTopDiaIdx(idx);
+  }
 
   return (
-    <div id="root" className={styles.root}>
-      <div className={styles.header}>
-        <div className={styles.header_content}>
-            <ThemeProvider theme={theme}>
-          <AppBar position="static" color="secondary" style={{backgroundColor: '#fff'}}>
-              <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                  <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, color: 'secondary.light', mr: 1 }} />
-                  <Typography
-                    variant="h6"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                      mr: 2,
-                      display: { xs: 'none', md: 'flex' },
-                      fontFamily: 'monospace',
-                      fontWeight: 700,
-                      letterSpacing: '.3rem',
-                      color: 'secondary.light',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    LOGO
-                  </Typography>
-
-                  <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                    <IconButton
-                      size="large"
-                      aria-label="account of current user"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      onClick={handleOpenNavMenu}
-                      // color="inherit"
-                      sx={{color: 'secondary.light',}}
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                    <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorElNav}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                      open={Boolean(anchorElNav)}
-                      onClose={handleCloseNavMenu}
-                      sx={{
-                        display: { xs: 'block', md: 'none' },
-                      }}
-                    >
-                      {pages.map((page) => (
-                        <MenuItem key={page} onClick={handleCloseNavMenu}>
-                          <Typography textAlign="center">{page}</Typography>
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  </Box>
-                  <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                  <Typography
-                    variant="h5"
-                    noWrap
-                    component="a"
-                    href=""
-                    sx={{
-                      mr: 2,
-                      display: { xs: 'flex', md: 'none' },
-                      flexGrow: 1,
-                      fontFamily: 'monospace',
-                      fontWeight: 700,
-                      letterSpacing: '.3rem',
-                      color: 'inherit',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    LOGO
-                  </Typography>
-                  <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                    {pages.map((page) => (
-                      <Button
-                        key={page}
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: 'white', display: 'block' }}
-                      >
-                        {page}
-                      </Button>
-                    ))}
-                  </Box>
-
-                  <Box sx={{ flexGrow: 0 }}>
-                    {/* <Tooltip title="Open settings">
-                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                      </IconButton>
-                    </Tooltip>
-                    <Menu
-                      sx={{ mt: '45px' }}
-                      id="menu-appbar"
-                      anchorEl={anchorElUser}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={Boolean(anchorElUser)}
-                      onClose={handleCloseUserMenu}
-                    >
-                      {settings.map((setting) => (
-                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                          <Typography textAlign="center">{setting}</Typography>
-                        </MenuItem>
-                      ))}
-                    </Menu> */}
-                  </Box>
-                </Toolbar>
-              </Container>
-          </AppBar>
-            </ThemeProvider>
+    <div className={styles.root}>
+      <ThemeProvider theme={theme}>
+        <div className={styles.header}>
+          <div className={styles.header_content}>
+            {!engFlag && <div className={styles.top_buttons}>
+              <button className={`${styles.top_button} ${topBtnIdx === 0 ? styles.active_top_btn : ''}`} onClick={() => handleTop(0)}>
+                水龙头
+                <div style={{display: flagone ? 'flex' : 'none'}} className={styles.top_dialog}>
+                  <p className={`${topDiaIdx === 0 ? styles.active_top_dia : ''}`} onClick={() => handleDia(0)}>amama ajsd</p>
+                  <p className={`${topDiaIdx === 1 ? styles.active_top_dia : ''}`} onClick={() => handleDia(1)}>dimai ljos</p>
+                </div>
+              </button>
+              <button className={`${styles.top_button} ${topBtnIdx === 1 ? styles.active_top_btn : ''}`} onClick={() => handleTop(1)}>
+                生态
+              </button>
+              <button className={`${styles.top_button} ${topBtnIdx === 2 ? styles.active_top_btn : ''}`} onClick={() => handleTop(2)}>
+                工具集
+              </button>
+            </div>}
+            {engFlag && <div className={styles.top_buttons}>
+              <button className={styles.top_button}>Faucet</button>
+              <button className={styles.top_button}>Ecosystem</button>
+              <button className={styles.top_button}>Toolkit</button>
+            </div>}
+          </div>
         </div>
-      </div>
+      </ThemeProvider>
     </div>
   );
 }
