@@ -1,23 +1,16 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import en_png from "./assets/MainPage/btn_en.png";
+import group_png from "./assets/MainPage/btn_group.png";
+import qitmeer_png from "./assets/MainPage/qitmeer_logo.png";
+import wallet_png from "./assets/MainPage/btn_wallet.png";
+import logo1_png from "./assets/MainPage/logo_1.png";
+import logo2_png from "./assets/MainPage/logo_2.png";
+import logo3_png from "./assets/MainPage/logo_3.png";
+import logo4_png from "./assets/MainPage/logo_4.png";
 // import './App.css'
 import styles from './App.module.css';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 // 可能用于组件样式的颜色表
 const theme = createTheme({
   palette: {
@@ -70,6 +63,10 @@ function App() {
     setTopDiaIdx(idx);
   }
 
+  const switchFlagEng = () => {
+    setEngFlag(old => !old);
+  }
+
   return (
     <div className={styles.root}>
       <ThemeProvider theme={theme}>
@@ -95,8 +92,86 @@ function App() {
               <button className={styles.top_button}>Ecosystem</button>
               <button className={styles.top_button}>Toolkit</button>
             </div>}
+            {/* 图标 */}
+            <div className={styles.logo_top_left}>
+              <img src={qitmeer_png} />
+            </div>
+            <div className={styles.btns_header_right}>
+              <img className={styles.btn_group} src={group_png} />
+              <img className={styles.btn_en} onClick={() => switchFlagEng()} src={en_png} />
+              <img className={styles.btn_wallet} src={wallet_png} />
+            </div>
           </div>
         </div>
+        {/* 内容部分 */}
+        {!engFlag && <div className={styles.content}>
+          <p>获取Qitmeer测试币</p>
+          <p>获取测试网Meer以运行你的DAPP</p>
+        </div>}
+        {engFlag && <div className={styles.content}>
+          <p>Get Qitmeer Test Coins</p>
+          <p>Get Testnet MEER to run your DAPP</p>
+        </div>}
+        {/* 首选项 */}
+        <div className={styles.btns_center}>
+          <button className={styles.btn_middle_left}>QNG Testnet</button>
+          <button className={styles.btn_middle_right}>Amana Testne</button>
+        </div>
+        {/* 搜索框 */}
+        <div className={styles.search_line}>
+          <div className={styles.search_area}>
+            <input type="text" placeholder={!engFlag ? '请输入你的钱包地址(0x...)' : 'Please enter your wallet address (0x...)'} />
+            <div>{!engFlag ? '领取5个测试MEER' : 'Claim 5 Test MEER'}</div>
+          </div>
+          <div className={styles.remark_area}>{!engFlag ? '每个地址限制20次，每次5 MEER。 同一IP或地址72小时内只能认领一次。' : 'Limit 20 times per address, 5 MEER each time. Same IP or address can only claim once within 72 hours.'}</div>
+        </div>
+        {/* 文字2 */}
+        <div className={styles.content_two}>
+          <p>{!engFlag ? '生态&工具' : 'Ecosystem & Tools'}</p>
+          <div className={styles.routers}>
+            <div className={styles.router}>
+              <img src={logo1_png} />
+              <div className={styles.router_content}>
+                <p>DimAI</p>
+                <p>{!engFlag ? '与DimAI一起释放你的想象力踏上元宇宙的创作之旅' : 'Ignite Your Creativity with DimAI: Embark on an Extraordinary Journey in the Metaverse'}</p>
+              </div>
+              <div className={styles.router_last}>
+                <div className={styles.router_btn}>{!engFlag ? '立刻探索' : 'Explore Now'}</div>
+              </div>
+            </div>
+            <div className={styles.router}>
+              <img src={logo2_png} />
+              <div className={styles.router_content}>
+                <p>批量转账</p>
+                <p>{!engFlag ? 'Qitmeer批量转账工具' : 'Ignite Your Creativity with DimAI: Embark on an Extraordinary Journey in the Metaverse'}</p>
+              </div>
+              <div className={styles.router_last}>
+                <div className={styles.router_btn}>{!engFlag ? '开始使用' : 'Start Using'}</div>
+              </div>
+            </div>
+            <div className={styles.router}>
+              <img src={logo3_png} />
+              <div className={styles.router_content}>
+                <p>供应量查询</p>
+                <p>{!engFlag ? 'Qitmeer供应量查询' : 'Ignite Your Creativity with DimAI: Embark on an Extraordinary Journey in the Metaverse'}</p>
+              </div>
+              <div className={styles.router_last}>
+                <div className={styles.router_btn}>{!engFlag ? '前往查看' : 'Go to View'}</div>
+              </div>
+            </div>
+            <div className={styles.router}>
+              <img src={logo4_png} />
+              <div className={styles.router_content}>
+                <p>Kafh</p>
+                <p>{!engFlag ? 'Qitmeer生态' : 'Ignite Your Creativity with DimAI: Embark on an Extraordinary Journey in the Metaverse'}</p>
+              </div>
+              <div className={styles.router_last}>
+                <div className={styles.router_btn}>{!engFlag ? '前往下载' : 'Go to Download'}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </ThemeProvider>
     </div>
   );

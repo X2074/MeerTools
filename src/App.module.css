@@ -91,3 +91,257 @@
 .top_dialog>p:first-child {
     margin-top: .27rem;
 }
+
+.logo_top_left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.logo_top_left>img {
+    width: 1.36rem;
+    height: .54rem;
+    margin-left: .05rem;
+}
+
+.btns_header_right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.btn_group {
+    width: 1.92rem;
+    height: .36rem;
+    margin-right: .36rem;
+}
+
+.btn_en {
+    width: .36rem;
+    height: .36rem;
+    margin-right: .36rem;
+}
+
+.btn_wallet {
+    height: 1.2rem;
+    width: .36rem;
+    margin-right: .05rem;
+}
+
+.content {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 1.7rem;
+}
+
+.content>p:first-child {
+    color: #fff;
+    font-size: .52rem;
+    height: .72rem;
+    line-height: .72rem;
+    text-align: center;
+    margin: 0;
+}
+
+.content>p:first-child {
+    color: #fff;
+    font-size: .24rem;
+    height: .33rem;
+    line-height: .33rem;
+    text-align: center;
+    margin: .19rem 0 0;
+}
+
+.btns_center {
+    position: absolute;
+    top: 3.68rem;
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn_middle_left {
+    color: #090904;
+    width: 2.05rem;
+    height: .53rem;
+    line-height: .53rem;
+    text-align: center;
+    font-size: .2rem;
+    border-radius: .1rem;
+    background-color: #31EB31;
+    /* mui的样式 */
+    cursor: pointer;
+    border: 0;
+    user-select: none;
+    vertical-align: middle;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    letter-spacing: .02857em;
+    /* text-transform: uppercase; */
+    /* transition: background-color 250ms cubic-bezier(); */
+}
+
+.btn_middle_right {
+    color: #fff;
+    margin-left: .24rem;
+    width: 2.05rem;
+    height: .53rem;
+    line-height: .53rem;
+    text-align: center;
+    font-size: .2rem;
+    border-radius: .1rem;
+    background-color: #090904;
+    border: .01rem solid #31EB31;
+    /* mui的样式 */
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    letter-spacing: .02857em;
+    /* text-transform: uppercase; */
+    /* transition: background-color 250ms cubic-bezier(); */
+}
+
+.search_line {
+    position: absolute;
+    top: 4.93rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search_area {
+    width: 7.67rem;
+    height: .66rem;
+    border-radius: .08rem;
+    border: .01rem solid rgb(219, 219, 219);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search_area>input {
+    width: 4rem;
+    margin-left: .3rem;
+    height: .44rem;
+    border: 0;
+    outline: 0;
+    font-size: .2rem;
+    padding: 0 auto;
+}
+
+.search_area>div {
+    font-size: .2rem;
+    border-radius: 0 .08rem .08rem 0;
+    background-color: #31EB31;
+    color: #fff;
+    width: 2.35rem;
+    height: .67rem;
+}
+
+.remark_area {
+    width: 7.67rem;
+    margin-top: .27rem;
+    padding-left: .07rem;
+    font-size: .14rem;
+    height: .2rem;
+    line-height: .2rem;
+    text-align: left;
+}
+
+.content_two {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 7.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content_two>p {
+    color: #fff;
+    font-size: .48rem;
+    height: .66rem;
+    line-height: .66rem;
+    text-align: center;
+    margin: 0;
+}
+
+.routers {
+    margin-top: .44rem;
+    width: auto;
+    height: auto;
+}
+
+.router {
+    height: 3.53rem;
+    width: 3.27rem;
+    border-radius: .08rem;
+    position: relative;
+    background-color: rgba(31,31,30,.85);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: .2rem;
+}
+
+.router>img {
+    width: 1rem;
+    height: 1rem;
+    margin-top: .34rem;
+}
+
+.router_content {
+    height: auto;
+    width: 100%;
+    margin-top: .3rem;
+}
+
+.router_content>p:first-child {
+    font-size: .24rem;
+    color: #fff;
+    height: .33rem;
+    line-height: .33rem;
+    text-align: center;
+}
+
+.router_content>p:last-child {
+    font-size: .14rem;
+    margin-top: .14rem;
+    height: auto;
+    line-height: .2rem;
+    text-align: center;
+}
+
+.router_last {
+    position: absolute;
+    top: 2.76rem;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.router_btn {
+    width: 2.05rem;
+    height: .53rem;
+    background: #31EB31;
+    border-radius: .1rem;
+    text-align: center;
+    line-height: .53rem;
+    font-size: .2rem;
+}
