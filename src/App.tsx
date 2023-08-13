@@ -72,6 +72,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <div className={styles.header}>
           <div className={styles.header_content}>
+            {/* 图标 */}
+            <div className={styles.logo_top_left}>
+              <img src={qitmeer_png} />
+            </div>
             {!engFlag && <div className={styles.top_buttons}>
               <button className={`${styles.top_button} ${topBtnIdx === 0 ? styles.active_top_btn : ''}`} onClick={() => handleTop(0)}>
                 水龙头
@@ -92,10 +96,6 @@ function App() {
               <button className={styles.top_button}>Ecosystem</button>
               <button className={styles.top_button}>Toolkit</button>
             </div>}
-            {/* 图标 */}
-            <div className={styles.logo_top_left}>
-              <img src={qitmeer_png} />
-            </div>
             <div className={styles.btns_header_right}>
               <img className={styles.btn_group} src={group_png} />
               <img className={styles.btn_en} onClick={() => switchFlagEng()} src={en_png} />
