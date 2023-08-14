@@ -8,6 +8,7 @@ import logo1_png from "./assets/MainPage/logo_1.png";
 import logo2_png from "./assets/MainPage/logo_2.png";
 import logo3_png from "./assets/MainPage/logo_3.png";
 import logo4_png from "./assets/MainPage/logo_4.png";
+import copyright_png from "./assets/MainPage/background_bottom.png";
 // import './App.css'
 import styles from './App.module.css';
 
@@ -169,6 +170,9 @@ function App() {
                 <div className={styles.router_btn}>{!engFlag ? '前往下载' : 'Go to Download'}</div>
               </div>
             </div>
+          </div>
+          <div className={styles.copy_right}>
+            <img src={copyright_png} />
           </div>
         </div>
 

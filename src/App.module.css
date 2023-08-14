@@ -1,6 +1,6 @@
 .root {
     width: 100vw;
-    height: 100vh;
+    height: auto;
     position: relative;
     font-weight: 400;
     letter-spacing: 0;
@@ -133,8 +133,7 @@
 .content {
     width: 100%;
     height: auto;
-    position: absolute;
-    top: 1.7rem;
+    margin-top: 1.7rem;
 }
 
 .content>p:first-child {
@@ -156,8 +155,7 @@
 }
 
 .btns_center {
-    position: absolute;
-    top: 3.68rem;
+    margin-top: .74rem;
     height: auto;
     width: 100%;
     display: flex;
@@ -204,8 +202,7 @@
 }
 
 .search_line {
-    position: absolute;
-    top: 4.93rem;
+    margin-top: .72rem;
     width: 100%;
     height: auto;
     display: flex;
@@ -259,12 +256,16 @@
 
 .content_two {
     width: 100%;
-    height: auto;
-    position: absolute;
-    top: 7.6rem;
+    margin-top: 1.54rem;
+    height: 7.7rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("./assets/MainPage/btn_bottom.png");
+    background-repeat: no-repeat;
+    background-size: 20.92rem 5.16rem;
+    background-clip: border-box;
+    background-position: bottom;
 }
 
 .content_two>p {
@@ -345,4 +346,18 @@
     text-align: center;
     line-height: .53rem;
     font-size: .2rem;
+}
+
+.copy_right {
+    width: 100%;
+    height: auto;
+    margin-top: 1.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy_right>img {
+    width: 14.4rem;
+    height: 1.5rem;
 }
