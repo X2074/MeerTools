@@ -8,7 +8,7 @@ import logo1_png from "./assets/MainPage/logo_1.png";
 import logo2_png from "./assets/MainPage/logo_2.png";
 import logo3_png from "./assets/MainPage/logo_3.png";
 import logo4_png from "./assets/MainPage/logo_4.png";
-import copyright_png from "./assets/MainPage/background_bottom.png";
+import copyright_png from "./assets/MainPage/btn_bottom.png";
 // import './App.css'
 import styles from './App.module.css';
 
