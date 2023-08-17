@@ -37,7 +37,8 @@ function App() {
   const [flagtwo, setFlagTwo] = React.useState<boolean|HTMLElement>(false);
   const [flagthr, setFlagThr] = React.useState<boolean|HTMLElement>(false);
 
-  const handleTop = (idx : number) => {
+  const handleTop = (idx : number, event : React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.stopPropagation();
     setTopBtnIdx(idx);
     switch(idx) {
       case 0:
@@ -68,8 +69,13 @@ function App() {
     setEngFlag(old => !old);
   }
 
+  const clickWindow = () => {
+    console.log("11")
+    setTopBtnIdx(-1);setFlagOne(false);setFlagTwo(false);setFlagThr(false);
+  }
+
   return (
-    <div className={styles.root}>
+    <div className={styles.root} onClick={() => clickWindow()}>
       <ThemeProvider theme={theme}>
         <div className={styles.header}>
           <div className={styles.header_content}>
@@ -78,18 +84,26 @@ function App() {
               <img src={qitmeer_png} />
             </div>
             {!engFlag && <div className={styles.top_buttons}>
-              <button className={`${styles.top_button} ${topBtnIdx === 0 ? styles.active_top_btn : ''}`} onClick={() => handleTop(0)}>
+              <button className={`${styles.top_button} ${topBtnIdx === 0 ? styles.active_top_btn : ''}`} onClick={(e) => handleTop(0,e)}>
                 水龙头
                 <div style={{display: flagone ? 'flex' : 'none'}} className={styles.top_dialog}>
-                  <p className={`${topDiaIdx === 0 ? styles.active_top_dia : ''}`} onClick={() => handleDia(0)}>amama ajsd</p>
-                  <p className={`${topDiaIdx === 1 ? styles.active_top_dia : ''}`} onClick={() => handleDia(1)}>dimai ljos</p>
+                  <p className={`${topDiaIdx === 0 ? styles.active_top_dia : ''}`} onClick={() => handleDia(0)}>Amana Testnet</p>
+                  <p className={`${topDiaIdx === 1 ? styles.active_top_dia : ''}`} onClick={() => handleDia(1)}>QNG Testnet</p>
                 </div>
               </button>
-              <button className={`${styles.top_button} ${topBtnIdx === 1 ? styles.active_top_btn : ''}`} onClick={() => handleTop(1)}>
+              <button className={`${styles.top_button} ${topBtnIdx === 1 ? styles.active_top_btn : ''}`} onClick={(e) => handleTop(1,e)}>
                 生态
+                <div style={{display: flagtwo ? 'flex' : 'none'}} className={styles.top_dialog}>
+                  <p className={`${topDiaIdx === 0 ? styles.active_top_dia : ''}`} onClick={() => handleDia(0)}>DimAI</p>
+                  <p className={`${topDiaIdx === 1 ? styles.active_top_dia : ''}`} onClick={() => handleDia(1)}>Kafh</p>
+                </div>
               </button>
-              <button className={`${styles.top_button} ${topBtnIdx === 2 ? styles.active_top_btn : ''}`} onClick={() => handleTop(2)}>
+              <button className={`${styles.top_button} ${topBtnIdx === 2 ? styles.active_top_btn : ''}`} onClick={(e) => handleTop(2,e)}>
                 工具集
+                <div style={{display: flagthr ? 'flex' : 'none'}} className={styles.top_dialog}>
+                  <p className={`${topDiaIdx === 0 ? styles.active_top_dia : ''}`} onClick={() => handleDia(0)}>批量发送代币</p>
+                  <p className={`${topDiaIdx === 1 ? styles.active_top_dia : ''}`} onClick={() => handleDia(1)}>供应量查询</p>
+                </div>
               </button>
             </div>}
             {engFlag && <div className={styles.top_buttons}>
