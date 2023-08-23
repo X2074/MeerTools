@@ -36,6 +36,7 @@
     "react-router-dom": "5",
     "react-toastify": "^9.0.5",
     "typechain": "^8.1.0",
+    "web3": "^4.1.0",
     "web3modal": "^1.9.8"
   },
   "devDependencies": {

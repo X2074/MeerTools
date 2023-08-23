@@ -36,6 +36,29 @@ function App() {
   const [flagone, setFlagOne] = React.useState<boolean|HTMLElement>(false);
   const [flagtwo, setFlagTwo] = React.useState<boolean|HTMLElement>(false);
   const [flagthr, setFlagThr] = React.useState<boolean|HTMLElement>(false);
+  // 业务相关变量
+  const chains = React.useRef([
+    {
+      value: 0,
+      label: 'QNG',
+      name: 'QNG',
+      unit: 'Meer',
+      rpc: 'https://testnet-qng.rpc.qitmeer.io',
+      browser: 'https://qng-testnet.meerscan.io'
+    },
+    {
+      value: 1,
+      label: 'Amana',
+      name: 'Amana',
+      unit: 'Meer',
+      rpc: 'https://testnet-amana.rpc.qitmeer.io',
+      browser: 'https://amana-testnet.meerscan.io'
+    },
+  ])
+  // const Web3 = require("web3");
+  // let rpc = 'https://testnet-qng.rpc.qitmeer.io'
+  // let browser = 'https://qng-testnet.meerscan.io'
+  // let web3 = new Web3(rpc)
 
   const handleTop = (idx : number, event : React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
