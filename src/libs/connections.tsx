@@ -35,7 +35,7 @@ function getIsBraveWallet(): boolean {
     return window.ethereum?.isBraveWallet ?? false
 }
 
-export function getHasMetaMaskEctensionInstalled(): boolean {
+export function getHasMetaMaskExtensionInstalled(): boolean {
     return (window.ethereum?.isMetaMask ?? false) && !getIsBraveWallet()
 }
 

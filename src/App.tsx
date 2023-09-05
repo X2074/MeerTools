@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { ethers } from "ethers";
+import faucetContract from "./ethereum/faucet.js";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import en_png from "./assets/MainPage/btn_en.png";
 import group_png from "./assets/MainPage/btn_group.png";
@@ -12,6 +14,7 @@ import copyright_png from "./assets/MainPage/btn_bottom.png";
 // import './App.css'
 import styles from './App.module.css';
 import { Web3ContextProvider } from './libs/components/Web3ContextProvider';
+import { JsonRpcProvider, JsonRpcSigner } from '@ethersproject/providers/lib/json-rpc-provider.js';
 
 // 可能用于组件样式的颜色表
 const theme = createTheme({
@@ -37,6 +40,19 @@ function App() {
   const [flagone, setFlagOne] = useState(false);
   const [flagtwo, setFlagTwo] = useState(false);
   const [flagthr, setFlagThr] = useState(false);
+  // 用户输入与操作变量
+  // const [addressWallet, setAddress] = useState("");
+  // etherjs相关变量，provider，contract，signer
+  const [walletAddress, setWalletAddress] = useState("");
+  const [signer, setSigner] = useState<JsonRpcSigner | undefined>();
+  const [wallet, setWallet] = useState<ethers.Wallet | undefined>();
+  const [provider, setProvider] = useState<JsonRpcProvider | undefined>();
+  const [fcContract, setFcContract] = useState<ethers.Contract | undefined>();
+  const [withdrawSucces, setWithdrawSuccess] = useState("");
+  const [withdreaError, setWithdrawError] = useState("");
+  const [transactionData, setTransactionData] = useState("");
+  const pKey = '53721201246f16a603f1926e26ebf6098ba2f190764d1c527c1259128e3f8af5';
+  
   // 业务相关变量
   const chains = useRef([
     {
@@ -94,9 +110,80 @@ function App() {
   }
 
   const clickWindow = () => {
-    console.log("11")
+    // console.log("11")
     setTopBtnIdx(-1);setFlagOne(false);setFlagTwo(false);setFlagThr(false);
   }
+
+  const changeAddress = (e) => {
+    // console.log(e.target.value);
+    setWalletAddress(e.target.value);
+  }
+
+  const receiveMeer = async () => {
+    try {
+
+      // 判断地址是否存在
+      if (typeof walletAddress === 'undefined' || walletAddress == "") {
+        console.log("地址有误，请重新填写");
+        return;
+      }
+      // 发送货币
+      const gasPrice = await provider.getGasPrice();
+
+      const tx = {
+        to: "0x01090CbC41805FaD0292a1c83af4eE35f0C38D2a",
+        gasPrice: gasPrice.add(100000000),
+        value: ethers.utils.parseEther('0'),
+        gasLimit: 200000,
+        data: fcContract.interface.encodeFunctionData('requestToken',[walletAddress])
+      };
+      let _limit = await fcContract.estimateGas.requestToken(walletAddress, {gasPrice: tx.gasPrice});
+      tx.gasLimit = _limit.toNumber();
+      
+      const signedTx = await wallet.signTransaction(tx);
+
+      const txResponse = await wallet.sendTransaction(signedTx);
+
+      const receipt = await txResponse.wait();
+      console.log("Transaction confirmed in block:", receipt.blockNumber);
+      
+    } catch( error ) {
+      console.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
+      async function doit () {
+        try {
+          // const provider = new ethers.providers.Web3Provider(window.ethereum);
+          const provider = new ethers.providers.JsonRpcProvider('https://testnet-qng.rpc.qitmeer.io');
+          setProvider(provider);
+          // const accounts = await provider.send('eth_requestAccounts', []);
+          const wallet = new ethers.Wallet(pKey, provider);
+
+
+          const contract = faucetContract(wallet);
+          setFcContract(contract);
+
+
+
+          // if (accounts.length > 0) {
+          //   setSigner(provider.getSigner());
+          //   setFcContract(faucetContract(provider));
+          //   setWalletAddress(accounts[0]);
+          // } else {
+          //   console.log("Connect to MetaMask using the Connect button");
+          // }
+        } catch (err) {
+          console.log(err.message);
+        }
+      }
+      doit();
+    } else {
+      console.log("Please install MetaMask");
+    }
+  }, [])
 
   return (
     <div className={styles.root} onClick={() => clickWindow()}>
@@ -160,8 +247,8 @@ function App() {
           {/* 搜索框 */}
           <div className={styles.search_line}>
             <div className={styles.search_area}>
-              <input type="text" placeholder={!engFlag ? '请输入你的钱包地址(0x...)' : 'Please enter your wallet address (0x...)'} />
-              <div>{!engFlag ? '领取5个测试MEER' : 'Claim 5 Test MEER'}</div>
+              <input type="text" value={walletAddress} onChange={(e)=>changeAddress(e)} placeholder={!engFlag ? '请输入你的钱包地址(0x...)' : 'Please enter your wallet address (0x...)'} />
+              <div onClick={() => receiveMeer()}>{!engFlag ? '领取5个测试MEER' : 'Claim 5 Test MEER'}</div>
             </div>
             <div className={styles.remark_area}>{!engFlag ? '每个地址限制20次，每次5 MEER。 同一IP或地址72小时内只能认领一次。' : 'Limit 20 times per address, 5 MEER each time. Same IP or address can only claim once within 72 hours.'}</div>
           </div>
