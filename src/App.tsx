@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ethers } from "ethers";
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime';
 import faucetContract from "./ethereum/faucet.js";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import en_png from "./assets/MainPage/btn_en.png";
@@ -15,6 +17,7 @@ import copyright_png from "./assets/MainPage/btn_bottom.png";
 import styles from './App.module.css';
 import { Web3ContextProvider } from './libs/components/Web3ContextProvider';
 import { JsonRpcProvider, JsonRpcSigner } from '@ethersproject/providers/lib/json-rpc-provider.js';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 // 可能用于组件样式的颜色表
 const theme = createTheme({
@@ -30,6 +33,12 @@ const theme = createTheme({
     },
   },
 });
+// 表格 表头
+const columns: GridColDef[] = [
+  { field: 'tracsactionHash', headerName: 'TransactionHash', width: 260 },
+  { field: 'amount', headerName: 'Amount', width: 70 },
+  { field: 'datetime', headerName: 'Last name', width: 70 },
+];
 
 function App() {
   // 决定页面是否英文的flag
@@ -40,8 +49,7 @@ function App() {
   const [flagone, setFlagOne] = useState(false);
   const [flagtwo, setFlagTwo] = useState(false);
   const [flagthr, setFlagThr] = useState(false);
-  // 用户输入与操作变量
-  // const [addressWallet, setAddress] = useState("");
+  const [flagList, setFlagList] = useState(false);
   // etherjs相关变量，provider，contract，signer
   const [walletAddress, setWalletAddress] = useState("");
   const [signer, setSigner] = useState<JsonRpcSigner | undefined>();
@@ -50,7 +58,7 @@ function App() {
   const [fcContract, setFcContract] = useState<ethers.Contract | undefined>();
   const [withdrawSucces, setWithdrawSuccess] = useState("");
   const [withdreaError, setWithdrawError] = useState("");
-  const [transactionData, setTransactionData] = useState("");
+  const [transactionData, setTransactionData] = useState<Array<Object> | undefined>();
   const pKey = '53721201246f16a603f1926e26ebf6098ba2f190764d1c527c1259128e3f8af5';
   
   // 业务相关变量
@@ -134,25 +142,50 @@ function App() {
         to: "0x01090CbC41805FaD0292a1c83af4eE35f0C38D2a",
         gasPrice: gasPrice.add(100000000),
         value: ethers.utils.parseEther('0'),
-        gasLimit: 200000,
-        data: fcContract.interface.encodeFunctionData('requestToken',[walletAddress])
+        data: fcContract.interface.encodeFunctionData('requestToken',[[walletAddress]])
       };
-      let _limit = await fcContract.estimateGas.requestToken(walletAddress, {gasPrice: tx.gasPrice});
-      tx.gasLimit = _limit.toNumber();
+
+      const gasLimit = await fcContract.estimateGas.requestToken([walletAddress], {
+        gasPrice: tx.gasPrice
+      });
+      tx['gasLimit'] = gasLimit;
       
-      const signedTx = await wallet.signTransaction(tx);
+      const txResponse = await wallet.sendTransaction(tx);
+      console.log("发送结果",txResponse);
 
-      const txResponse = await wallet.sendTransaction(signedTx);
-
-      const receipt = await txResponse.wait();
-      console.log("Transaction confirmed in block:", receipt.blockNumber);
+      showList();
       
     } catch( error ) {
       console.error(error.message);
     }
   }
 
+  const showList = async () => {
+    let eventName = "SendToken";
+    // let eventArgs = {};
+    fcContract.queryFilter(eventName).then(res => {
+      // console.log(res);
+      let datetimes = [];
+      res.reverse().map((item, index) => {
+        provider.getBlock(item.blockNumber).then((res) => {
+          datetimes[index] = dayjs().to(dayjs.unix(res.timestamp));
+        })
+      })
+      let allEvents = res.map((item, index) => {
+        return {
+          tracsactionHash: item.transactionHash,
+          address: item.args.receiver,
+          amount: item.args.amount / 1000000000000000000 + 'MEER',
+          datetime: datetimes[index]
+        }
+      })
+
+      console.log(allEvents);
+    });
+  }
+
   useEffect(() => {
+    dayjs.extend(relativeTime);
     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
       async function doit () {
         try {
@@ -161,12 +194,10 @@ function App() {
           setProvider(provider);
           // const accounts = await provider.send('eth_requestAccounts', []);
           const wallet = new ethers.Wallet(pKey, provider);
-
+          setWallet(wallet);
 
           const contract = faucetContract(wallet);
           setFcContract(contract);
-
-
 
           // if (accounts.length > 0) {
           //   setSigner(provider.getSigner());
@@ -187,7 +218,6 @@ function App() {
 
   return (
     <div className={styles.root} onClick={() => clickWindow()}>
-      <Web3ContextProvider>
         <ThemeProvider theme={theme}>
           <div className={styles.header}>
             <div className={styles.header_content}>
@@ -252,6 +282,20 @@ function App() {
             </div>
             <div className={styles.remark_area}>{!engFlag ? '每个地址限制20次，每次5 MEER。 同一IP或地址72小时内只能认领一次。' : 'Limit 20 times per address, 5 MEER each time. Same IP or address can only claim once within 72 hours.'}</div>
           </div>
+          <div className={styles.trans_data} 
+            style={{display : flagList ? 'block' : 'none'}}>
+              <DataGrid
+                rows={transactionData}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: { page: 0, pageSize: 5 },
+                  },
+                }}
+                pageSizeOptions={[5, 10]}
+                checkboxSelection
+              />
+          </div>
           {/* 文字2 */}
           <div className={styles.content_two}>
             <p>{!engFlag ? '生态&工具' : 'Ecosystem & Tools'}</p>
@@ -303,7 +347,6 @@ function App() {
           </div>
 
         </ThemeProvider>
-      </Web3ContextProvider>
     </div>
   );
 }
