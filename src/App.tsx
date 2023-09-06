@@ -13,11 +13,21 @@ import logo2_png from "./assets/MainPage/logo_2.png";
 import logo3_png from "./assets/MainPage/logo_3.png";
 import logo4_png from "./assets/MainPage/logo_4.png";
 import copyright_png from "./assets/MainPage/btn_bottom.png";
-// import './App.css'
 import styles from './App.module.css';
-import { Web3ContextProvider } from './libs/components/Web3ContextProvider';
 import { JsonRpcProvider, JsonRpcSigner } from '@ethersproject/providers/lib/json-rpc-provider.js';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TableRow from '@mui/material/TableRow';
+// import Paper from '@mui/material/Paper';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@material-ui/core'; 
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { TablePagination } from '@material-ui/core';
+import './App.css'
 
 // 可能用于组件样式的颜色表
 const theme = createTheme({
@@ -35,10 +45,12 @@ const theme = createTheme({
 });
 // 表格 表头
 const columns: GridColDef[] = [
-  { field: 'tracsactionHash', headerName: 'TransactionHash', width: 260 },
-  { field: 'amount', headerName: 'Amount', width: 70 },
-  { field: 'datetime', headerName: 'Last name', width: 70 },
+  { field: 'idx', headerName: 'Number', width: 120 },
+  { field: 'tracsactionHash', headerName: 'TransactionHash', width: 1080 },
+  { field: 'amount', headerName: 'Amount', width: 258 },
+  { field: 'datetime', headerName: 'Last name', width: 258 },
 ];
+
 
 function App() {
   // 决定页面是否英文的flag
@@ -58,7 +70,7 @@ function App() {
   const [fcContract, setFcContract] = useState<ethers.Contract | undefined>();
   const [withdrawSucces, setWithdrawSuccess] = useState("");
   const [withdreaError, setWithdrawError] = useState("");
-  const [transactionData, setTransactionData] = useState<Array<Object> | undefined>();
+  const [transactionData, setTransactionData] = useState<Array<any> | undefined>([]);
   const pKey = '53721201246f16a603f1926e26ebf6098ba2f190764d1c527c1259128e3f8af5';
   
   // 业务相关变量
@@ -84,6 +96,58 @@ function App() {
   // let rpc = 'https://testnet-qng.rpc.qitmeer.io'
   // let browser = 'https://qng-testnet.meerscan.io'
   // let web3 = new Web3(rpc)
+  // 表格 组件
+  function PaginatedTable({ data }) {  
+    // console.log("表格组件",data)
+    const [page, setPage] = useState(0);  
+    const [rowsPerPage, setRowsPerPage] = useState(10);  
+    const indexOfLastRow = page * rowsPerPage;  
+    const indexOfFirstRow = (page + 1) * rowsPerPage;  
+    const currentRows = data.slice(indexOfLastRow, indexOfFirstRow);  
+    console.log("表格slice",currentRows)
+    
+    const handlePageChange = (event, newPage) => {  
+      setPage(newPage);  
+    };  
+    
+    const handleRowsPerPageChange = (event) => {  
+      setRowsPerPage(event.target.value);  
+      setPage(0);  
+    };  
+    
+    return (  
+      <TableContainer component={Paper}>  
+        <Table>  
+          <TableHead>  
+            <TableRow>  
+              <TableCell>序号</TableCell>  
+              <TableCell>钱包地址</TableCell>  
+              <TableCell>数量</TableCell>  
+              <TableCell>操作</TableCell>  
+            </TableRow>  
+          </TableHead>  
+          <TableBody>  
+            {currentRows && currentRows.map((row, index) => (  
+              <TableRow key={index}>  
+                <TableCell>{row.idx}</TableCell>  
+                <TableCell>{row.tracsactionHash}</TableCell>  
+                <TableCell>{row.amount}</TableCell>  
+                <TableCell>{"删除"}</TableCell>  
+              </TableRow>  
+            ))}  
+          </TableBody>  
+        </Table>  
+        <TablePagination  
+          count={data.length}  
+          rowsPerPageOptions={[10]}  
+          rowsPerPage={10}
+          page={page}  
+          onPageChange={handlePageChange}  
+          onRowsPerPageChange={handleRowsPerPageChange}  
+        />  
+      </TableContainer>  
+    );  
+  }  
 
   const handleTop = (idx : number, event : React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
@@ -133,6 +197,7 @@ function App() {
       // 判断地址是否存在
       if (typeof walletAddress === 'undefined' || walletAddress == "") {
         console.log("地址有误，请重新填写");
+        showList();
         return;
       }
       // 发送货币
@@ -176,10 +241,14 @@ function App() {
           tracsactionHash: item.transactionHash,
           address: item.args.receiver,
           amount: item.args.amount / 1000000000000000000 + 'MEER',
-          datetime: datetimes[index]
+          datetime: datetimes[index],
+          id: item.args.receiver,
+          idx: index + 1
         }
       })
 
+      setTransactionData(allEvents);
+      setFlagList(true);
       console.log(allEvents);
     });
   }
@@ -283,18 +352,19 @@ function App() {
             <div className={styles.remark_area}>{!engFlag ? '每个地址限制20次，每次5 MEER。 同一IP或地址72小时内只能认领一次。' : 'Limit 20 times per address, 5 MEER each time. Same IP or address can only claim once within 72 hours.'}</div>
           </div>
           <div className={styles.trans_data} 
-            style={{display : flagList ? 'block' : 'none'}}>
-              <DataGrid
-                rows={transactionData}
+            style={{display : flagList ? 'flex' : 'none'}}>
+              {/* <DataGrid
+                rows={transactionData || []}
                 columns={columns}
                 initialState={{
                   pagination: {
                     paginationModel: { page: 0, pageSize: 5 },
                   },
                 }}
+                sx={{color: '#fff', fontSize: '.16rem'}}
                 pageSizeOptions={[5, 10]}
-                checkboxSelection
-              />
+              /> */}
+              <PaginatedTable data={transactionData} />
           </div>
           {/* 文字2 */}
           <div className={styles.content_two}>

@@ -363,3 +363,12 @@
     width: 100%;
     height: 1.5rem;
 }
+
+.trans_data {
+    width: 17.2rem;
+    display: flex;
+    align-items: center;
+    height: 7.8rem;
+    color: #fff;
+    margin: 0 1rem;
+}
