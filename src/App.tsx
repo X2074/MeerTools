@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ethers } from "ethers";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -14,18 +14,11 @@ import logo3_png from "./assets/MainPage/logo_3.png";
 import logo4_png from "./assets/MainPage/logo_4.png";
 import copyright_png from "./assets/MainPage/btn_bottom.png";
 import styles from './App.module.css';
-import { JsonRpcProvider, JsonRpcSigner } from '@ethersproject/providers/lib/json-rpc-provider.js';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TableRow from '@mui/material/TableRow';
-// import Paper from '@mui/material/Paper';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@material-ui/core'; 
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { JsonRpcProvider } from '@ethersproject/providers/lib/json-rpc-provider.js';
+// import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core'; 
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { TablePagination } from '@material-ui/core';
 import './App.css'
 
@@ -44,12 +37,12 @@ const theme = createTheme({
   },
 });
 // 表格 表头
-const columns: GridColDef[] = [
-  { field: 'idx', headerName: 'Number', width: 120 },
-  { field: 'tracsactionHash', headerName: 'TransactionHash', width: 1080 },
-  { field: 'amount', headerName: 'Amount', width: 258 },
-  { field: 'datetime', headerName: 'Last name', width: 258 },
-];
+// const columns: GridColDef[] = [
+//   { field: 'idx', headerName: 'Number', width: 120 },
+//   { field: 'tracsactionHash', headerName: 'TransactionHash', width: 1080 },
+//   { field: 'amount', headerName: 'Amount', width: 258 },
+//   { field: 'datetime', headerName: 'Last name', width: 258 },
+// ];
 
 
 function App() {
@@ -64,34 +57,34 @@ function App() {
   const [flagList, setFlagList] = useState(false);
   // etherjs相关变量，provider，contract，signer
   const [walletAddress, setWalletAddress] = useState("");
-  const [signer, setSigner] = useState<JsonRpcSigner | undefined>();
+  // const [signer, setSigner] = useState<JsonRpcSigner | undefined>();
   const [wallet, setWallet] = useState<ethers.Wallet | undefined>();
   const [provider, setProvider] = useState<JsonRpcProvider | undefined>();
   const [fcContract, setFcContract] = useState<ethers.Contract | undefined>();
-  const [withdrawSucces, setWithdrawSuccess] = useState("");
-  const [withdreaError, setWithdrawError] = useState("");
+  // const [withdrawSucces, setWithdrawSuccess] = useState("");
+  // const [withdreaError, setWithdrawError] = useState("");
   const [transactionData, setTransactionData] = useState<Array<any> | undefined>([]);
   const pKey = '53721201246f16a603f1926e26ebf6098ba2f190764d1c527c1259128e3f8af5';
   
   // 业务相关变量
-  const chains = useRef([
-    {
-      value: 0,
-      label: 'QNG',
-      name: 'QNG',
-      unit: 'Meer',
-      rpc: 'https://testnet-qng.rpc.qitmeer.io',
-      browser: 'https://qng-testnet.meerscan.io'
-    },
-    {
-      value: 1,
-      label: 'Amana',
-      name: 'Amana',
-      unit: 'Meer',
-      rpc: 'https://testnet-amana.rpc.qitmeer.io',
-      browser: 'https://amana-testnet.meerscan.io'
-    },
-  ])
+  // const chains = useRef([
+  //   {
+  //     value: 0,
+  //     label: 'QNG',
+  //     name: 'QNG',
+  //     unit: 'Meer',
+  //     rpc: 'https://testnet-qng.rpc.qitmeer.io',
+  //     browser: 'https://qng-testnet.meerscan.io'
+  //   },
+  //   {
+  //     value: 1,
+  //     label: 'Amana',
+  //     name: 'Amana',
+  //     unit: 'Meer',
+  //     rpc: 'https://testnet-amana.rpc.qitmeer.io',
+  //     browser: 'https://amana-testnet.meerscan.io'
+  //   },
+  // ])
   // const Web3 = require("web3");
   // let rpc = 'https://testnet-qng.rpc.qitmeer.io'
   // let browser = 'https://qng-testnet.meerscan.io'
@@ -106,7 +99,8 @@ function App() {
     const currentRows = data.slice(indexOfLastRow, indexOfFirstRow);  
     console.log("表格slice",currentRows)
     
-    const handlePageChange = (event, newPage) => {  
+    const handlePageChange = (event, newPage) => {
+      console.log("nothing for need",event);  
       setPage(newPage);  
     };  
     
