@@ -7,8 +7,7 @@
     "dev": "vite --port 8080",
     "build": "tsc && vite build",
     "deploy": "gh-pages -d dist --remote fs",
-    "preview": "vite preview",
-    "typechain": "typechain --out-dir src/config/abi/types --target=ethers-v5 \"src/config/abi/*.json\""
+    "preview": "vite preview"
   },
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.7.1",
