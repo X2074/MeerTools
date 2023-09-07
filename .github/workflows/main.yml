@@ -3,7 +3,7 @@ name: deploy-on-test-server
 on:
   push:
     branches:
-      - main
+      - runner
 
 jobs:
   build-and-deploy:
