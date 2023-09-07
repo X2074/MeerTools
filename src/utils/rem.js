@@ -1,3 +1,4 @@
+; (function () {
 // 基本大小，和webpack.config里配置的数值一样
 const baseSize = 100
 // 设置 rem 函数
@@ -13,3 +14,4 @@ setRem()
 window.onresize = function () {
   setRem()
 }
+})()
