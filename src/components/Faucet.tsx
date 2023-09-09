@@ -36,6 +36,24 @@ const theme = createTheme({
     },
   },
 });
+// 用于样式
+const tableRow = {
+  border: '1px solid rgba(219, 219, 219, 1)',
+  borderRadius: '8px',
+  opacity: 1,
+  background: 'rgba(9,9,4,1)'
+}
+const tableCol = {
+  color: 'white'
+}
+const tableColSpecial = {
+  color: 'rgba(36, 255, 36, 1)'
+}
+const tableStyle = {
+  width: '17.2rem',
+  // height: '7.8rem',
+  margin: '.2rem auto'
+}
 // 表格 表头
 // const columns: GridColDef[] = [
 //   { field: 'idx', headerName: 'Number', width: 120 },
@@ -43,7 +61,6 @@ const theme = createTheme({
 //   { field: 'amount', headerName: 'Amount', width: 258 },
 //   { field: 'datetime', headerName: 'Last name', width: 258 },
 // ];
-
 
 function Faucet() {
   // 决定页面是否英文的flag
@@ -110,28 +127,34 @@ function Faucet() {
     };  
     
     return (  
-      <TableContainer component={Paper}>  
+      <TableContainer component={Paper} style={tableStyle} >  
         <Table>  
           <TableHead>  
-            <TableRow>  
-              <TableCell>序号</TableCell>  
-              <TableCell>钱包地址</TableCell>  
-              <TableCell>数量</TableCell>  
-              <TableCell>操作</TableCell>  
+            <TableRow style={tableRow}>  
+              <TableCell style={tableColSpecial}>序号</TableCell>  
+              <TableCell style={tableColSpecial}>钱包地址</TableCell>  
+              <TableCell style={tableColSpecial}>数量</TableCell>  
+              <TableCell style={tableColSpecial}>操作</TableCell>  
             </TableRow>  
           </TableHead>  
           <TableBody>  
             {currentRows && currentRows.map((row, index) => (  
-              <TableRow key={index}>  
-                <TableCell>{row.idx}</TableCell>  
-                <TableCell>{row.tracsactionHash}</TableCell>  
-                <TableCell>{row.amount}</TableCell>  
-                <TableCell>{"删除"}</TableCell>  
+              <TableRow key={index} style={tableRow}>  
+                <TableCell style={tableCol}>{row.idx}</TableCell>  
+                <TableCell style={tableCol}>{row.tracsactionHash}</TableCell>  
+                <TableCell style={tableCol}>{row.amount}</TableCell>  
+                <TableCell style={tableColSpecial}>{"删除"}</TableCell>  
               </TableRow>  
             ))}  
           </TableBody>  
         </Table>  
         <TablePagination  
+          style={{
+            background: 'rgba(9,9,4,1)',
+            color: 'white',
+            border: "1px solid rgba(219, 219, 219, 1)",
+            boxSizing: 'border-box'
+          }}
           count={data.length}  
           rowsPerPageOptions={[10]}  
           rowsPerPage={10}
@@ -345,21 +368,7 @@ function Faucet() {
             </div>
             <div className={styles.remark_area}>{!engFlag ? '每个地址限制20次，每次5 MEER。 同一IP或地址72小时内只能认领一次。' : 'Limit 20 times per address, 5 MEER each time. Same IP or address can only claim once within 72 hours.'}</div>
           </div>
-          <div className={styles.trans_data} 
-            style={{display : flagList ? 'flex' : 'none'}}>
-              {/* <DataGrid
-                rows={transactionData || []}
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                  },
-                }}
-                sx={{color: '#fff', fontSize: '.16rem'}}
-                pageSizeOptions={[5, 10]}
-              /> */}
-              <PaginatedTable data={transactionData} />
-          </div>
+          {flagList && <PaginatedTable data={transactionData} />}
           {/* 文字2 */}
           <div className={styles.content_two}>
             <p>{!engFlag ? '生态&工具' : 'Ecosystem & Tools'}</p>
