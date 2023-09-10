@@ -45,7 +45,7 @@
     text-align: center;
     font-size: .2rem;
     color: #fff;
-    background-color: #090904;
+    background-color: transparent;
     position: relative;
     /* mui的样式 */
     cursor: pointer;
@@ -59,8 +59,15 @@
     /* transition: background-color 250ms cubic-bezier(); */
 }
 
+.top_button:focus {
+    border: 0;
+    outline: 0;
+    transition-duration: 0.5s;
+}
+
 .active_top_btn {
     color: #31EB31;
+    background-color: rgba(0, 0, 0, .1);
 }
 
 .top_dialog {
@@ -102,8 +109,8 @@
 
 .logo_top_left>img {
     width: 1.36rem;
-    height: .54rem;
     margin-left: .05rem;
+    cursor: pointer;
 }
 
 .btns_header_right {
@@ -114,21 +121,24 @@
 }
 
 .btn_group {
-    width: 1.92rem;
+    /* width: 1.92rem; */
     height: .36rem;
     margin-right: .36rem;
+    cursor: pointer;
 }
 
 .btn_en {
-    width: .36rem;
+    /* width: .36rem; */
     height: .36rem;
     margin-right: .36rem;
+    cursor: pointer;
 }
 
 .btn_wallet {
     height: .36rem;
-    width: 1.2rem;
+    /* width: 1.2rem; */
     margin-right: .05rem;
+    cursor: pointer;
 }
 
 .content {
@@ -242,6 +252,16 @@
     height: .67rem;
     line-height: .67rem;
     text-align: center;
+    
+    cursor: pointer;
+
+}
+@media (hover: hover) {
+    .search_area>div:hover {
+        background: #32C176;
+        border-color: #fff;
+        transition-duration: 0.5s;
+    }
 }
 
 .remark_area {

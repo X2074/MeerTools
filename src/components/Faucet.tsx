@@ -107,7 +107,7 @@ function Faucet() {
   // let browser = 'https://qng-testnet.meerscan.io'
   // let web3 = new Web3(rpc)
   // 表格 组件
-  function PaginatedTable({ data }) {  
+  function PaginatedTable({ data, enFlag }) {  
     // console.log("表格组件",data)
     const [page, setPage] = useState(0);  
     const [rowsPerPage, setRowsPerPage] = useState(10);  
@@ -131,19 +131,17 @@ function Faucet() {
         <Table>  
           <TableHead>  
             <TableRow style={tableRow}>  
-              <TableCell style={tableColSpecial}>序号</TableCell>  
-              <TableCell style={tableColSpecial}>钱包地址</TableCell>  
-              <TableCell style={tableColSpecial}>数量</TableCell>  
-              <TableCell style={tableColSpecial}>操作</TableCell>  
+              <TableCell style={tableColSpecial}>{enFlag ? "TransactionHash" : "交易Hash"}</TableCell>  
+              <TableCell style={tableColSpecial}>{enFlag ? "Amount" : "数量"}</TableCell>
+              <TableCell style={tableColSpecial}>{enFlag ? "Datetime" : "发放时间"}</TableCell>
             </TableRow>  
           </TableHead>  
           <TableBody>  
             {currentRows && currentRows.map((row, index) => (  
               <TableRow key={index} style={tableRow}>  
-                <TableCell style={tableCol}>{row.idx}</TableCell>  
                 <TableCell style={tableCol}>{row.tracsactionHash}</TableCell>  
-                <TableCell style={tableCol}>{row.amount}</TableCell>  
-                <TableCell style={tableColSpecial}>{"删除"}</TableCell>  
+                <TableCell style={tableCol}>{row.amount}</TableCell>
+                <TableCell style={tableCol}>{row.datetime}</TableCell>
               </TableRow>  
             ))}  
           </TableBody>  
@@ -247,22 +245,23 @@ function Faucet() {
     // let eventArgs = {};
     fcContract.queryFilter(eventName).then(res => {
       // console.log(res);
-      let datetimes = [];
-      res.reverse().map((item, index) => {
-        provider.getBlock(item.blockNumber).then((res) => {
-          datetimes[index] = dayjs().to(dayjs.unix(res.timestamp));
-        })
-      })
       let allEvents = res.map((item, index) => {
         return {
           tracsactionHash: item.transactionHash,
           address: item.args.receiver,
           amount: item.args.amount / 1000000000000000000 + 'MEER',
-          datetime: datetimes[index],
+          datetime: "",
           id: item.args.receiver,
           idx: index + 1
         }
       })
+
+      res.map((item, index) => {
+        provider.getBlock(item.blockNumber).then((res) => {
+          allEvents[index].datetime = dayjs().to(dayjs.unix(res.timestamp));
+        })
+      })
+      // console.log("times",datetimes);
 
       setTransactionData(allEvents);
       setFlagList(true);
@@ -368,7 +367,7 @@ function Faucet() {
             </div>
             <div className={styles.remark_area}>{!engFlag ? '每个地址限制20次，每次5 MEER。 同一IP或地址72小时内只能认领一次。' : 'Limit 20 times per address, 5 MEER each time. Same IP or address can only claim once within 72 hours.'}</div>
           </div>
-          {flagList && <PaginatedTable data={transactionData} />}
+          {flagList && <PaginatedTable data={transactionData} enFlag={engFlag} />}
           {/* 文字2 */}
           <div className={styles.content_two}>
             <p>{!engFlag ? '生态&工具' : 'Ecosystem & Tools'}</p>
