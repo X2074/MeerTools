@@ -13,6 +13,10 @@ import logo2_png from "../assets/MainPage/logo_2.png";
 import logo3_png from "../assets/MainPage/logo_3.png";
 import logo4_png from "../assets/MainPage/logo_4.png";
 import copyright_png from "../assets/MainPage/btn_bottom.png";
+import correct_png from "../assets/Message/correct.png";
+import toomuch_png from "../assets/Message/toomuch.png";
+import emptyAddr_png from "../assets/Message/emptyAddress.png";
+import attention_png from "../assets/Message/attentionTimespan.png";
 import styles from './Faucet.module.css';
 import { JsonRpcProvider } from '@ethersproject/providers/lib/json-rpc-provider.js';
 // import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
@@ -72,12 +76,15 @@ function Faucet() {
   const [flagtwo, setFlagTwo] = useState(false);
   const [flagthr, setFlagThr] = useState(false);
   const [flagList, setFlagList] = useState(false);
+  const [flagMessage, setFlagMess] = useState(false);
+  const [indexMessage, setIndexMess] = useState(0);
   // etherjs相关变量，provider，contract，signer
   const [walletAddress, setWalletAddress] = useState("");
   // const [signer, setSigner] = useState<JsonRpcSigner | undefined>();
   const [wallet, setWallet] = useState<ethers.Wallet | undefined>();
   const [provider, setProvider] = useState<JsonRpcProvider | undefined>();
   const [fcContract, setFcContract] = useState<ethers.Contract | undefined>();
+  // const [signer, setSigner] = useState<ethers.Signer | undefined>();
   // const [withdrawSucces, setWithdrawSuccess] = useState("");
   // const [withdreaError, setWithdrawError] = useState("");
   const [transactionData, setTransactionData] = useState<Array<any> | undefined>([]);
@@ -206,15 +213,47 @@ function Faucet() {
     setWalletAddress(e.target.value);
   }
 
-  const receiveMeer = async () => {
+  const sendMeer = async () => {
     try {
 
       // 判断地址是否存在
       if (typeof walletAddress === 'undefined' || walletAddress == "") {
         console.log("地址有误，请重新填写");
-        showList();
+              
+        // 结果提示，地址有误
+        setIndexMess(1);
+        setFlagMess(true);
+        // showList();
         return;
       }
+
+      // 判断地址领取资格
+      // const requestTimes = await fcContract.requestedTimes([walletAddress]);
+      const requestTimes = await fcContract.functions.requestedTimes(walletAddress);
+      const lastCalled = await fcContract.functions.lastCalled(walletAddress);
+      const coolDownPeriod = await fcContract.functions.coolDownPeriod();
+      console.log("requestTimes",requestTimes);
+      console.log("lastCalled",lastCalled);
+      console.log("coolDownPeriod",coolDownPeriod);
+
+      if (lastCalled[0].toNumber() + coolDownPeriod[0].toNumber() * 1000 <= Date.now()) {
+        if (requestTimes[0].toNumber() < 200) {
+          // ok
+        } else {
+          console.log("This address has requested 20 times");
+          // 结果提示，领取过多
+          setIndexMess(3);
+          setFlagMess(true);
+          return ;
+        }
+      } else {
+        console.log("CoolDown period has not ended");
+        // 结果提示，冷却未满
+        setIndexMess(2);
+        setFlagMess(true);
+        return ;
+      }
+
       // 发送货币
       const gasPrice = await provider.getGasPrice();
 
@@ -232,6 +271,10 @@ function Faucet() {
       
       const txResponse = await wallet.sendTransaction(tx);
       console.log("发送结果",txResponse);
+
+      // 结果提示，发送成功
+      setIndexMess(0);
+      setFlagMess(true);
 
       showList();
       
@@ -269,6 +312,26 @@ function Faucet() {
     });
   }
 
+  const connectWallet = async () => {
+    // 可恶，没有打到jason的脸，我们的provider不支持此调用
+    // /* get accounts */
+    // const accounts = await provider.send("eth_requestAccounts", []);
+    // /* get signer */
+    // setSigner(provider.getSigner());
+    // /* set active wallet address */
+    // setWalletAddress(accounts[0]);
+  }
+
+  const testMessage = () => {
+    console.log("type of message",indexMessage);
+    setIndexMess(oldv => (oldv + 1) % 4);
+    setFlagMess(true);
+  }
+
+  const closeMessage = () => {
+    setFlagMess(false);
+  }
+
   useEffect(() => {
     dayjs.extend(relativeTime);
     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
@@ -284,13 +347,29 @@ function Faucet() {
           const contract = faucetContract(wallet);
           setFcContract(contract);
 
-          // if (accounts.length > 0) {
-          //   setSigner(provider.getSigner());
-          //   setFcContract(faucetContract(provider));
-          //   setWalletAddress(accounts[0]);
-          // } else {
-          //   console.log("Connect to MetaMask using the Connect button");
-          // }
+          // 检查管理员账户余额
+          // 获取账户地址
+          const address = wallet.getAddress();
+
+          // 查看账户余额
+          provider.getBalance(address).then((balance) => {
+            // 检查manager账户余额，如果小于0.1，要提示增加手续费了
+            if (parseFloat(ethers.utils.formatUnits(balance)) < 0.1) {
+              // TODO 提示
+              // message.error("The balance of manager account is less than 0.1 meer, need deposit.",10);
+              return ;
+            }
+
+            // 检查水龙头余额
+            provider.getBalance(contract.address).then(async (fcBalance) => {
+              if (parseInt(ethers.utils.formatUnits(fcBalance)) < 100 || parseInt(ethers.utils.formatUnits(fcBalance)) < 1) {
+                await contract.senMail(ethers.utils.formatUnits(fcBalance) + "Meer", ethers.utils.formatUnits(fcBalance) + "Meer");
+              }
+              console.log(`Contract balance: ${fcBalance}`);
+            })
+
+            console.log(`Ether balance: ${balance}`)
+          })
         } catch (err) {
           console.log(err.message);
         }
@@ -341,7 +420,7 @@ function Faucet() {
               <div className={styles.btns_header_right}>
                 <img className={styles.btn_group} src={group_png} />
                 <img className={styles.btn_en} onClick={() => switchFlagEng()} src={en_png} />
-                <img className={styles.btn_wallet} src={wallet_png} />
+                <img className={styles.btn_wallet} onClick={() => connectWallet()} src={wallet_png} />
               </div>
             </div>
           </div>
@@ -363,7 +442,7 @@ function Faucet() {
           <div className={styles.search_line}>
             <div className={styles.search_area}>
               <input type="text" value={walletAddress} onChange={(e)=>changeAddress(e)} placeholder={!engFlag ? '请输入你的钱包地址(0x...)' : 'Please enter your wallet address (0x...)'} />
-              <div onClick={() => receiveMeer()}>{!engFlag ? '领取5个测试MEER' : 'Claim 5 Test MEER'}</div>
+              <div onClick={() => sendMeer()}>{!engFlag ? '领取5个测试MEER' : 'Claim 5 Test MEER'}</div>
             </div>
             <div className={styles.remark_area}>{!engFlag ? '每个地址限制20次，每次5 MEER。 同一IP或地址72小时内只能认领一次。' : 'Limit 20 times per address, 5 MEER each time. Same IP or address can only claim once within 72 hours.'}</div>
           </div>
@@ -417,8 +496,17 @@ function Faucet() {
               <img src={copyright_png} />
             </div>
           </div>
-
+          <div className={styles.test} onClick={() => testMessage()}>Test</div>
         </ThemeProvider>
+        {flagMessage && <div className={styles.message}>
+          <div className={styles.maskBackground} onClick={() => closeMessage()}></div>
+          <div className={styles.messageBody}>
+            {indexMessage == 0 && <img src={correct_png} />}
+            {indexMessage == 1 && <img src={emptyAddr_png} />}
+            {indexMessage == 2 && <img src={attention_png} />}
+            {indexMessage == 3 && <img src={toomuch_png} />}
+          </div>
+        </div>}
     </div>
   );
 }
