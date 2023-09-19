@@ -236,7 +236,7 @@ function Faucet() {
       console.log("lastCalled",lastCalled);
       console.log("coolDownPeriod",coolDownPeriod);
 
-      if (lastCalled[0].toNumber() + coolDownPeriod[0].toNumber() * 1000 <= Date.now()) {
+      if (lastCalled[0].toNumber() + coolDownPeriod[0].toNumber() * 1000 <= Date.now() / 1000) {
         if (requestTimes[0].toNumber() < 200) {
           // ok
         } else {
