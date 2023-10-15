@@ -1,3 +1,4 @@
+import { useState } from "react";
 import frameUtil from "../../utils/frameUtil";
 import styles from "./index.module.css";
 import headerPng from "./assets/header.png";
@@ -13,10 +14,25 @@ import screwPng from "./assets/screw.png";
 import ball01Png from "./assets/ball01.png";
 import ball02Png from "./assets/ball02.png";
 import ball03Png from "./assets/ball03.png";
+// 路由入口图标
+import img01Png from "./assets/img01.png";
+import img02Png from "./assets/img02.png";
+import img03Png from "./assets/img03.png";
+import img04Png from "./assets/img04.png";
+import img05Png from "./assets/img05.png";
 
 
 frameUtil.frameUtil.setRem(1440);
 export default function Home() {
+    const [activeId, setActiveId] = useState(0);
+    const route_list = ['批量转账','批量转账','批量转账','批量转账'];
+    const content_list = [
+        { id : 1, img : img01Png,text: '水龙头', span: '水龙头是一款内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容' },
+        { id : 2, img : img02Png, text: 'DimAI', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内' },
+        { id : 3, img : img03Png, text: '批量转账', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
+        { id : 4, img : img04Png, text: '区块浏览器', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
+        { id : 5, img : img05Png, text: 'Kafh', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
+    ]
     return (
         <div className={styles.root}>
             <div className={styles.header}>
@@ -66,7 +82,26 @@ export default function Home() {
                 </div>
 
             </div>
-            
+            <div className={styles.routers}>
+                <div className={styles.router_title}>工具集合</div>
+                <div className={styles.router_in}>
+                    {route_list.map((item, idx) => (
+                        <div key={idx} className={idx == activeId? styles.router_active : styles.router}>{item}</div>
+                    ))}
+                </div>
+                <div className={styles.router_grid}>
+                    {content_list.map(item => (
+                        <div key={item.id} className={styles[`grid_item0${item.id}`]}>
+                            <div className={styles.grid_item_icon}>
+                                <img src={item.img} />
+                            </div>
+                            <div className={styles.grid_item_title}>{item.text}</div>
+                            <div className={styles.grid_item_text}>{item.span}</div>
+                            <div className={styles.grid_item_btn}>去领取</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }

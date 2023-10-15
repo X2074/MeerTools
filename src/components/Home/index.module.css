@@ -213,3 +213,27 @@
     left: 9.54rem;
     transform: rotate(-32.9deg);
 }
+
+.routers {
+    width: 14.4rem;
+    height: 8.42rem;
+    margin-top: .2rem;
+    padding-bottom: 1rem;
+}
+
+.router_grid {  
+    display: grid;  
+    grid-template-columns: 1.75fr 1fr; /* 两列，比例为2:1 */  
+    grid-template-rows: 1fr 1fr 1fr; /* 三行，每行高度一致 */  
+    gap: .24rem; /* 根据需要调整元素间距离 */  
+}  
+
+/* 在第一列的元素 */  
+.grid_item01, .grid_item02 {  
+    grid-row: 1 / span 2; /* 这两个元素位于第一行，跨越两列 */  
+}  
+  
+/* 在第二列的元素 */  
+.grid_item03, .grid_item04, .grid_item05 {  
+    grid-row: 2 / span 1; /* 这三个元素位于第二行，每行一列 */  
+}
