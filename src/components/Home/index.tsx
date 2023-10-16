@@ -86,7 +86,7 @@ export default function Home() {
                 <div className={styles.router_title}>工具集合</div>
                 <div className={styles.router_in}>
                     {route_list.map((item, idx) => (
-                        <div key={idx} className={idx == activeId? styles.router_active : styles.router}>{item}</div>
+                        <div key={idx} onClick={() => {setActiveId(Number(idx))}} className={idx == activeId? styles.router_active : styles.router}>{item}</div>
                     ))}
                 </div>
                 <div className={styles.router_grid}>
