@@ -1,5 +1,5 @@
 import { useState } from "react";
-import frameUtil from "../../utils/frameUtil";
+// import frameUtil from "../../utils/frameUtil";
 import styles from "./index.module.css";
 import headerPng from "./assets/header.png";
 import titlePng from "./assets/title.png";
@@ -22,7 +22,7 @@ import img04Png from "./assets/img04.png";
 import img05Png from "./assets/img05.png";
 
 
-frameUtil.frameUtil.setRem(1440);
+// frameUtil.frameUtil.setRem(1440);
 export default function Home() {
     const [activeId, setActiveId] = useState(0);
     const route_list = ['批量转账','批量转账','批量转账','批量转账'];
@@ -91,12 +91,14 @@ export default function Home() {
                 </div>
                 <div className={styles.router_grid}>
                     {content_list.map(item => (
-                        <div key={item.id} className={styles[`grid_item0${item.id}`]}>
+                        <div key={item.id} className={styles[`grid_item0${item.id}`] + " " + styles.grid_item}>
                             <div className={styles.grid_item_icon}>
                                 <img src={item.img} />
                             </div>
-                            <div className={styles.grid_item_title}>{item.text}</div>
-                            <div className={styles.grid_item_text}>{item.span}</div>
+                            <div className={styles.grid_item_content}>
+                                <div className={styles.grid_item_title}>{item.text}</div>
+                                <div className={styles.grid_item_text}>{item.span}</div>
+                            </div>
                             <div className={styles.grid_item_btn}>去领取</div>
                         </div>
                     ))}
