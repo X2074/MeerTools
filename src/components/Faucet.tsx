@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import frameUtil from '../utils/frameUtil';
+// import frameUtil from '../utils/frameUtil';
 import { ethers } from "ethers";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -66,7 +66,7 @@ const tableStyle = {
 //   { field: 'amount', headerName: 'Amount', width: 258 },
 //   { field: 'datetime', headerName: 'Last name', width: 258 },
 // ];
-frameUtil.frameUtil.setRem(1920);
+// frameUtil.frameUtil.setRem(1920);
 function Faucet() {
   // 决定页面是否英文的flag
   const [engFlag, setEngFlag] = useState(false);
