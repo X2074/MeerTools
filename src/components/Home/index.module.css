@@ -214,26 +214,170 @@
     transform: rotate(-32.9deg);
 }
 
+/* 下部链接 */
+
 .routers {
     width: 14.4rem;
     height: 8.42rem;
     margin-top: .2rem;
     padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-.router_grid {  
+.router_title {
+    height: .58rem;
+    line-height: .58rem;
+    text-align: center;
+    font-size: .46rem;
+    color: #fff;
+}
+
+.router_in {
+    font-size: .24rem;
+    margin-top: .31rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: .26rem;
+}
+
+.router {
+    color: #9F9F9F;
+}
+
+.router_active {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* 功能模块 */
+.router_grid {
+    width: 10.41rem;
+    height: 5.98rem;
     display: grid;  
     grid-template-columns: 1.75fr 1fr; /* 两列，比例为2:1 */  
     grid-template-rows: 1fr 1fr 1fr; /* 三行，每行高度一致 */  
     gap: .24rem; /* 根据需要调整元素间距离 */  
+
+    margin-top: .31rem;
+    font-size: .24rem;
 }  
 
+.grid_item {
+    background-color: rgba(242,242,242,.08);
+    border-radius: .36rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.grid_item_btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: .12rem;
+    color: #24FF24;
+    width: 20%;
+    text-align: center;
+    border: .01rem solid #24FF24;
+    border-radius: .32rem;
+}
+
+.grid_item_icon {
+    height: 80%;
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid_item_content {
+    width: 40%;
+    height: auto;
+    max-height: 90%;
+    margin-left: 5%;
+}
+
 /* 在第一列的元素 */  
-.grid_item01, .grid_item02 {  
-    grid-row: 1 / span 2; /* 这两个元素位于第一行，跨越两列 */  
-}  
+.grid_item01 {  
+    grid-row: 1 / span 2; /* 这两个元素位于第一行，跨越两列 */
+}
+
+.grid_item01 .grid_item_btn {
+    height: .42rem;
+    line-height: .42rem;
+    bottom: .32rem;
+    right: .32rem;
+    font-size: .16rem;
+}
+
+.grid_item01 img {
+    width: 1.9rem;
+    height: 1.95rem;
+}
+
+.grid_item01 .grid_item_content {
+    height: 50%;
+    max-height: 60%;
+}
+
+.grid_item01 .grid_item_title {
+    font-size: .48rem;
+    color: #fff;
+}
+
+.grid_item01 .grid_item_text {
+    font-size: .16rem;
+    color: #C2C2C2;
+}
+
+.grid_item02 {
+    grid-row: 3;
+}
+
+.grid_item02 .grid_item_btn {
+    height: .32rem;
+    line-height: .32rem;
+    bottom: .24rem;
+    right: .32rem;
+    font-size: .16rem;
+}
+
+.grid_item02 img {
+    width: 1.31rem;
+    height: 1.48rem;
+}
+
+.grid_item02 .grid_item_text, .grid_item03 .grid_item_text, .grid_item04 .grid_item_text, .grid_item05 .grid_item_text {
+    font-size: .12rem;
+    color: #C2C2C2;
+}
   
-/* 在第二列的元素 */  
-.grid_item03, .grid_item04, .grid_item05 {  
-    grid-row: 2 / span 1; /* 这三个元素位于第二行，每行一列 */  
+.grid_item02 .grid_item_title, .grid_item03 .grid_item_title, .grid_item04 .grid_item_title, .grid_item05 .grid_item_title { 
+    font-size: .24rem;
+    color: #fff;
+}
+
+.grid_item03 .grid_item_btn, .grid_item04 .grid_item_btn, .grid_item05 .grid_item_btn {
+    height: .24rem;
+    line-height: .24rem;
+    bottom: .16rem;
+    right: .24rem;
+    font-size: .12rem;
+}
+
+.grid_item03 img {
+    width: .79rem;
+    height: .92rem;
+}
+
+.grid_item04 img {
+    width: .93rem;
+    height: 1.06rem;
+}
+
+.grid_item05 img {
+    width: .9rem;
+    height: 1.02rem;
 }
