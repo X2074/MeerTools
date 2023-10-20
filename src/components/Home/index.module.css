@@ -19,14 +19,101 @@
     width: 100%;
     height: .7rem;
     top: 0;
-    /* transition: top 300ms cubic-bezier(.4, 0, 0, .2, 1) 0ms; */
+    transition: top 300ms cubic-bezier(.4, 0, 0, .2, 1) 0ms;
     z-index: 100;
-    /* backdrop-filter: blur(8px); */
-    /* box-shadow: inset 0px 1px #E5EAF2; */
-    /* background-color: rgba(9, 9, 4, .8); */
+    backdrop-filter: blur(8px);
+    box-shadow: inset 0px 1px #E5EAF2;
+    background-color: rgba(9, 9, 4, .8);
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
+}
+
+.header_content {
+    width: 100%;
+    padding-left: 1.58rem;
+    padding-right: 1.58rem;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_left {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+.header_left>img {
+    width: 1.22rem;
+    height: .51rem;
+}
+
+.header_center {
+    width: 2.4rem;
+    height: 100%;
+    line-height: 100%;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-family: PingFang SC;
+    font-size: .18rem;
+    font-weight: 600;
+    letter-spacing: 0em;
+}
+
+.header_center>div {
+    cursor: pointer;
+    user-select: none;
+}
+
+.header_right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: auto;
+}
+
+.language {
+    width: .46rem;
+    height: .4rem;
+    line-height: .4rem;
+    text-align: center;
+    font-family: PingFang SC;
+    font-size: .18rem;
+    font-weight: 400;
+    letter-spacing: 0em;
+    color: #24FF24;
+    border: solid .01rem #24FF24;
+    border-radius: .09rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.wallet {
+    height: .4rem;
+    width: 1.44rem;
+    text-align: center;
+    line-height: .4rem;
+    margin-left: .16rem;
+    font-family: PingFang SC;
+    font-size: .18rem;
+    font-weight: 400;
+    letter-spacing: 0em;
+    color: #0F0B1F;
+    background-color: #24FF24;
+    border-radius: .09rem;
+    border-top: solid .01rem #fff;
+    border-left: solid .01rem #fff;
+    border-right: solid .01rem #fff;
+    border-bottom: solid .04rem #fff;
+    cursor: pointer;
+    user-select: none;
 }
 
 .content {
@@ -244,11 +331,15 @@
 
 .router {
     color: #9F9F9F;
+    cursor: pointer;
+    user-select: none;
 }
 
 .router_active {
     color: #fff;
     font-weight: 700;
+    cursor: pointer;
+    user-select: none;
 }
 
 /* 功能模块 */
@@ -282,6 +373,8 @@
     text-align: center;
     border: .01rem solid #24FF24;
     border-radius: .32rem;
+    cursor: pointer;
+    user-select: none;
 }
 
 .grid_item_icon {

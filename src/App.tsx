@@ -7,8 +7,8 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/home" component={Home} />
-        <Route path="/faucet" component={Faucet} />
+        <Route path="/" component={Home} />
+        <Route path="/faucet" exact component={Faucet} />
       </Switch>
     </BrowserRouter>
   )

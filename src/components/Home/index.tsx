@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import frameUtil from "../../utils/frameUtil";
 import styles from "./index.module.css";
-import headerPng from "./assets/header.png";
+// 国际化
+import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n'; // 导入i18n实例
+// 顶部logo
+import qitmeer_png from "../../assets/MainPage/qitmeer_logo.png";
 import titlePng from "./assets/title.png";
 // 浮标
 import qitmeerPng from "./assets/qitmeer.png";
@@ -32,11 +36,41 @@ export default function Home() {
         { id : 3, img : img03Png, text: '批量转账', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
         { id : 4, img : img04Png, text: '区块浏览器', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
         { id : 5, img : img05Png, text: 'Kafh', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
-    ]
+    ];
+    const [isChinese, setChinese] = useState(true); // 默认中文
+    // 国际化
+    const { t } = useTranslation();
+
+    const switchLanguage = () => {
+        setChinese(old => !old);
+    }
+
+    useEffect(() => {
+        if (isChinese) {
+            i18n.changeLanguage("zh"); 
+        } else {
+            console.log("点啦")
+            i18n.changeLanguage("en"); 
+        }
+    }, [isChinese])
+
     return (
         <div className={styles.root}>
             <div className={styles.header}>
-                <img src={headerPng} />
+              <div className={styles.header_content}>
+                <div className={styles.header_left}>
+                    <img src={qitmeer_png} />
+                </div>
+                <div className={styles.header_center}>
+                    <div>{t('tools')}</div>
+                    <div>{t('situation')}</div>
+                    <div>{t('platform')}</div>
+                </div>
+                <div className={styles.header_right}>
+                    <div className={styles.language} onClick={switchLanguage}>{t('language')}</div>
+                    <div className={styles.wallet}>{t('wallet')}</div>
+                </div>
+              </div>
             </div>
             {/* 带手的部分 */}
             <div className={styles.content}>
