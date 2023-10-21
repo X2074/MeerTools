@@ -4,7 +4,7 @@ import en from './locales/en'; // 英文语言包
 import zh from './locales/zh'; // 中文语言包  
 
 // 定义支持的语言列表  
-const languages = ['en', 'zh'];
+// const languages = ['en', 'zh'];
   
 // 配置 i18next  
 i18n.use(initReactI18next).init({  

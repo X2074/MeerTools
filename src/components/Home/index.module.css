@@ -133,7 +133,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    animation: fadeIn 2s ease-in-out; /* 设置动画效果，持续时间为2秒 */  
+    animation: fadeIn 2s ease-in-out; /* 设置动画效果，持续时间为2秒  */
 
     z-index: 17;
 }
@@ -146,7 +146,7 @@
     100% {  
       opacity: 1; /* 结束状态，透明度为1 */  
     }  
-}  
+}
 
 .title {
     height: 1.88rem;
@@ -354,6 +354,21 @@
     margin-top: .31rem;
     font-size: .24rem;
 }  
+
+.active_grid {
+    background: linear-gradient(0deg, rgba(242, 242, 242, 0.16), rgba(242, 242, 242, 0.16));
+    border: 1px solid #24FF24;
+}
+
+.active_grid .grid_item_icon {
+    animation: float 2s infinite ease-in-out;
+}
+
+.active_grid .grid_item_btn {
+    background-color: #24FF24;
+    color: #0F0B1F;
+    border: 0;
+}
 
 .grid_item {
     background-color: rgba(242,242,242,.08);

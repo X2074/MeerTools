@@ -24,6 +24,8 @@ import img02Png from "./assets/img02.png";
 import img03Png from "./assets/img03.png";
 import img04Png from "./assets/img04.png";
 import img05Png from "./assets/img05.png";
+// 组件
+import { Alert } from "@mui/material";
 
 
 // frameUtil.frameUtil.setRem(1440);
@@ -31,31 +33,72 @@ export default function Home() {
     const [activeId, setActiveId] = useState(0);
     const route_list = ['批量转账','批量转账','批量转账','批量转账'];
     const content_list = [
-        { id : 1, img : img01Png,text: '水龙头', span: '水龙头是一款内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容' },
-        { id : 2, img : img02Png, text: 'DimAI', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内' },
+        { id : 1, img : img01Png, text: '水龙头', span: '水龙头是一款内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容' },
+        { id : 2, img : img02Png, text: 'DimAI', web: 'https://www.dimai.ai', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内' },
         { id : 3, img : img03Png, text: '批量转账', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
-        { id : 4, img : img04Png, text: '区块浏览器', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
-        { id : 5, img : img05Png, text: 'Kafh', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
+        { id : 4, img : img04Png, text: '区块浏览器', web: 'https://qng.qitmeer.io/', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
+        { id : 5, img : img05Png, text: 'Kafh', web: 'https://kahf.io/', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
     ];
+    const [activeRoute, setActiveRoute] = useState(0)
     const [isChinese, setChinese] = useState(true); // 默认中文
     // 国际化
     const { t } = useTranslation();
-
+    // 提示消息
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertInfo, setAlertInfo] = useState("This is a message, check it out");
+    // 切换语言
     const switchLanguage = () => {
         setChinese(old => !old);
+    }
+
+    // 点击功能模块
+    const clickRoute = (id, e) => {
+        setActiveRoute(id);
+        e.stopPropagation();
+    }
+
+    // 消除下方点击效果
+    const removeActive = () => {
+        setActiveRoute(0);
+    }
+
+    // 弹出消息并消除
+    const alert = (mess, time) => {
+        setAlertInfo(mess);
+        setShowAlert(true);
+
+        setTimeout(()=> {
+            setShowAlert(false);
+        }, time * 1000)
+    }
+
+    // 点击按钮跳转
+    const clickRouteBtn = (id) => {
+        let targetWebsite = "";
+        content_list.forEach(item => {
+            if (item.id === id) {
+                targetWebsite = item.web ? item.web : "";
+            }
+        })
+
+        // 待配置水龙头和批量转账
+        if (targetWebsite) {
+            location.href = targetWebsite;
+        } else {
+            alert("该功能尚未配置，请联系管理人员获取更新消息",1.5);
+        }
     }
 
     useEffect(() => {
         if (isChinese) {
             i18n.changeLanguage("zh"); 
         } else {
-            console.log("点啦")
             i18n.changeLanguage("en"); 
         }
     }, [isChinese])
 
     return (
-        <div className={styles.root}>
+        <div className={styles.root} onClick={removeActive}>
             <div className={styles.header}>
               <div className={styles.header_content}>
                 <div className={styles.header_left}>
@@ -125,7 +168,9 @@ export default function Home() {
                 </div>
                 <div className={styles.router_grid}>
                     {content_list.map(item => (
-                        <div key={item.id} className={styles[`grid_item0${item.id}`] + " " + styles.grid_item}>
+                        <div key={item.id} 
+                        className={`${styles[`grid_item0${item.id}`]} ${styles.grid_item} ${item.id === activeRoute ? styles.active_grid : ''}`}
+                        onClick={(e) => clickRoute(item.id, e)}>
                             <div className={styles.grid_item_icon}>
                                 <img src={item.img} />
                             </div>
@@ -133,11 +178,16 @@ export default function Home() {
                                 <div className={styles.grid_item_title}>{item.text}</div>
                                 <div className={styles.grid_item_text}>{item.span}</div>
                             </div>
-                            <div className={styles.grid_item_btn}>去领取</div>
+                            <div className={styles.grid_item_btn} onClick={() => clickRouteBtn(item.id)}>去领取</div>
                         </div>
                     ))}
                 </div>
             </div>
+            {showAlert && <div style={{position: 'fixed', top: '.9rem', width: '100%', display: 'flex', justifyContent: 'center'}}>
+                <Alert variant="filled" severity="info" style={{fontSize: '.18rem'}}>
+                    {alertInfo}
+                </Alert>
+            </div>}
         </div>
     )
 }
