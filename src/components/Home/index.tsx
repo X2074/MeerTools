@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import styles from "./index.module.css";
 // 国际化
 import { useTranslation } from 'react-i18next';
-import i18n from '../../i18n'; // 导入i18n实例
+// import i18n from '../../i18n'; 
 // 顶部logo
 import qitmeer_png from "../../assets/MainPage/qitmeer_logo.png";
 import titlePng from "./assets/title.png";
+// 灯光
+import lightPng from "./assets/light.png";
 // 浮标
 import qitmeerPng from "./assets/qitmeer.png";
 import harmerPng from "./assets/harmer.png";
@@ -40,16 +42,19 @@ export default function Home() {
         { id : 5, img : img05Png, text: 'Kafh', web: 'https://kahf.io/', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
     ];
     const [activeRoute, setActiveRoute] = useState(0)
-    const [isChinese, setChinese] = useState(true); // 默认中文
+    // const [isChinese, setChinese] = useState(true); // 默认中文
     // 国际化
     const { t } = useTranslation();
     // 提示消息
     const [showAlert, setShowAlert] = useState(false);
     const [alertInfo, setAlertInfo] = useState("This is a message, check it out");
+    // 配合动画（光束）
+    const [lightHeight, setLHeight] = useState(0);
     // 切换语言
-    const switchLanguage = () => {
-        setChinese(old => !old);
-    }
+    // 2023.10 删除英中互译的实现
+    // const switchLanguage = () => {
+    //     setChinese(old => !old);
+    // }
 
     // 点击功能模块
     const clickRoute = (id, e) => {
@@ -89,13 +94,20 @@ export default function Home() {
         }
     }
 
+    // 2023.10 删除英中互译的实现
+    // useEffect(() => {
+    //     if (isChinese) {
+    //         i18n.changeLanguage("zh"); 
+    //     } else {
+    //         i18n.changeLanguage("en"); 
+    //     }
+    // }, [isChinese])
+
     useEffect(() => {
-        if (isChinese) {
-            i18n.changeLanguage("zh"); 
-        } else {
-            i18n.changeLanguage("en"); 
-        }
-    }, [isChinese])
+        setInterval(() => {
+            setLHeight(old => old + 7.03 / 20);
+        }, 100, 20)
+    }, [])
 
     return (
         <div className={styles.root} onClick={removeActive}>
@@ -110,7 +122,7 @@ export default function Home() {
                     <div>{t('platform')}</div>
                 </div>
                 <div className={styles.header_right}>
-                    <div className={styles.language} onClick={switchLanguage}>{t('language')}</div>
+                    {/* <div className={styles.language} onClick={switchLanguage}>{t('language')}</div> */}
                     <div className={styles.wallet}>{t('wallet')}</div>
                 </div>
               </div>
@@ -118,7 +130,10 @@ export default function Home() {
             {/* 带手的部分 */}
             <div className={styles.content}>
                 {/* 光束 */}
-                <div className={styles.light}></div>
+                {/* <div className={styles.light}></div> */}
+                <div className={styles.light} style={{height: `${lightHeight}rem`}}>
+                    <img src={lightPng} />
+                </div>
                 {/* title */}
                 <div className={styles.title}>
                     <img src={titlePng} />

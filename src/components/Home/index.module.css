@@ -125,7 +125,7 @@
     position: relative;
 }
 
-.light {
+/* .light {
     height: 7.03rem;
     width: 14.4rem;
     background-image: url(./assets/light.png);
@@ -133,9 +133,29 @@
     position: absolute;
     top: 0;
     left: 0;
-    animation: fadeIn 2s ease-in-out; /* 设置动画效果，持续时间为2秒  */
+    animation: fadeIn 2s ease-in-out; 
+    z-index: 17;
+} */
+
+.light {
+    height: 7.03rem;
+    width: 14.4rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    animation: fadeIn 4s ease-in-out;
 
     z-index: 17;
+
+    overflow: hidden;
+}
+
+.light>img {
+    height: 7.03rem;
+    width: 14.4rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
 /* 使用CSS动画 */  
