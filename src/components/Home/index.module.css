@@ -206,19 +206,19 @@
 
 /* 四种浮动样式 */
 .floatU_T {  
-    animation: floatD 2s infinite ease-in-out;  
+    animation: floatD 4s infinite ease-in-out;  
 }
 
 .floatU_O {
-    animation: floatD 1s infinite ease-in-out; 
+    animation: floatD 3s infinite ease-in-out; 
 }
 
 .floatD_T {
-    animation: float 2s infinite ease-in-out;  
+    animation: float 4s infinite ease-in-out;  
 }
 
 .floatD_O {
-    animation: float 1s infinite ease-in-out; 
+    animation: float 3s infinite ease-in-out; 
 }
 
 .png_qitmeer {
@@ -375,16 +375,16 @@
     font-size: .24rem;
 }  
 
-.active_grid {
+.grid_item:hover {
     background: linear-gradient(0deg, rgba(242, 242, 242, 0.16), rgba(242, 242, 242, 0.16));
     border: 1px solid #24FF24;
 }
 
-.active_grid .grid_item_icon {
+.grid_item:hover .grid_item_icon {
     animation: float 2s infinite ease-in-out;
 }
 
-.active_grid .grid_item_btn {
+.grid_item:hover .grid_item_btn {
     background-color: #24FF24;
     color: #0F0B1F;
     border: 0;

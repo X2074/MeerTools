@@ -41,7 +41,6 @@ export default function Home() {
         { id : 4, img : img04Png, text: '区块浏览器', web: 'https://qng.qitmeer.io/', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
         { id : 5, img : img05Png, text: 'Kafh', web: 'https://kahf.io/', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
     ];
-    const [activeRoute, setActiveRoute] = useState(0)
     // const [isChinese, setChinese] = useState(true); // 默认中文
     // 国际化
     const { t } = useTranslation();
@@ -55,17 +54,6 @@ export default function Home() {
     // const switchLanguage = () => {
     //     setChinese(old => !old);
     // }
-
-    // 点击功能模块
-    const clickRoute = (id, e) => {
-        setActiveRoute(id);
-        e.stopPropagation();
-    }
-
-    // 消除下方点击效果
-    const removeActive = () => {
-        setActiveRoute(0);
-    }
 
     // 弹出消息并消除
     const alert = (mess, time) => {
@@ -110,7 +98,7 @@ export default function Home() {
     }, [])
 
     return (
-        <div className={styles.root} onClick={removeActive}>
+        <div className={styles.root}>
             <div className={styles.header}>
               <div className={styles.header_content}>
                 <div className={styles.header_left}>
@@ -184,8 +172,8 @@ export default function Home() {
                 <div className={styles.router_grid}>
                     {content_list.map(item => (
                         <div key={item.id} 
-                        className={`${styles[`grid_item0${item.id}`]} ${styles.grid_item} ${item.id === activeRoute ? styles.active_grid : ''}`}
-                        onClick={(e) => clickRoute(item.id, e)}>
+                        className={`${styles[`grid_item0${item.id}`]} ${styles.grid_item}`}
+                        >
                             <div className={styles.grid_item_icon}>
                                 <img src={item.img} />
                             </div>
