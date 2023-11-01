@@ -120,8 +120,8 @@
     height: 7.03rem;
     width: 15.78rem;
     margin: .63rem auto 0;
-    background-image: url(./assets/bg01.png);
-    background-size: 14.4rem 7.03rem;
+    background-image: url(./assets/bg.png);
+    background-size: 15.78rem 7.03rem;
     position: relative;
 }
 
@@ -141,7 +141,7 @@
     height: 7.03rem;
     width: 14.4rem;
     position: absolute;
-    left: 0;
+    left: .69rem;
     bottom: 0;
     animation: fadeIn 4s ease-in-out;
 
@@ -226,7 +226,7 @@
     height: 1.5rem;
     position: absolute;
     top: 4.57rem;
-    left: 6.64rem;
+    left: 7.33rem;
 }
 
 .png_harmer {
@@ -234,7 +234,7 @@
     height: 1.3rem;
     position: absolute;
     top: 2.72rem;
-    left: 8.38rem;
+    left: 9.07rem;
     transform: rotate(9.83deg);
 }
 
@@ -243,7 +243,7 @@
     height: .58rem;
     position: absolute;
     top: 3.17rem;
-    left: 5.97rem;
+    left: 6.66rem;
     transform: rotate(-29.75deg);
 }
 
@@ -252,7 +252,7 @@
     height: .77rem;
     position: absolute;
     top: 3.73rem;
-    left: 4.9rem;
+    left: 5.59rem;
 }
 
 .png_qitmeer>img{
@@ -266,7 +266,7 @@
     height: .27rem;
     position: absolute;
     left: 2.74rem;
-    top: 2.37rem;
+    top: 3.06rem;
     transform: rotate(-19.85deg);
 }
 
@@ -274,7 +274,7 @@
     width: .29rem;
     height: .29rem;
     position: absolute;
-    left: 7.14rem;
+    left: 7.83rem;
     top: 2.43rem;
 }
 
@@ -282,7 +282,7 @@
     width: .19rem;
     height: .33rem;
     position: absolute;
-    left: 6.14rem;
+    left: 6.83rem;
     top: 4.27rem;
     transform: rotate(-136.76deg)
 }
@@ -292,7 +292,7 @@
     height: .33rem;
     position: absolute;
     top: 2.36rem;
-    left: 10.93rem;
+    left: 11.62rem;
     transform: rotate(-30deg);
 }
 
@@ -301,7 +301,7 @@
     height: .54rem;
     position: absolute;
     top: 2.18rem;
-    left: 8.27rem;
+    left: 8.96rem;
 }
 
 .png_ball03 {
@@ -309,7 +309,7 @@
     height: .55rem;
     position: absolute;
     top: 4.53rem;
-    left: 10.05rem;
+    left: 10.74rem;
 }
 
 .png_ball01 {
@@ -317,7 +317,7 @@
     height: .3rem;
     position: absolute;
     top: 5rem;
-    left: 9.54rem;
+    left: 10.23rem;
     transform: rotate(-32.9deg);
 }
 
