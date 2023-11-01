@@ -118,8 +118,8 @@
 
 .content {
     height: 7.03rem;
-    width: 14.4rem;
-    margin-top: .63rem;
+    width: 15.78rem;
+    margin: .63rem auto 0;
     background-image: url(./assets/bg01.png);
     background-size: 14.4rem 7.03rem;
     position: relative;
@@ -324,7 +324,7 @@
 /* 下部链接 */
 
 .routers {
-    width: 14.4rem;
+    width: 19.2rem;
     height: 8.42rem;
     margin-top: .2rem;
     padding-bottom: 1rem;
