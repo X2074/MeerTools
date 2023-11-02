@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 // import frameUtil from "../../utils/frameUtil";
 import styles from "./index.module.css";
 // 国际化
@@ -35,7 +36,7 @@ export default function Home() {
     const [activeId, setActiveId] = useState(0);
     const route_list = ['批量转账','批量转账','批量转账','批量转账'];
     const content_list = [
-        { id : 1, img : img01Png, text: '水龙头', span: '水龙头是一款内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容' },
+        { id : 1, img : img01Png, text: '水龙头', web: "https://tools.meertalk.org/faucet", span: '水龙头是一款内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容' },
         { id : 2, img : img02Png, text: 'DimAI', web: 'https://www.dimai.ai', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内' },
         { id : 3, img : img03Png, text: '批量转账', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
         { id : 4, img : img04Png, text: '区块浏览器', web: 'https://qng.qitmeer.io/', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
