@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./index.module.css";
 // 国际化
 import { useTranslation } from 'react-i18next';
-// import i18n from '../../i18n'; 
+// import i18n from '../../i18n';
 // 顶部logo
 import qitmeer_png from "../../assets/MainPage/qitmeer_logo.png";
 import titlePng from "./assets/title.png";
@@ -36,11 +36,11 @@ export default function Home() {
     const [activeId, setActiveId] = useState(0);
     const route_list = ['批量转账','批量转账','批量转账','批量转账'];
     const content_list = [
-        { id : 1, img : img01Png, text: '水龙头', web: "https://tools.meertalk.org/faucet", span: '水龙头是一款内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容' },
-        { id : 2, img : img02Png, text: 'DimAI', web: 'https://www.dimai.ai', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内' },
-        { id : 3, img : img03Png, text: '批量转账', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
-        { id : 4, img : img04Png, text: '区块浏览器', web: 'https://qng.qitmeer.io/', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
-        { id : 5, img : img05Png, text: 'Kafh', web: 'https://kahf.io/', span: '内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内' },
+        { id : 1, img : img01Png, text: '水龙头', web: "https://tools.meertalk.org/faucet", span: 'Qitmeer Testnet 将为你提供完整、安全的开发测试环境，你可以在测试网上调试和优化你的合约与应用。你可以从水龙头获取测试网 MEER coin 以供测试。'},
+        { id : 2, img : img02Png, text: 'DimAI', web: 'https://www.dimai.ai', span: 'DimAI 是你的 AIGC 助理，将为你提供从内容生成到 NFT 铸造的一站式服务，将为你打开进入 Web3.0 与元宇宙窗口。' },
+        { id : 3, img : img03Png, text: '批量转账', span: '批量转账工具将为你提供 MEER coin 以及 MeerEVM Tokens 便捷的批量转账服务。' },
+        { id : 4, img : img04Png, text: '区块浏览器', web: 'https://qng.qitmeer.io/', span: '区块浏览器实时跟踪 Qitmeer 链上的数据和交易记录，你可以查看和检索交易、区块、地址和其他相关数据。' },
+        { id : 5, img : img05Png, text: 'Kahf', web: 'https://kahf.io/', span: 'Kahf 是一款多链钱包，将帮助你管理包括 MEER coin、Tokens 以及 NFTs 等多种资产。' },
     ];
     // const [isChinese, setChinese] = useState(true); // 默认中文
     // 国际化
@@ -86,9 +86,9 @@ export default function Home() {
     // 2023.10 删除英中互译的实现
     // useEffect(() => {
     //     if (isChinese) {
-    //         i18n.changeLanguage("zh"); 
+    //         i18n.changeLanguage("zh");
     //     } else {
-    //         i18n.changeLanguage("en"); 
+    //         i18n.changeLanguage("en");
     //     }
     // }, [isChinese])
 
@@ -172,7 +172,7 @@ export default function Home() {
                 </div>
                 <div className={styles.router_grid}>
                     {content_list.map(item => (
-                        <div key={item.id} 
+                        <div key={item.id}
                         className={`${styles[`grid_item0${item.id}`]} ${styles.grid_item}`}
                         >
                             <div className={styles.grid_item_icon}>
