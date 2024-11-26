@@ -1,11 +1,22 @@
-.introduce{
-  .intro-text{
-margin-top: 100px;
-text-align: center;
-.p1{
-  color: #ACFF43;
-  font-size: 48px;
-  font-weight: 700;
-}
-}
+.introduce {
+  .intro-text {
+    text-align: center;
+    width: 55%;
+    margin: 100px auto 0;
+    .p1 {
+      color: #acff43;
+      font-size: 48px;
+      font-weight: 700;
+    }
+    .p2 {
+      margin-top: 16px;
+      color: #fff;
+      font-size: 48px;
+      font-weight: 700;
+    }
+    .p3 {
+      color: #9a9a9a;
+      font-size: 20px;
+    }
+  }
 }
