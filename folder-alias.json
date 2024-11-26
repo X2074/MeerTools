@@ -1,0 +1,377 @@
+{
+    "src/utils/window.ts": {
+        "description": "window阻止事件"
+    },
+    "src/views/blackTheme/componentsChildren/rechargeDim": {
+        "description": "充值"
+    },
+    "src/views/mySpace/rechargeDim": {
+        "description": "购买dim"
+    },
+    "public/images/icons": {
+        "description": "共有 icon"
+    },
+    "public/images/left": {
+        "description": "左侧功能区"
+    },
+    "public/images/header": {
+        "description": "顶部"
+    },
+    "src/utils/bus.js": {
+        "description": "组件传参"
+    },
+    "src/utils/menu.js": {
+        "description": "左侧菜单功能区"
+    },
+    "src/utils/request.ts": {
+        "description": "axios 方法封装"
+    },
+    "src/views/homePage": {
+        "description": "首页"
+    },
+    "src/components/image/s3image.vue": {
+        "description": "主题、我的作品专用"
+    },
+    "src/views/blackTheme/term": {
+        "description": "用户协议"
+    },
+    "src/assets/css/nft.scss": {
+        "description": "我的nft，我的合集"
+    },
+    "src/components/processDrawer": {
+        "description": "流程抽屉组件"
+    },
+    "src/components/processDrawer/components/drawImages": {
+        "description": "绘图"
+    },
+    "src/components/processDrawer/components/createCollection": {
+        "description": "合集"
+    },
+    "src/contract/contractFiles/DimaiCollectionFactory.json": {
+        "description": "创建合集"
+    },
+    "src/contract/factoryNFT.js": {
+        "description": "工厂合约mintNFT"
+    },
+    "src/i18n/lang/collection": {
+        "description": "合集"
+    },
+    "src/api/resource.ts": {
+        "description": "nft相关接口"
+    },
+    "src/views/Nft/buyNFTs": {
+        "description": "我购买的nft"
+    },
+    "src/views/collection/myCollection": {
+        "description": "我的合集"
+    },
+    "src/views/collection/createCollection": {
+        "description": "创建合集"
+    },
+    "src/contract/contractFiles/DimAIFunTime.json": {
+        "description": "查询免费次数"
+    },
+    "src/contract/dimaiFunTime.ts": {
+        "description": "免费"
+    },
+    "src/views/Nft/nftDisplay": {
+        "description": "nft展示"
+    },
+    "src/components/createCollection": {
+        "description": "创建合集"
+    },
+    "src/views/mySpace/dimRecord": {
+        "description": "消费记录"
+    },
+    "src/views/mySpace/dimToken": {
+        "description": "购买记录"
+    },
+    "src/views/mySpace/dimRecharge": {
+        "description": "购买dim"
+    },
+    "src/views/blackTheme/privacy": {
+        "description": "隐私"
+    },
+    "src/views/blog": {
+        "description": "博客"
+    },
+    "src/views/Nft/myNft": {
+        "description": "dimai合集"
+    },
+    "src/views/invite": {
+        "description": "未来探险家"
+    },
+    "src/views/Nft/customCollection": {
+        "description": "非原创nft"
+    },
+    "src/views/Nft/dimaiCollection": {
+        "description": "dimai原创nft"
+    },
+    "src/i18n/lang/invite": {
+        "description": "未来探险家"
+    },
+    "src/api/essay.ts": {
+        "description": "文章相关接口"
+    },
+    "src/components/bindAddress": {
+        "description": "绑定未来探险家"
+    },
+    "src/api/invite.ts": {
+        "description": "拉新返佣"
+    },
+    "src/views/dim": {
+        "description": "购买dim相关"
+    },
+    "src/views/Nft/activityNFT": {
+        "description": "社区活动"
+    },
+    "src/i18n/lang/prompt": {
+        "description": "提示"
+    },
+    "src/components/prompt": {
+        "description": "提示弹框"
+    },
+    "src/components/dialogModal": {
+        "description": "公共弹框组件"
+    },
+    "src/i18n/lang/create": {
+        "description": "绘制"
+    },
+    "src/i18n/lang/activity": {
+        "description": "活动的文案"
+    },
+    "src/contract/BCFMatching.js": {
+        "description": "历史活动nft获取"
+    },
+    "src/contract/createCollection.js": {
+        "description": "创建合集"
+    },
+    "src/contract/dimaiFunTime.js": {
+        "description": "免费"
+    },
+    "src/contract/dimaiNFT.js": {
+        "description": "dimai、原创合集"
+    },
+    "src/contract/dimaiSwap.js": {
+        "description": "购买dim"
+    },
+    "src/contract/myCollection.js": {
+        "description": "原创合集"
+    },
+    "src/contract/web3GetNFT.js": {
+        "description": "web3公共方法获取nft"
+    },
+    "src/contract/web3GetBcfNft.js": {
+        "description": "活动合集"
+    },
+    "src/contract/contractFiles/Love214_XCreativeActivity.json": {
+        "description": "情人节活动"
+    },
+    "src/contract/LOVEMatching.js": {
+        "description": "情人节活动"
+    },
+    "src/components/shareQrcode": {
+        "description": "分享页面"
+    },
+    "src/i18n/lang/shareCode": {
+        "description": "分享图片"
+    },
+    "src/views/promptContent": {
+        "description": "prompt"
+    },
+    "src/views/promptContent/promptDisplay": {
+        "description": "展示"
+    },
+    "src/views/mySpace/messages": {
+        "description": "站内信"
+    },
+    "src/i18n/lang/language": {
+        "description": "语言种类"
+    },
+    "src/components/language": {
+        "description": "多语言弹框"
+    },
+    "src/components/revenueDetails": {
+        "description": "收益明细"
+    },
+    "src/i18n/lang/term/kor.js": {
+        "description": "韩语"
+    },
+    "src/i18n/lang/term/bul.js": {
+        "description": "保加利亚"
+    },
+    "src/i18n/lang/term/cht.js": {
+        "description": "繁体"
+    },
+    "src/i18n/lang/term/de.js": {
+        "description": "德语"
+    },
+    "src/i18n/lang/term/fra.js": {
+        "description": "法语"
+    },
+    "src/i18n/lang/term/it.js": {
+        "description": "意大利语"
+    },
+    "src/i18n/lang/term/jp.js": {
+        "description": "日语"
+    },
+    "src/i18n/lang/term/nl.js": {
+        "description": "荷兰语"
+    },
+    "src/i18n/lang/term/pl.js": {
+        "description": "波兰语"
+    },
+    "src/i18n/lang/term/pt.js": {
+        "description": "葡萄牙语"
+    },
+    "src/i18n/lang/term/rom.js": {
+        "description": "罗马尼亚语"
+    },
+    "src/i18n/lang/term/ru.js": {
+        "description": "俄语"
+    },
+    "src/i18n/lang/term/spa.js": {
+        "description": "西班牙语"
+    },
+    "src/i18n/lang/term/yd.js": {
+        "description": "印地语"
+    },
+    "src/i18n/lang/term/tk.js": {
+        "description": "土耳其语"
+    },
+    "src/i18n/lang/bul.js": {
+        "description": "保加利亚"
+    },
+    "src/i18n/lang/cht.js": {
+        "description": "繁体"
+    },
+    "src/i18n/lang/de.js": {
+        "description": "德语"
+    },
+    "src/i18n/lang/fra.js": {
+        "description": "法语"
+    },
+    "src/i18n/lang/it.js": {
+        "description": "意大利语"
+    },
+    "src/i18n/lang/jp.js": {
+        "description": "日语"
+    },
+    "src/i18n/lang/nl.js": {
+        "description": "荷兰语"
+    },
+    "src/i18n/lang/pl.js": {
+        "description": "波兰语"
+    },
+    "src/i18n/lang/pt.js": {
+        "description": "葡萄牙语"
+    },
+    "src/i18n/lang/rom.js": {
+        "description": "罗马尼亚语"
+    },
+    "src/i18n/lang/ru.js": {
+        "description": "俄语"
+    },
+    "src/i18n/lang/spa.js": {
+        "description": "西班牙语"
+    },
+    "src/i18n/lang/yd.js": {
+        "description": "印地语"
+    },
+    "src/i18n/lang/tk.js": {
+        "description": "土耳其语"
+    },
+    "src/i18n/lang/adCopy": {
+        "description": "广告文案"
+    },
+    "src/views/privacy": {
+        "description": "隐私"
+    },
+    "src/views/term": {
+        "description": "用户协议"
+    },
+    "src/views/aiTools": {
+        "description": "ai工具"
+    },
+    "src/views/mySpace": {
+        "description": "个人空间"
+    },
+    "src/views/community": {
+        "description": "社区"
+    },
+    "src/views/aiTools/createImage/textCanvas": {
+        "description": "文生图"
+    },
+    "src/views/aiTools/createImage/AICanvas": {
+        "description": "图生图"
+    },
+    "src/views/mySpace/invite/invite": {
+        "description": "未来探险家"
+    },
+    "src/views/mySpace/invite/myInvite": {
+        "description": "我的探险家"
+    },
+    "src/views/mySpace/invite": {
+        "description": "未来探险家"
+    },
+    "src/views/mySpace/myInvite": {
+        "description": "我的探险家"
+    },
+    "src/views/mySpace/myCreation": {
+        "description": "我的作品"
+    },
+    "src/views/aiTools/createImage": {
+        "description": "作品绘制"
+    },
+    "src/views/NFT/userProjectNft": {
+        "description": "所有的活动nft和B端选中的"
+    },
+    "src/views/NFT/userProjectNft/projectNft": {
+        "description": "项目选中的"
+    },
+    "src/views/NFT/userProjectNft/userNfts": {
+        "description": "所有"
+    },
+    "src/views/NFT/collection": {
+        "description": "原创合集"
+    },
+    "src/views/NFT/collection/createCollection": {
+        "description": "创建合集"
+    },
+    "src/views/NFT/collection/myCollection": {
+        "description": "我的合集"
+    },
+    "src/views/community/nftDisplay": {
+        "description": "nft展示"
+    },
+    "src/views/NFT/promptContent": {
+        "description": "prompt"
+    },
+    "src/views/NFT/promptContent/myPrompt": {
+        "description": "我的prompt"
+    },
+    "src/views/NFT/promptContent/promptDisplay": {
+        "description": "prompt 展示"
+    },
+    "src/wagmi.ts": {
+        "description": "创建钱包链接的配置"
+    },
+    "src/views/NFT/customCollection": {
+        "description": "非原创合集"
+    },
+    "src/views/NFT/dimaiCollection": {
+        "description": "dimai合集"
+    },
+    "src/views/NFT/activityNFT": {
+        "description": "活动合集"
+    },
+    "src/views/NFT/nftDetail": {
+        "description": "nft详情"
+    },
+    "src/views/promptDetail": {
+        "description": "prompt详情"
+    },
+    "src/components/image/nftIimage.vue": {
+        "description": "nft展示"
+    }
+}

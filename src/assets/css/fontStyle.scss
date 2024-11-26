@@ -1,0 +1,39 @@
+.AlibabaPuHuiTi {
+    //普惠字体，默认
+    font-family: AlibabaPuHuiTi !important;
+}
+
+.AaBaLuoKe {
+    font-family: AaBaLuoKe !important;
+}
+
+.AaBaoHeZiFangSuan {
+    font-family: AaBaoHeZiFangSuan !important;
+}
+
+// 英文专用字体
+.MontserratAlternates {
+    font-family: Montserrat-Light !important;
+
+}
+
+@font-face {
+    font-family: 'AlibabaPuHuiTi';
+    src: url('./font/AlibabaPuHuiTi.woff2') format('woff2')
+}
+
+@font-face {
+    font-family: 'AaBaLuoKe';
+    src: url('./font/AaBaLuoKe.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'AaBaoHeZiFangSuan';
+    src: url('./font/AaBaoHeZiFangSuan.woff2') format('woff2')
+}
+
+
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url('./font/Montserrat-Light-6.ttf') format('truetype')
+}

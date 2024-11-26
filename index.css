@@ -1,7 +1,0 @@
-/* 全局样式 */
-p {
-    margin: 0;
-}
-body::-webkit-scrollbar {
-    display: none;
-  }

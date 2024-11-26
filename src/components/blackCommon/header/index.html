@@ -1,0 +1,15 @@
+<div class="header-out flex-center showBg" v-route-loading="confirmLoading">
+    <div class="header max-width1440 flex-between flex-center">
+        <a href="/index">
+            <img src="/images/header/logo2.png" alt="" class="logo">
+        </a>
+    </div>
+</div>
+
+<!-- 登录 -->
+<dialogModal v-model="loginWallt" @close="loginWallt = false">
+    <div class="connect-wallt pl-25 pr-25" v-for="connector in connectors" :key="connector.id"
+        @click="connectLogin({ connector, chainId })">
+        {{ connector.name }}
+    </div>
+</dialogModal>

@@ -1,0 +1,35 @@
+:root {
+  --white: #ffffff;
+  --black: #000000;
+}
+
+@mixin box($bgColor: #fff, $borderColor: #000, $bradius: 10px) {
+
+  background: $bgColor;
+  border: 2px solid $borderColor;
+  border-radius: $bradius;
+}
+
+
+@mixin box-shadow($shadows...) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@mixin omit($i) {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden; //溢出内容隐藏
+  text-overflow: ellipsis; //文本溢出部分用省略号表示
+  display: -webkit-box; //特别显示模式
+  -webkit-line-clamp: #{$i}; //行数
+  line-clamp: #{$i};
+  -webkit-box-orient: vertical; //盒子中内容竖直排列
+}
+
+
+@mixin ov-flow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
