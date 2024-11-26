@@ -32,12 +32,12 @@
             </div>
         </div>
         <!-- 登录 -->
-        <div class="wallt-loginout" v-if="!loginBol" @click="loginWallt = true">
+        <div class="wallt-loginout" v-if="!isLogin" @click="loginWallt = true">
             Connect Wallet
         </div>
         <div class="wallt-login flex-center" v-else>
             {{omit(address)}}
-            <div class="wallt-loginout ml-16" @click="disconnect();loginBol = false">
+            <div class="wallt-loginout ml-16" @click="disconnect();isLogin = false">
                 DoConnect
             </div>
         </div>

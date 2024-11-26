@@ -16,7 +16,7 @@ const router = useRouter();
 // 钱包选项
 let loginWallt = ref(false);
 // 是否链接
-let loginBol = ref(false);
+const isLogin = ref(false);
 const avatar = ref(null);
 
 let confirmLoading = ref(false);
@@ -50,12 +50,11 @@ const connectLogin = (data) => {
     // 调用连接函数进行登录
     connect(data);
 };
-const isLogin = ref(false);
 
 onMounted(async () => {
     console.log(status.value, "status.value");
     if (status.value == "connected") {
-        loginBol.value = true;
+        isLogin.value = true;
     }
 });
 
