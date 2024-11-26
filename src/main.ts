@@ -13,6 +13,7 @@ import 'ant-design-vue/dist/antd.css';
 import '/public/css/style.scss'
 import "@/assets/css/common.scss";
 import "@/assets/css/fontStyle.scss";
+import "@/assets/css/publicStyle.scss";
 import '/public/js/flexible.js'
 // 导入 vue-cropper
 import VueCropper from 'vue-cropper'

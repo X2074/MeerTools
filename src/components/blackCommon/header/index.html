@@ -1,8 +1,46 @@
-<div class="header-out flex-center showBg" v-route-loading="confirmLoading">
+<div class="header-out flex-center" v-route-loading="confirmLoading">
     <div class="header max-width1440 flex-between flex-center">
         <a href="/index">
             <img src="/images/header/logo2.png" alt="" class="logo">
         </a>
+        <!-- 中间菜单栏 -->
+        <div class="tool-menus">
+            <div class="menu-list flex">
+                <div class="menus-item mr-38">
+                    工具模块
+                    <img src="/images/icons/zoom.svg" alt="">
+                    <div class="menus-item-children">
+                        <div class="menu-item-list">
+                            <p>水龙头</p>
+                            <p>批量转账</p>
+                            <p>智能合约自动部署</p>
+                            <p>生态项目监管</p>
+                            <p>供应量查询</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="menus-item mr-38">
+                    区块浏览器
+                </div>
+                <div class="menus-item mr-38">
+                    生态项目
+                    <img src="/images/icons/zoom.svg" alt="">
+                </div>
+                <div class="menus-item mr-38">
+                    Qitmeer官网
+                </div>
+            </div>
+        </div>
+        <!-- 登录 -->
+        <div class="wallt-loginout" v-if="!loginBol" @click="loginWallt = true">
+            Connect Wallet
+        </div>
+        <div class="wallt-login flex-center" v-else>
+            {{omit(address)}}
+            <div class="wallt-loginout ml-16" @click="disconnect();loginBol = false">
+                DoConnect
+            </div>
+        </div>
     </div>
 </div>
 
