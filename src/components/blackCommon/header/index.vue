@@ -83,6 +83,5 @@ watch(
 );
 </script>
 <style scoped lang="scss">
-@import "@/assets/css/header.scss";
 @import "./index.scss";
 </style>

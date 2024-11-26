@@ -1,9 +1,9 @@
 import axios from "axios";
 import bus from "./bus.js";
 // import i18n from '@/i18n';
-import { TOKEN } from '@/api/constant'
-import { getItem, setItem } from './storage.js'
-import { isCheckTimeout } from "@/api/sys"
+// import { TOKEN } from '@/api/constant'
+// import { getItem, setItem } from './storage.js'
+// import { isCheckTimeout } from "@/api/sys"
 import store from '@/store'
 import router from "@/router/index";
 
@@ -61,13 +61,13 @@ service.interceptors.request.use(
         }
         pushAxios()
         // 模拟指定请求令牌
-        if (getItem(TOKEN)) {
-            if (isCheckTimeout()) {
-                store.dispatch('user/logout')
-            } else {
-                config.headers['Authorization'] = getItem(TOKEN);
-            }
-        }
+        // if (getItem(TOKEN)) {
+        //     if (isCheckTimeout()) {
+        //         store.dispatch('user/logout')
+        //     } else {
+        //         config.headers['Authorization'] = getItem(TOKEN);
+        //     }
+        // }
         return config;
     },
     (error) => {

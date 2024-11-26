@@ -19,5 +19,5 @@
     }
     //添加配置 end
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/views/blackTheme/children/createImage/components/cardList.js", "src/contract/dimaiFunTime.js"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
