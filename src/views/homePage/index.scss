@@ -1,22 +1,182 @@
 .introduce {
+  width: 100%;
+  height: 700px;
+  background: url(/images/index/first.svg) no-repeat center bottom;
+
   .intro-text {
     text-align: center;
     width: 55%;
     margin: 100px auto 0;
+
     .p1 {
       color: #acff43;
       font-size: 48px;
       font-weight: 700;
     }
+
     .p2 {
       margin-top: 16px;
       color: #fff;
       font-size: 48px;
       font-weight: 700;
     }
+
     .p3 {
       color: #9a9a9a;
       font-size: 20px;
+    }
+  }
+}
+.content-block {
+  width: 1200px;
+  margin: 0 auto 120px;
+  .cards {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2%;
+
+    .card-item {
+      width: 32%;
+      height: 190px;
+      padding: 16px;
+      border-radius: 16px;
+      backdrop-filter: blur(40px);
+      background: #ffffff12;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      .item-left {
+        width: 66%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        justify-content: space-between;
+        .p1 {
+          color: #acff43b2;
+          font-size: 12px;
+        }
+        .p2 {
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 27px;
+          text-align: left;
+          color: #fff;
+          height: 0;
+          flex: 1;
+        }
+        .p3 {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 18px;
+          text-align: left;
+          color: #8b8b8e;
+        }
+      }
+      .item-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+    .card-item3 {
+      .item-left {
+        .p1 {
+          color: #ffb902b2;
+        }
+      }
+    }
+    .shadow {
+      box-shadow: 0px 0px 16px 0px #ffffff40;
+    }
+  }
+  .title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    justify-content: center;
+    color: #fff;
+    .circle {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #acff43;
+    }
+  }
+  .tool {
+    margin-top: 80px;
+    .tool-body {
+      margin-top: 60px;
+      display: flex;
+      gap: 220px;
+      .tool-left {
+        width: 512px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        .tool-item {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          min-height: 114px;
+          padding: 16px;
+          gap: 16px;
+          border-radius: 8px;
+          &:hover {
+            background: #ffffff12;
+
+            backdrop-filter: blur(40px);
+          }
+          .p1 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 18px;
+            text-align: left;
+          }
+          .p2 {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            text-align: left;
+
+            color: #999999;
+          }
+        }
+      }
+      .tool-right {
+        display: flex;
+        align-items: center;
+        width: 360px;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+  .ecological {
+    margin-top: 80px;
+    .eco-cards {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 60px;
+      width: 580px;
+      height: 218px;
+
+      padding: 24px;
+      gap: 40px;
+      border-radius: 16px;
+      .eco-item {
+        width: 48%;
+      }
     }
   }
 }
