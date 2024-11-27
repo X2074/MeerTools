@@ -2,7 +2,7 @@
     <div class="modal-content" v-if="props.modelValue" @click.self="closeClick">
         <div class="status-modal">
             <div class="modal-header flex">
-                <p>{{ props.title || "提示" }}</p>
+                <p>{{ props.title || "Prompt" }}</p>
                 <img
                     class="close-icon"
                     @click.self="closeClick"
@@ -15,16 +15,16 @@
             <!-- 底部是确认、取消按钮 -->
             <div v-if="footer == 'whether'" class="footer-btn flex mt-35">
                 <p @click="closeClick" class="close">
-                    {{ props.closeText || "取消" }}
+                    {{ props.closeText || "Close" }}
                 </p>
                 <p @click="confirmClick" class="confirm">
-                    {{ props.confirmText || "确认" }}
+                    {{ props.confirmText || "Confirm" }}
                 </p>
             </div>
             <!-- 底部只有一个按钮 -->
             <div v-if="footer == 'default'" class="footer-btn flex mt-35">
                 <p @click="confirmClick" class="confirm">
-                    {{ props.confirmText || "确认" }}
+                    {{ props.confirmText || "Confirm" }}
                 </p>
             </div>
             <!-- 自定义底部 -->

@@ -1,5 +1,8 @@
 {
     "src/views/homePage": {
         "description": "首页"
+    },
+    "src/views/faucet": {
+        "description": "水龙头"
     }
 }

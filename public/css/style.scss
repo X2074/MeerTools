@@ -1,1 +1,90 @@
 @import './abstracts/mixin.scss';
+
+
+.remodel-pagination {
+    .ant-pagination {
+        padding: 5px 0;
+        align-items: center;
+
+        .ant-pagination-item {
+            border: 0;
+            border-radius: 3.6px;
+            position: relative;
+            background-color: transparent !important;
+            width: 30px !important;
+
+            a {
+                font-size: 14px;
+                font-weight: 500;
+                width: 100%;
+                height: 100%;
+                color: #fff;
+            }
+        }
+
+        .ant-pagination-item-ellipsis {
+            color: rgba(165, 214, 63, 1) !important;
+        }
+
+        .ant-pagination-jump-prev:hover .ant-pagination-item-link-icon,
+        .ant-pagination-jump-next:hover .ant-pagination-item-link-icon {
+
+            color: rgba(165, 214, 63, 1) !important;
+        }
+
+        li.ant-pagination-item-active {
+            min-width: 30px !important;
+            max-width: 30px !important;
+            height: 30px;
+            background: rgba(36, 255, 36, 1) !important;
+            border: 1px solid rgba(0, 0, 0, 1);
+            box-sizing: content-box;
+            margin: 0 4px;
+
+            a {
+                color: #000;
+            }
+        }
+
+        .ant-pagination-options {
+            display: none;
+            margin-left: 10px;
+
+            .ant-select-selector {
+                height: 100%;
+            }
+        }
+
+        .ant-pagination-prev {
+            margin-right: 0;
+        }
+
+        .ant-pagination-next {
+            margin-left: 5px;
+        }
+
+        .ant-pagination-prev,
+        .ant-pagination-next {
+            .ant-pagination-item-link {
+                position: relative;
+                border-radius: 3.6px;
+                width: 26px;
+                height: 26px;
+                margin-top: 4px;
+                border: 0;
+                background: transparent;
+
+                span {
+                    border-radius: 3.6px;
+                    font-size: 20px;
+                    color: #fff !important;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 26px;
+                    height: 26px;
+                }
+            }
+        }
+    }
+}

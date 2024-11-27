@@ -14,6 +14,11 @@ const routes = <any>[
                 path: "/index",
                 name: "index",
                 component: () => import("@/views/homePage/index.vue"),
+            },
+            {
+                path: "/faucet",
+                name: "faucet",
+                component: () => import("@/views/faucet/index.vue"),
             }
         ]
     }
