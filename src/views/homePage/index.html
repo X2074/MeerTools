@@ -62,9 +62,27 @@
       </div>
     </div>
   </div>
-  <div class="cell1"></div>
-  <div class="welcom"></div>
-  <div class="cell2"></div>
+</div>
+<div class="cell1"></div>
+<div class="welcome">
+  <div class="wel-left">
+    <img src="/images/index/cup.svg" alt="" />
+  </div>
+  <div class="wel-right">
+    <p class="p1">Welcome to Qitmeer</p>
+    <p class="p1">Block Explorer</p>
+    <p class="p2">
+      A one-stop platform for on-chain information queries, offering
+      comprehensive insights into on-chain data.
+    </p>
+    <a class="btn active" target="_blank" href="">
+      <span>Go</span>
+      <i></i>
+    </a>
+  </div>
+</div>
+<div class="cell2"></div>
+<div class="content-block">
   <div class="ecological">
     <div class="title">
       <span>Ecological</span>
@@ -72,7 +90,22 @@
       <span>Project display</span>
     </div>
     <div class="eco-cards">
-      <div class="eco-item"></div>
+      <div class="eco-item" v-for="(item,i) in ecological" :key="i">
+        <div class="eco-left">
+          <div>
+            <p class="p1">{{item.title}}</p>
+            <p class="p2">{{item.txt}}</p>
+          </div>
+
+          <a class="btn" target="_blank" :href="item.link">
+            <span>Go</span>
+            <i></i>
+          </a>
+        </div>
+        <div class="eco-right">
+          <img :src="item.img" alt="" />
+        </div>
+      </div>
     </div>
   </div>
 </div>
