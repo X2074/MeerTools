@@ -20,7 +20,20 @@ import VueCropper from 'vue-cropper'
 import 'vue-cropper/dist/index.css'
 import loadingDirective from '@/components/loading/directive.js'
 import routeDirective from '@/components/loading/route-directive.js'
-
+//引入依赖和语言
+import 'highlight.js/styles/stackoverflow-dark.css'
+import hljs from "highlight.js/lib/core";
+import hljsVuePlugin from "@highlightjs/vue-plugin";
+//import "highlight.js/lib/common"; //单一加载
+//按需引入语言
+import javascript from "highlight.js/lib/languages/javascript";
+import java from "highlight.js/lib/languages/java";
+import sql from "highlight.js/lib/languages/sql";
+import xml from "highlight.js/lib/languages/xml";
+import html from "highlight.js/lib/languages/vbscript-html";
+import json from "highlight.js/lib/languages/json";
+import yaml from "highlight.js/lib/languages/json";
+hljs.registerLanguage("javascript", javascript);
 import {
     Affix, Avatar, Button, Breadcrumb, Card, Carousel, Checkbox, Comment, Col, Collapse, Dropdown, DatePicker, Form, Image, Input, InputNumber, List, Layout, LocaleProvider, Menu, message, Modal, Popover, Popconfirm, Pagination, Row, Radio, Select, SelectOption, Switch, Steps, Tabs, Timeline, Tooltip, Tree, Upload, Progress, Spin, Table, Slider, Badge
 } from 'ant-design-vue';
@@ -74,4 +87,5 @@ app.use(router)
     .use(Badge)
 app.component('dialogModal', dialogModal)
 app.use(WagmiPlugin, { config }).use(VueQueryPlugin, {})
+app.use(hljsVuePlugin)
 app.mount('#app')

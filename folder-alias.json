@@ -4,5 +4,20 @@
     },
     "src/views/faucet": {
         "description": "水龙头"
+    },
+    "src/views/contractDeployment": {
+        "description": "智能合约部署"
+    },
+    "src/views/contractDeployment/components/contractContent/demoCode": {
+        "description": "示例代码-左侧选择右侧对应显示内容"
+    },
+    "src/views/contractDeployment/components/contractContent/demoCode/exportCode.js": {
+        "description": "顶部默认注释类"
+    },
+    "src/views/contractDeployment/components/contractContent/demoCode/import.js": {
+        "description": "引入文件"
+    },
+    "src/views/contractDeployment/components/contractContent/demoCode/mintTable.js": {
+        "description": "mintTable选项"
     }
 }

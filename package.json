@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^2.1.2",
+    "@highlightjs/vue-plugin": "^2.1.0",
     "@tanstack/vue-query": ">=5.45.0",
     "@wagmi/core": "^2.11.6",
     "@wagmi/vue": "latest",
@@ -32,6 +33,7 @@
     "dexie": "^4.0.8",
     "ethers": "^5.2.0",
     "file-saver": "^2.0.5",
+    "highlight.js": "^11.10.0",
     "html2canvas": "^1.4.1",
     "image-conversion": "^2.1.1",
     "jszip": "^3.10.1",
