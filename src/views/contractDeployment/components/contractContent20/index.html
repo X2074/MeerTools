@@ -1,0 +1,89 @@
+<div class="contract-content flex">
+    <div class="set-radio">
+        <div class="settings input-section pb-32">
+            <p class="title">SETTINGS</p>
+            <div class="section-input ml-24 mt-24">
+                <p class="mb-8">Name</p>
+                <input type="text" v-model="contarctName">
+            </div>
+            <div class="section-input ml-24 mt-16 mb-16">
+                <p class="mb-8">Symbol</p>
+                <input type="text" v-model="contarctSymbol">
+            </div>
+            <div class="section-input ml-24">
+                <p class="mb-8">Premint</p>
+                <input type="text" v-model="premint">
+            </div>
+            <!-- <div>
+                <a-checkbox v-model:checked="tableAll" @change="onCheckAllChange">
+                </a-checkbox>
+            </div> -->
+        </div>
+        <div class="features select-section pb-32 mt-32">
+            <p class="title">FEATURES</p>
+            <div class="section-select ml-24 mt-24">
+                <a-checkbox-group v-model:value="features">
+                    <div class="section-select flex mb-10">
+                        <a-checkbox value="mintable">Mintable</a-checkbox>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                    <div class="section-select flex mb-10">
+                        <a-checkbox value="burnable">Burnable</a-checkbox>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                    <div class="section-select flex mb-10">
+                        <a-checkbox value="pausable">Pausable</a-checkbox>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                    <div class="section-select flex mb-10">
+                        <a-checkbox value="permit">Permit</a-checkbox>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                    <div class="section-select flex">
+                        <a-checkbox value="flashminting">Flash Minting</a-checkbox>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                </a-checkbox-group>
+            </div>
+        </div>
+        <div class="access-control radio-section pb-32 mt-32">
+            <p class="title">ACCESS CONTROL <a-checkbox value="accessControl"></a-checkbox>
+            </p>
+            <div class="section-radio ml-24 mt-24">
+                <a-radio-group v-model:value="accessControlRadio">
+                    <div class="section-radio flex mb-10">
+                        <a-radio value="ownable">Ownable</a-radio>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                    <div class="section-radio flex mb-10">
+                        <a-radio value="roles">Roles</a-radio>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                    <div class="section-radio flex mb-10">
+                        <a-radio value="managed">Managed</a-radio>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                </a-radio-group>
+            </div>
+        </div>
+        <div class="access-control radio-section pb-32 mt-32">
+            <p class="title">UPGRADEABILITY<a-checkbox value="accessControl"></a-checkbox>
+            </p>
+            <div class="section-radio ml-24 mt-24">
+                <a-radio-group v-model:value="upgradeabilityRadio">
+                    <div class="section-radio flex mb-10">
+                        <a-radio value="Transparent">Transparent</a-radio>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                    <div class="section-radio flex mb-10">
+                        <a-radio value="uups">UUPS</a-radio>
+                        <img src="/images/contract/tips.svg" alt="">
+                    </div>
+                </a-radio-group>
+            </div>
+        </div>
+    </div>
+    <div class="highlight">
+        <highlightjs autodetect :code="solContent"></highlightjs>
+    </div>
+</div>

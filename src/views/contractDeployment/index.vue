@@ -4,6 +4,6 @@
 <template src="./index.html"></template>
 <script lang="ts" setup>
 import { ref, onMounted, watch } from "vue";
-
-import contractContent from "./components/contractContent/index.vue";
+// ERC20合约
+import contractContent20 from "./components/contractContent20/index.vue";
 </script>
