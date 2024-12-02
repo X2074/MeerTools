@@ -1,27 +1,48 @@
 <div class="footer">
-    <div class="footer-text max-width1440">
-        <div class="flex">
-            <div class="footer-left flex">
-                <img src="/images/header/logo_white.png" alt="">
-            </div>
-            <div class="footer-share flex max-width1440">
-                <!-- <a target="_blank" class="mr-15" href="https://www.woowow.io/">
-                    <img src="/images/wowow.png" alt="">
-                </a>
-                <a target="_blank" class="mr-15" href="https://twitter.com/DimAIGlobal">
-                    <img src="/images/homePage/link01.png" alt="">
-                </a>
-                <a target="_blank" class="mr-15" href="https://t.me/DimAIOfficial">
-                    <img src="/images/homePage/link02.png" alt="">
-                </a>
-                <a target="_blank" class="mr-15" href="https://discord.gg/yTVjqAwp2j">
-                    <img src="/images/homePage/link03.png" alt="">
-                </a>
-                <a target="_blank" href="https://dimaiglobal.medium.com/">
-                    <img src="/images/homePage/link03.svg" alt="">
-                </a> -->
-            </div>
-        </div>
+  <div class="footer-body">
+    <div class="subscribe-block mobile-sub">
+      <subscribe></subscribe>
     </div>
-
+    <div class="footer-top flex-between">
+      <img src="/images/header/logo2.png" alt="" class="logo" />
+      <div class="flex-center">
+        <div class="footer-share flex-center">
+          <a :href="jumpUrl.github" target="_blank">
+            <img src="/images/index/share01.svg" alt="" />
+          </a>
+          <a :href="jumpUrl.telegram" target="_blank">
+            <img src="/images/index/share02.svg" alt="" />
+          </a>
+          <a :href="jumpUrl.discord" target="_blank"
+            ><img src="/images/index/share03.svg" alt="" />
+          </a>
+          <a :href="jumpUrl.medium" target="_blank"
+            ><img src="/images/index/share04.svg" alt="" />
+          </a>
+          <a :href="jumpUrl.twitter" target="_blank">
+            <img src="/images/index/share05.svg" alt="" />
+          </a>
+        </div>
+        <div class="subscribe-block">
+          <subscribe></subscribe>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom flex-between">
+      <div
+        class="footer-item flex-column flex-center"
+        v-for="(item,i) in menu"
+        :key="i"
+      >
+        <div class="flex-column">
+          <label>{{item.name}}</label>
+          <div class="flex-column">
+            <template v-for="(child,c) in item.child">
+              <a :href="child.path" :target="child.target">{{child.name}}</a>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
