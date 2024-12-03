@@ -24,6 +24,11 @@ const routes = <any>[
                 path: "/contractDeployment",
                 name: "contractDeployment",
                 component: () => import("@/views/contractDeployment/index.vue"),
+            },
+            {
+                path: "/test",
+                name: "test",
+                component: () => import("@/views/test/index.vue"),
             }
         ]
     }
