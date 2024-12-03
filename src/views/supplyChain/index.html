@@ -1,0 +1,64 @@
+<div class="top-block">
+  <div class="content-width top-cont">
+    <div class="txt">
+      <p>Qitmeer Network</p>
+      <p>Tokenomics</p>
+    </div>
+  </div>
+</div>
+<div class="content-width static-block">
+  <div class="static-left">
+    <div class="circulate flex-column">
+      <div class="circulate-line1 flex-between">
+        <span class="c-title">Circulation</span>
+        <div class="rects flex">
+          <span class="rect1"></span>
+          <span class="rect2"></span>
+          <span class="rect3"></span>
+        </div>
+      </div>
+      <div class="circulate-line2 flex-column">
+        <span>Circulating Supply:</span>
+        <div class="flex">
+          <span class="num">1890310.89567292</span>
+          <label for="">MEER</label>
+        </div>
+      </div>
+      <div class="circulate-line3 flex-column">
+        <span class="c-title">Max Supply:</span>
+        <div class="flex">
+          <span class="num">3067292</span>
+          <label for="">MEER</label>
+        </div>
+      </div>
+    </div>
+    <div class="static-info flex-column">
+      <p>
+        The Qitmeer Network is divided into four key eras: Mecca (awakening),
+        Medina (innovation), Umayyad (stability), and Abbasid (prosperity).
+      </p>
+      <p>
+        Qitmeer's tokenomics integrates value carriers from these periods. The
+        Umayyad era marked the mainnet launch, where 42,108,530 MEER were
+        allocated during Genesis Mapping. The Umayyad 1.0 "Majority Game Model"
+        allocated 12,159,120 MEER as staking rewards, but only 7,426,492 MEER
+        entered circulation. The remaining 4,732,628 MEER serve as the ecosystem
+        development fund.
+      </p>
+      <p>
+        Currently, all tokens from Genesis Mapping, staking rewards, and
+        development funds are in circulation. New MEER is generated solely
+        through POW mining, with ecosystem and future funds released as needed.
+      </p>
+    </div>
+  </div>
+  <div class="static-right">
+    <div class="chart"></div>
+    <div class="legend">
+      <div class="leg-item" v-for="(item,i) in legend" :key="i">
+        <i :style="{'background':item.color}"></i>
+        <span>{{item.name}}</span>
+      </div>
+    </div>
+  </div>
+</div>

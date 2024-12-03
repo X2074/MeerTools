@@ -1,276 +1,280 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", 'Montserrat-Light', 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', 'sans-serif';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Montserrat-Light",
+    "Microsoft Yahei", "PingFang SC", "Avenir", "Segoe UI", "Hiragino Sans GB",
+    "STHeiti", "Microsoft Sans Serif", "WenQuanYi Micro Hei", "sans-serif";
 }
 
 body,
 html,
 #app {
-    background-color: rgba(13, 13, 13, 1);
-    height: 100%;
-    overflow: auto;
+  background-color: rgba(13, 13, 13, 1);
+  height: 100%;
+  overflow: auto;
 }
 
 html {
-    width: 100%;
-    margin-left: auto;
-    margin-right: +auto;
+  width: 100%;
+  margin-left: auto;
+  margin-right: +auto;
 }
 
 div,
 p,
 span {
-    cursor: default;
-    padding: 0;
+  cursor: default;
+  padding: 0;
 }
 
-
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 input,
 button,
 select,
 textarea {
-    outline: none;
-    border-radius: 0;
+  outline: none;
+  border-radius: 0;
 }
 
 button {
-    border: 0;
+  border: 0;
 }
 
-input[type=checkbox],
-input[type=radio] {
-    margin: 0;
+input[type="checkbox"],
+input[type="radio"] {
+  margin: 0;
 }
 
 p,
 label,
 ol,
 ul {
-    margin: 0;
+  margin: 0;
 }
 
 .none {
-    display: none;
+  display: none;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-right {
-    text-align: right;
+  text-align: right;
 }
 
 .text-left {
-    text-align: left;
+  text-align: left;
 }
 
 .el-icon.el-message__icon.el-message-icon--info {
-    display: none;
+  display: none;
 }
 
 @for $i from 1 through 2000 {
-    .ml-#{$i} {
-        margin-left: #{$i}px !important;
-    }
+  .ml-#{$i} {
+    margin-left: #{$i}px !important;
+  }
 }
 
 @for $i from 1 through 2000 {
-    .mr-#{$i} {
-        margin-right: #{$i}px !important;
-    }
+  .mr-#{$i} {
+    margin-right: #{$i}px !important;
+  }
 }
 
 @for $i from 1 through 2000 {
-    .mt-#{$i} {
-        margin-top: #{$i}px !important;
-    }
+  .mt-#{$i} {
+    margin-top: #{$i}px !important;
+  }
 }
 
 @for $i from 1 through 2000 {
-    .mb-#{$i} {
-        margin-bottom: #{$i}px !important;
-    }
+  .mb-#{$i} {
+    margin-bottom: #{$i}px !important;
+  }
 }
 
 @for $i from 1 through 2000 {
-    .pl-#{$i} {
-        padding-left: #{$i}px !important;
-    }
+  .pl-#{$i} {
+    padding-left: #{$i}px !important;
+  }
 }
 
 @for $i from 1 through 2000 {
-    .pr-#{$i} {
-        padding-right: #{$i}px !important;
-    }
+  .pr-#{$i} {
+    padding-right: #{$i}px !important;
+  }
 }
 
 @for $i from 1 through 2000 {
-    .pt-#{$i} {
-        padding-top: #{$i}px !important;
-    }
+  .pt-#{$i} {
+    padding-top: #{$i}px !important;
+  }
 }
 
 @for $i from 1 through 2000 {
-    .pb-#{$i} {
-        padding-bottom: #{$i}px !important;
-    }
+  .pb-#{$i} {
+    padding-bottom: #{$i}px !important;
+  }
 }
 
 .pt-top {
-    padding-top: 200px;
+  padding-top: 200px;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .justify-between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .flex-center {
-    @extend .flex;
-    align-items: center;
+  @extend .flex;
+  align-items: center;
 
-    span {
-        word-break: break-all;
-        word-wrap: break-word;
-    }
+  span {
+    word-break: break-all;
+    word-wrap: break-word;
+  }
 }
 
 .flex-column {
-    @extend .flex;
-    flex-direction: column;
+  @extend .flex;
+  flex-direction: column;
 }
 
 .height0 {
-    height: 0;
-    flex: 1;
+  height: 0;
+  flex: 1;
 }
 
 .flex-between {
-    @extend .flex;
-    justify-content: space-between;
+  @extend .flex;
+  justify-content: space-between;
 }
 
 .flex-end {
-    @extend .flex;
-    justify-content: end;
+  @extend .flex;
+  justify-content: end;
 }
 
 .flex-around {
-    @extend .flex;
-    justify-content: space-around;
+  @extend .flex;
+  justify-content: space-around;
 }
 
 .max-width1440 {
-    width: 1440px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+  width: 1440px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .min-width {
-    width: 100%;
-    min-width: 1920px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 100%;
+  min-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .margin-auto {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @for $i from 10 through 100 {
-    .fsize-#{$i} {
-        font-size: #{$i}px;
-    }
+  .fsize-#{$i} {
+    font-size: #{$i}px;
+  }
 }
 
 @for $i from 1 through 10 {
-    .omit#{$i} {
-        text-overflow: -o-ellipsis-lastline;
-        overflow: hidden; //溢出内容隐藏
-        text-overflow: ellipsis; //文本溢出部分用省略号表示
-        display: -webkit-box; //特别显示模式
-        -webkit-line-clamp: #{$i}; //行数
-        line-clamp: #{$i};
-        -webkit-box-orient: vertical; //盒子中内容竖直排列
-        word-break: break-all;
-    }
+  .omit#{$i} {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden; //溢出内容隐藏
+    text-overflow: ellipsis; //文本溢出部分用省略号表示
+    display: -webkit-box; //特别显示模式
+    -webkit-line-clamp: #{$i}; //行数
+    line-clamp: #{$i};
+    -webkit-box-orient: vertical; //盒子中内容竖直排列
+    word-break: break-all;
+  }
 }
 
 @for $i from 1 through 2000 {
-    .zindex#{$i} {
-        z-index: #{$i} !important;
-    }
+  .zindex#{$i} {
+    z-index: #{$i} !important;
+  }
 }
 
 @for $i from 1 through 10 {
-    .f#{$i} {
-        flex:#{$i}
-    }
+  .f#{$i} {
+    flex: #{$i};
+  }
 }
 
-
 @for $i from 1 through 1000 {
-    .width-#{$i} {
-        width: #{$i}px;
-    }
+  .width-#{$i} {
+    width: #{$i}px;
+  }
 }
 
 @media screen and (max-width: 992px) {
-    .header {
-        justify-content: space-between;
-    }
+  .header {
+    justify-content: space-between;
+  }
 
-    .tabs-status {
-        p {
-            padding: 10px 20px;
-        }
+  .tabs-status {
+    p {
+      padding: 10px 20px;
     }
+  }
 }
 
 .disabled-btn {
-    cursor: no-drop;
-    background-color: rgba(56, 56, 56, 1) !important;
+  cursor: no-drop;
+  background-color: rgba(56, 56, 56, 1) !important;
 }
 
 .waterfall-list {
-    margin: 20px 60px 0 !important;
-    background-color: transparent !important;
+  margin: 20px 60px 0 !important;
+  background-color: transparent !important;
 }
 
 .connect-wallt {
-    color: #fff;
-    text-align: left;
-    line-height: 50px;
-    cursor: pointer;
+  color: #fff;
+  text-align: left;
+  line-height: 50px;
+  cursor: pointer;
 
-    &:hover {
-        color: rgb(36, 255, 36);
-    }
+  &:hover {
+    color: rgb(36, 255, 36);
+  }
 
-    &:nth-child(2) {
-        margin-top: 15px;
-    }
+  &:nth-child(2) {
+    margin-top: 15px;
+  }
+}
+.content-width {
+  width: 1200px;
+  margin: 0 auto;
 }
