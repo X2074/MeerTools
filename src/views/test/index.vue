@@ -28,7 +28,9 @@ const contract = erc20.print({
     mintable: true,
     transparent: true,
     pausable: true,
+    ownable: false,
     roles: true,
+    flashmint: true,
 });
 
 let solContent = ref("");
