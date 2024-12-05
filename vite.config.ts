@@ -19,7 +19,7 @@ export default ({ mode }) => defineConfig({
   },
   server: {
     host: "localhost",
-    port: 8080,
+    port: 8090,
     // host:'10.10.34.183',
     hmr: true,
     cors: true,
@@ -43,7 +43,15 @@ export default ({ mode }) => defineConfig({
         // target: 'https://qitmeer.io/',
         changeOrigin: true, // 是否跨域,
         // rewrite: (path) => path.replace(/^\/offchaindata/, ""), // 将ccc替换为空
-      }
+      },
+      // 当地址中有/api的时候会触发代理机制
+      '/qitmeer-auth/api': {
+        // 要代理的服务器地址  这里不用写 api
+        target: 'http://16.163.42.221:8080/',
+        // target: 'https://test.meertalk.org/',
+        // target: 'https://qitmeer.io/',
+        changeOrigin: true // 是否跨域
+    },
     }
   },
   build: {

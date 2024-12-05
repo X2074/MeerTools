@@ -5,7 +5,7 @@ import router from "@/router";
 // import * as api from "@/api/sys.js";
 // import i18n from "@/i18n";
 // import subscribe from "./subscribe/index.vue";
-// import subscribe from "../subscribe/index.vue";
+import subscribe from "../subscribe/index.vue";
 const subData = ref("");
 const subShow = ref(false);
 // 语言切换部分
