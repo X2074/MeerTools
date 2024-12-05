@@ -52,11 +52,21 @@ const connectLogin = (data) => {
 };
 
 onMounted(async () => {
-    console.log(status.value, "status.value");
     if (status.value == "connected") {
         isLogin.value = true;
     }
 });
+// 监听登录状态变化
+watch(
+    () => status.value,
+    async (newV) => {
+        if (newV == "connected") {
+            isLogin.value = true;
+        } else {
+            isLogin.value = false;
+        }
+    }
+);
 
 //省略地址中间内容
 const omit = (address: any, len: any) => {

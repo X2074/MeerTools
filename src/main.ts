@@ -14,6 +14,7 @@ import '/public/css/style.scss'
 import "@/assets/css/common.scss";
 import "@/assets/css/fontStyle.scss";
 import "@/assets/css/publicStyle.scss";
+import "@/assets/css/antd.scss";
 import '/public/js/flexible.js'
 // 导入 vue-cropper
 import VueCropper from 'vue-cropper'
@@ -35,7 +36,7 @@ import json from "highlight.js/lib/languages/json";
 import yaml from "highlight.js/lib/languages/json";
 hljs.registerLanguage("javascript", javascript);
 import {
-    Affix, Avatar, Button, Breadcrumb, Card, Carousel, Checkbox, Comment, Col, Collapse, Dropdown, DatePicker, Form, Image, Input, InputNumber, List, Layout, LocaleProvider, Menu, message, Modal, Popover, Popconfirm, Pagination, Row, Radio, Select, SelectOption, Switch, Steps, Tabs, Timeline, Tooltip, Tree, Upload, Progress, Spin, Table, Slider, Badge
+    Affix, Avatar, Button, Breadcrumb, Card, Carousel, Checkbox, Comment, Col, Collapse, Dropdown, DatePicker, Form, Image, Input, InputNumber, List, Layout, LocaleProvider, Menu, AutoComplete, Modal, Popover, Popconfirm, Pagination, Row, Radio, Select, SelectOption, Switch, Steps, Tabs, Timeline, Tooltip, Tree, Upload, Progress, Spin, Table, Slider, Badge
 } from 'ant-design-vue';
 
 const app = createApp(App)
@@ -85,6 +86,7 @@ app.use(router)
     .use(Spin)
     .use(Slider)
     .use(Badge)
+    .use(AutoComplete)
 app.component('dialogModal', dialogModal)
 app.use(WagmiPlugin, { config }).use(VueQueryPlugin, {})
 app.use(hljsVuePlugin)

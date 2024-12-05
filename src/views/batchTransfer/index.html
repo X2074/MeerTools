@@ -1,54 +1,64 @@
-<div class="faucet" v-route-loading="faucetLoading">
-	<div class="faucet-header">
-		<span>Q</span>NG Testnet
-		<span>.</span>
-	</div>
-	<div class="sub-title mt-24">Acquire testnet MEER for running your DApp</div>
-	<!-- 搜索框 -->
-	<div class="search-line">
-		<div class="search-area flex">
-			<input type="text" v-model="walletAddress" onChange="changeAddress"
-				placeholder="Please enter your wallet address (0x...)" />
-			<div class="ml-16 flex" @click="sendMeer">Claim 5 Test MEER</div>
-		</div>
-		<div class="remark-area mt-16">*Each address is limited to 20 times, 5 MEER each time. You can claim from the
-			same ip or address only once within 72 hours.</div>
-	</div>
-	<div class="table-list" v-if="allEvents && allEvents.length">
-		<table>
-			<thead>
-				<tr class="header">
-					<th>TransactionHash</th>
-					<th>Amount</th>
-					<th>Datetime</th>
-				</tr>
-			</thead>
-			<tbody>
-				<template v-for="(item,index) in allEvents">
-					<tr v-if="(index+1) > (current - 1) * 10 && (index+1) <= current * 10">
-						<td>{{item.tracsactionHash}}</td>
-						<td>{{item.amount}}</td>
-						<td>{{item.datetime}}</td>
-					</tr>
-				</template>
-			</tbody>
-		</table>
-	</div>
+<div class="batch-transfer">
+    <div class="header flex">
+        <div class="header-text">
+            <h2>批量转账</h2>
+            <p class="mt-24">高效便捷，操作简单，快速实现资金的集中调配和分散管理。</p>
+        </div>
+        <img src="/images/batchTransfer/transfer.png" alt="">
+    </div>
 
-	<!-- 分页器 -->
-	<div class="remodel-pagination text-center mt-25 mb-25" v-if="allEvents && allEvents.length>10">
-		<a-pagination :current="current" :page-size="10" @change="pageChange" :total="allEvents.length" />
-	</div>
+    <div class="wallt-id flex">
+        <div class="wallt-id-area flex">
+            <div class="id">
+                账户 ID-ELEVEN
+                <div class="id-address flex mt-16">
+                    <p class="mr-8">{{status == "connected" ? address : status}}</p>
+                    <img v-if="status == 'connected'" @click="copy(address)" src="/images/icons/copy.png" alt="">
+                </div>
+            </div>
+            <p>转账记录</p>
+        </div>
+    </div>
+
+    <div class="currency mt-60">
+        <h3>币种</h3>
+        <a-auto-complete v-model:value="value" :options="tokenList" placeholder="请选择币种" :filter-option="filterOption" />
+    </div>
+
+    <div class="table-address mt-40">
+        <div class="header">
+            <h3>请填写详细信息</h3>
+            <div class="text-demo mt-10 flex">
+                <p class="text">填写收款人地址自动生成序号；请按照顺序填写收款人的地址，并且输入相应的转账金额。</p>
+                <p class="demo">查看例子</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="table-list">
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>收款人地址</th>
+                    <th>转账金额</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template v-for="(item,index) in allEvents">
+                    <tr>
+                        <td>{{index + 1}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.amount}}</td>
+                        <td>delete</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <div class="add-address">
+            <p>+</p>
+        </div>
+    </div>
 </div>
-
-<!-- 交易成功 -->
-<dialogModal v-model="unMetaMask" @close="unMetaMask = false">
-	<p class="mt-25 pl-25 pr-25">Please install MetaMask</p>
-</dialogModal>
-
-<dialogModal v-model="sendSuccess" @close="sendSuccess = false" title="Successfully">
-	<p class="mt-25 pl-25 pr-25">The testnet Meer were sent to</p>
-	<p class="mt-5 pl-25 pr-25" style="color: #acff43;">{{walletAddress || '--'}}</p>
-	<p class="mt-15 pl-25 pr-25">TransactionHash:</p>
-	<p class="mt-5 pl-25 pr-25" style="color: #bbb;">{{transactionHash || '--'}}</p>
-</dialogModal>

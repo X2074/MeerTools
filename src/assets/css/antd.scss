@@ -1,0 +1,26 @@
+.ant-select-dropdown {
+    background-color: transparent;
+    border-radius: 8px;
+    border: 1px solid rgba(49, 49, 49, 1);
+
+    .ant-select-item-option-active {
+        background: rgba(255, 255, 255, 0.05);
+        color: #fff !important;
+    }
+
+    .ant-select-item {
+        padding: 0 30px;
+        color: rgb(154, 154, 154);
+        font-size: 16px;
+        height: 64px;
+        line-height: 64px;
+
+        * {
+            cursor: pointer;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    }
+}

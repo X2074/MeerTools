@@ -34,7 +34,13 @@ const routes = <any>[
                 path: "/supplyChain",
                 name: "supplyChain",
                 component: () => import("@/views/supplyChain/index.vue"),
-            }
+            },
+            {
+                path: "/batchTransfer",
+                name: "batchTransfer",
+                component: () => import("@/views/batchTransfer/index.vue"),
+            },
+
         ]
     }
 
