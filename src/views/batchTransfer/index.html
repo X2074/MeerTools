@@ -1,0 +1,54 @@
+<div class="faucet" v-route-loading="faucetLoading">
+	<div class="faucet-header">
+		<span>Q</span>NG Testnet
+		<span>.</span>
+	</div>
+	<div class="sub-title mt-24">Acquire testnet MEER for running your DApp</div>
+	<!-- 搜索框 -->
+	<div class="search-line">
+		<div class="search-area flex">
+			<input type="text" v-model="walletAddress" onChange="changeAddress"
+				placeholder="Please enter your wallet address (0x...)" />
+			<div class="ml-16 flex" @click="sendMeer">Claim 5 Test MEER</div>
+		</div>
+		<div class="remark-area mt-16">*Each address is limited to 20 times, 5 MEER each time. You can claim from the
+			same ip or address only once within 72 hours.</div>
+	</div>
+	<div class="table-list" v-if="allEvents && allEvents.length">
+		<table>
+			<thead>
+				<tr class="header">
+					<th>TransactionHash</th>
+					<th>Amount</th>
+					<th>Datetime</th>
+				</tr>
+			</thead>
+			<tbody>
+				<template v-for="(item,index) in allEvents">
+					<tr v-if="(index+1) > (current - 1) * 10 && (index+1) <= current * 10">
+						<td>{{item.tracsactionHash}}</td>
+						<td>{{item.amount}}</td>
+						<td>{{item.datetime}}</td>
+					</tr>
+				</template>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- 分页器 -->
+	<div class="remodel-pagination text-center mt-25 mb-25" v-if="allEvents && allEvents.length>10">
+		<a-pagination :current="current" :page-size="10" @change="pageChange" :total="allEvents.length" />
+	</div>
+</div>
+
+<!-- 交易成功 -->
+<dialogModal v-model="unMetaMask" @close="unMetaMask = false">
+	<p class="mt-25 pl-25 pr-25">Please install MetaMask</p>
+</dialogModal>
+
+<dialogModal v-model="sendSuccess" @close="sendSuccess = false" title="Successfully">
+	<p class="mt-25 pl-25 pr-25">The testnet Meer were sent to</p>
+	<p class="mt-5 pl-25 pr-25" style="color: #acff43;">{{walletAddress || '--'}}</p>
+	<p class="mt-15 pl-25 pr-25">TransactionHash:</p>
+	<p class="mt-5 pl-25 pr-25" style="color: #bbb;">{{transactionHash || '--'}}</p>
+</dialogModal>

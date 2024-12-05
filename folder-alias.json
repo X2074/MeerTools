@@ -19,5 +19,8 @@
     },
     "src/views/contractDeployment/components/contractContent/demoCode/mintTable.js": {
         "description": "mintTable选项"
+    },
+    "src/views/batchTransfer": {
+        "description": "批量转账"
     }
 }
