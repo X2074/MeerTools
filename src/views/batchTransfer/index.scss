@@ -158,6 +158,10 @@
     }
 
     .table-address {
+        .header {
+            height: 80px;
+        }
+
         .text-demo {
             justify-content: space-between;
 
@@ -217,6 +221,29 @@
 
                     &:nth-child(4) {
                         width: 160px;
+                        cursor: pointer;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding: 0 20px;
+                        font-size: 16px;
+                        color: #fff;
+                        background-color: transparent;
+                        border: 0;
+                        text-align: center;
+                    }
+
+                    input[type="number"] {
+                        -moz-appearance: textfield;
+                        /* Firefox */
+                    }
+
+                    input[type="number"]::-webkit-inner-spin-button,
+                    input[type="number"]::-webkit-outer-spin-button {
+                        -webkit-appearance: none;
+                        /* Chrome, Safari 和 Opera */
+                        margin: 0;
                     }
                 }
             }
@@ -236,6 +263,23 @@
                 color: rgba(154, 154, 154, 1);
                 cursor: pointer;
             }
+        }
+    }
+
+    .confirm-btn {
+        width: 500px;
+        height: 48px;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 48px;
+        margin: 40px auto;
+        text-align: center;
+        color: #000;
+        background: rgba(172, 255, 67, 1);
+        cursor: pointer;
+
+        &.un-confirm-btn {
+            background: rgba(172, 255, 67, 0.5);
         }
     }
 }

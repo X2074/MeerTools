@@ -1,4 +1,4 @@
-<div class="batch-transfer">
+<div class="batch-transfer" v-loading="confirmLoading">
     <div class="header flex">
         <div class="header-text">
             <h2>批量转账</h2>
@@ -21,8 +21,9 @@
     </div>
 
     <div class="currency mt-60">
-        <h3>币种</h3>
-        <a-auto-complete v-model:value="value" :options="tokenList" placeholder="请选择币种" :filter-option="filterOption" />
+        <h3>币种{{walltAddress}}</h3>
+        <a-auto-complete v-model:value="walltAddress" :options="tokenList" placeholder="请选择币种"
+            :filter-option="filterOption" />
     </div>
 
     <div class="table-address mt-40">
@@ -30,7 +31,7 @@
             <h3>请填写详细信息</h3>
             <div class="text-demo mt-10 flex">
                 <p class="text">填写收款人地址自动生成序号；请按照顺序填写收款人的地址，并且输入相应的转账金额。</p>
-                <p class="demo">查看例子</p>
+                <p class="demo" @click="lookDemo">查看例子</p>
             </div>
         </div>
     </div>
@@ -50,15 +51,29 @@
                 <template v-for="(item,index) in allEvents">
                     <tr>
                         <td>{{index + 1}}</td>
-                        <td>{{item.address}}</td>
-                        <td>{{item.amount}}</td>
-                        <td>delete</td>
+                        <td><input placeholder="收款人地址" type="text" v-model="item.address"></td>
+                        <td><input @keypress="onlyAllowNumbers" placeholder="转账金额" type="number" v-model="item.amount">
+                        </td>
+                        <td @click="deleteAddress(index)">delete</td>
                     </tr>
                 </template>
             </tbody>
         </table>
-        <div class="add-address">
+        <div class="add-address" @click="addAddress">
             <p>+</p>
         </div>
     </div>
+
+    <div class="confirm-btn" :class="!allEvents || !allEvents.length ?'un-confirm-btn':''" @click="confirmAddress">确认
+    </div>
 </div>
+
+
+
+<!-- 登录 -->
+<dialogModal v-model="loginWallt" @close="loginWallt = false">
+    <div class="connect-wallt pl-25 pr-25" v-for="connector in connectors" :key="connector.id"
+        @click="connectLogin({ connector, chainId })">
+        {{ connector.name }}
+    </div>
+</dialogModal>

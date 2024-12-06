@@ -20,6 +20,7 @@ export function parseAmount(amount: string, decimal = 18) {
     if (!amount) return "0";
 
     amount = cleanupAmount(amount);
+    console.log(amount, "amountamountamount")
 
     const split = amount.split(".");
     const wholePart = split[0];
@@ -44,6 +45,8 @@ export function formatAmount(amount: string, decimal = 18) {
 }
 
 export function cleanupAmount(amount) {
+    console.log(amount.replace(/,/g, ""), 'amount.replace(/,/g, "").trim()');
+
     return amount.replace(/,/g, "").trim();
 }
 
