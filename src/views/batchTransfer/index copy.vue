@@ -3,12 +3,11 @@
 </style>
 <template src="./index.html"></template>
 <script lang="ts" setup>
-import { ref, onMounted, watch, toRaw } from "vue";
+import { ref, onMounted, watch, toRaw, reactive } from "vue";
 import useClipboard from "vue-clipboard3";
 const { toClipboard } = useClipboard();
 import { useConnect, useAccount, useDisconnect } from "@wagmi/vue";
 import defaultTokenList from "@/config/tokens/index";
-import Web3 from "web3";
 import {
     accAdd,
     accMul,
@@ -25,18 +24,13 @@ import {
     writeContract,
     getPublicClient,
     getAccount,
-    getBalance,
-    waitForTransactionReceipt,
 } from "@wagmi/core";
 import Transfer_ABI from "@/config/abi/MutilTransfer.json";
 import erc20 from "@/config/abi/erc20.json";
 import { config } from "@/wagmi";
 import { ethers } from "ethers";
 let walltAddress = ref(""); //选择的钱包地址
-let walltAddressOld = ref(""); //选择的旧的钱包地址
 let tokenList = ref([]);
-
-let sendData = ref();
 // 获取登录信息模块
 const { address, chainId, status } = useAccount();
 // 唤起钱包模块
@@ -51,65 +45,46 @@ let addressList = ref([]);
 // 每个账户转账数量的数组
 let tokenAmountList = ref([]);
 let sendValue = 1;
+
 let confirmation = ref(false);
 
+let sendData = ref(null);
 /**
  * 获取token合约
  */
-const getTokenContract = async (address, abi) => {
-    const account = getAccount(config);
+const getTokenContract = async (abi) => {
+    let token = tokenList.value.filter((item) => {
+        if (item.name == walltAddress.value) {
+            return item;
+        }
+    })[0];
+    token = { ...token };
     // 使用ethers生成ether合约实例，用来处理viem实例不易处理的问题
     const providerEth = new ethers.providers.Web3Provider(window.ethereum);
-    const tokenContract = new ethers.Contract(address, abi, providerEth);
+    const tokenContract = new ethers.Contract(
+        token["address"],
+        abi,
+        providerEth
+    );
     console.log(tokenContract, "是否获取合约");
     return tokenContract;
 };
 onMounted(async () => {
     console.log(status.value, "status");
-    if (status.value == "disconnected") {
+    if (status.value != "connected") {
         loginWallt.value = true;
+    } else {
+        getTokenList();
     }
-    getTokenList();
-    const providerEth = new ethers.providers.Web3Provider(window.ethereum);
-
-    const tokenContract = new ethers.Contract(
-        "0xa03650818CC5162F823e72d6902A9176d8A707B0",
-        erc20,
-        providerEth
-    );
-    try {
-        let data = await tokenContract.symbol();
-        console.log(data, "sadasdasd");
-    } catch (error) {}
+    let tokenContract = await getTokenContract(erc20);
+    console.log(tokenContract, "tokenContract");
 
     // 授权给合约，允许合约使用账户 token
     const currentAllowance = await tokenContract.allowance(
-        "0x533f6fece8af41da6c41de7af13d289ba92f9fe9",
-        "0xa03650818CC5162F823e72d6902A9176d8A707B0"
+        0x533f6fece8af41da6c41de7af13d289ba92f9fe9,
+        "0x46bCc37DAA845D8A2f23DB17EbB1469f51C711a7"
     );
-
-    // 如果当前授权数量小于转账数量，则先进行授权
-    // try {
-    //     // 先模拟合同写入
-    //     const { request } = await simulateContract(config, {
-    //         address: "0xa03650818CC5162F823e72d6902A9176d8A707B0",
-    //         abi: erc20,
-    //         functionName: "approve",
-    //         args: [
-    //             "0x533f6fece8af41da6c41de7af13d289ba92f9fe9",
-    //             2000000000000000000,
-    //         ],
-    //         gasLimit: 300000,
-    //         gasPrice: 10000000000,
-    //     });
-    //     let hash = await writeContract(config, request);
-    //     console.log(hash, "hash");
-    // } catch (err) {
-    //     console.log(err, "授权部分的错误");
-    //     return err;
-    // }
-    // 通过currentAllowance判断是否授权
-    console.log(currentAllowance.toString(), "currentAllowance");
+    console.log(currentAllowance, "currentAllowance");
 });
 // 新增地址
 const addAddress = () => {
@@ -123,18 +98,17 @@ const addAddress = () => {
 const deleteAddress = (index) => {
     allEvents.value.splice(index, 1); // 删除索引为 2 的元素
 };
-// 确认地址-交易
 const confirmAddress = () => {
-    if (!allEvents.value || !allEvents.value.length) {
-        bus.emit("promptModalErr", "请添加收款人信息");
-        return;
-    }
     let dataAddress = [];
     let dataAmount = [];
     // 正则表达式用于匹配以太坊地址
     const regexA = /^0x[a-fA-F0-9]{40}$/;
     // 正则表达式用于匹配数字（包括小数）但不允许科学计数法
     const regexN = /^\d+(\.\d+)?$/;
+    if (!allEvents.value || !allEvents.value.length) {
+        bus.emit("promptModalErr", "请添加收款人信息");
+        return;
+    }
     allEvents.value.forEach((item, index) => {
         addressList.value.push(item.address);
         tokenAmountList.value.push(item.amount);
@@ -152,6 +126,24 @@ const confirmAddress = () => {
     if (dataAmount && dataAmount.length) {
         bus.emit("promptModalErr", "转账金额有误");
         return;
+    }
+    let token;
+    // 因为是可以输入的，所以如果是以太坊地址就直接赋值
+    if (regexA.test(walltAddress.value)) {
+        token = walltAddress.value;
+    } else {
+        let _token = tokenList.value.filter((item) => {
+            if (item.name == walltAddress.value) {
+                return item;
+            }
+        });
+        // 如果没有匹配到，就返回
+        if (!_token || !_token.length) {
+            bus.emit("promptModalErr", "币种信息有误，请重新选择");
+            return;
+        } else {
+            token = _token[0];
+        }
     }
     sendTransfer();
 };
@@ -171,75 +163,64 @@ const copy = async (Msg: any) => {
 // 获取所有的币种
 const getTokenList = () => {
     let _tokenList = [...defaultTokenList[chainId.value]];
-    console.log(NATIVE[chainId.value], "_tokenList");
-
     _tokenList.sort((t1, t2) => {
         return t1.symbol.toLowerCase() < t2.symbol.toLowerCase() ? -1 : 1;
     });
     _tokenList = [NATIVE[chainId.value], ..._tokenList];
     _tokenList.forEach((item) => {
-        item["value"] = item.symbol + " " + item.address;
+        item["value"] = item.name;
+        item["label"] = item.name;
     });
+    console.log(_tokenList, "_tokenList");
+
     tokenList.value = _tokenList;
 };
 // 交易
 const sendTransfer = async () => {
-    confirmLoading.value = true;
     let token: any = null;
     token = tokenList.value.filter((item) => {
-        if (item.address == walltAddress.value) {
+        if (item.name == walltAddress.value) {
             return item;
         }
-    })[0];
+    });
     token = { ...token };
-
-    // 获取批量交易合约实例
-    let contract = await getTokenContract(
-        Transfer_ABI.address,
-        Transfer_ABI.abi
-    );
-    // 获取币种实例
-    let contract20 = await getTokenContract(token.address, erc20);
+    let contract = await getTokenContract(Transfer_ABI.abi);
+    let contract20 = await getTokenContract(erc20);
     let account = getAccount(config);
     let provider = getPublicClient(config);
     let gasPrice = await provider.getGasPrice();
-    let [fee, balance, balanceWallt] = ["", "", null];
     try {
-        fee = await contract.fee();
+        let fee = await contract.fee();
+        console.log(fee, "fee");
     } catch (error) {
         console.log(error, "error");
     }
+    console.log(contract20, "contract20");
     try {
-        balance = await contract20.balanceOf(address.value);
+        let symbol = await contract20.symbol();
+        console.log(symbol, "symbol");
     } catch (error) {
         console.log(error, "error");
     }
-    let allAmount = tokenAmountList.value.reduce((total, currentValue) => {
-        return accAdd(total, parseAmount(currentValue + "", token.decimals));
-    }, "0");
-    balanceWallt = await getBalance(config, {
-        address: address.value,
-    });
 
     sendData.value = {
-        gasPrice: Web3.utils.fromWei(gasPrice.toString() + "", "ether"),
+        gasPrice: gasPrice.toString(),
         gasLimit: "21000",
         value: "0",
         to: contract.address,
         network: account["chain"]["network"],
-        fee: fee.toString(),
-        allAmount: Web3.utils.fromWei(allAmount + "", "ether"),
-        name: token["name"],
-        symbol: token["symbol"],
-        balance: Web3.utils.fromWei(balance.toString() + "", "ether"),
-        formatted: balanceWallt["formatted"],
-        symbolWallt: balanceWallt["symbol"],
+
+        // data: contract.encodeFunctionData("transferMultiETH", [
+        //     toRaw(addressList.value),
+        //     tokenAmountList.value.map((item) =>
+        //         parseAmount(item + "", token.decimals).toString()
+        //     ),
+        // ]),
     };
-    confirmLoading.value = false;
+    console.log(isEth(token, chainId.value), "contract");
+
     // confirmation.value = true;
     // 如果是eth类型就不需要传token address
-    console.log(isEth(token, chainId.value), "isEth(token, chainId.value)");
-
     if (isEth(token, chainId.value)) {
         ethSend(account, gasPrice, token);
     } else {
@@ -248,10 +229,7 @@ const sendTransfer = async () => {
 };
 
 const ethSend = async (account, gasPrice, token) => {
-    let contract = await getTokenContract(
-        Transfer_ABI.address,
-        Transfer_ABI.abi
-    );
+    let contract = await getTokenContract(Transfer_ABI.abi);
     let fee = await contract.fee();
 
     let allAmount = tokenAmountList.value.reduce((total, currentValue) => {
@@ -260,12 +238,11 @@ const ethSend = async (account, gasPrice, token) => {
     let tokenAmount = tokenAmountList.value.map((item) =>
         parseAmount(item + "", token.decimals).toString()
     );
-
     console.log(accAdd(allAmount, fee.toString()), "allAmount");
     try {
         // 先模拟合同写入
         const { request } = await simulateContract(config, {
-            address: Transfer_ABI.address,
+            address: token.address,
             abi: Transfer_ABI.abi,
             functionName: "transferMultiETH",
             args: [toRaw(addressList.value), tokenAmount],
@@ -282,56 +259,15 @@ const ethSend = async (account, gasPrice, token) => {
     }
 };
 const tokenSend = async (account, gasPrice, token) => {
-    let contract = await getTokenContract(
-        Transfer_ABI.address,
-        Transfer_ABI.abi
-    );
+    let contract = await getTokenContract(Transfer_ABI.abi);
     let fee = await contract.fee();
-    const tokenAmount = allEvents.value.map((item) =>
-        parseAmount(item.amount + "", token.decimals).toString()
-    );
-    console.log(
-        token.address,
-        addressList.value,
-        tokenAmount,
-        "tokenAmountList.value"
-    );
-    let hash;
-    // 如果当前授权数量小于转账数量，则先进行授权
     try {
         // 先模拟合同写入
         const { request } = await simulateContract(config, {
-            address: "0xa03650818CC5162F823e72d6902A9176d8A707B0",
-            abi: erc20,
-            functionName: "approve",
-            args: [
-                "0x533f6fece8af41da6c41de7af13d289ba92f9fe9",
-                2000000000000000000,
-            ],
-            gasLimit: 300000,
-            gasPrice: 10000000000,
-        });
-        hash = await writeContract(config, request);
-        console.log(hash, "hash");
-    } catch (err) {
-        console.log(err, "授权部分的错误");
-        return err;
-    }
-    try {
-        const receipt = await waitForTransactionReceipt(config, { hash: hash });
-        console.log(receipt, "receipt");
-    } catch (err) {
-        console.log(err, "err");
-        return err;
-    }
-    // 需要把addressList.value改为toRaw格式
-    try {
-        // 先模拟合同写入
-        const { request } = await simulateContract(config, {
-            address: Transfer_ABI.address,
+            address: token.address,
             abi: Transfer_ABI.abi,
             functionName: "transferMultiToken",
-            args: [token.address, toRaw(addressList.value), tokenAmount],
+            args: [addressList.value, tokenAmountList.value],
             value: fee.toString(),
             from: account.address,
             gasLimit: 300000,
@@ -379,28 +315,6 @@ const onlyAllowNumbers = (event) => {
     const char = String.fromCharCode(event.which);
     if (!/[0-9]/.test(char)) {
         event.preventDefault(); // 阻止输入非数字字符
-    }
-};
-
-const getTokenListSearch = async (val) => {
-    console.log(val, "val");
-    // 正则表达式用于匹配以太坊地址
-    const regexA = /^0x[a-fA-F0-9]{40}$/;
-    if (regexA.test(val)) {
-        try {
-            let contract = await getTokenContract(val, erc20);
-            let data = {};
-            if (contract) {
-                data["name"] = await contract.name();
-                data["symbol"] = await contract.symbol();
-                data["address"] = await contract.address;
-                data["decimals"] = data["decimals"].toString();
-                data["value"] = data["symbol"] + " " + data["address"];
-                console.log(data, "data");
-                tokenList.value.push(data);
-                // walltAddress.value = data["value"];
-            }
-        } catch (error) {}
     }
 };
 </script>

@@ -1,4 +1,4 @@
-<div class="batch-transfer" v-loading="confirmLoading">
+<div class="batch-transfer" v-route-loading="confirmLoading">
     <div class="header flex">
         <div class="header-text">
             <h2>批量转账</h2>
@@ -22,8 +22,14 @@
 
     <div class="currency mt-60">
         <h3>币种{{walltAddress}}</h3>
-        <a-auto-complete v-model:value="walltAddress" :options="tokenList" placeholder="请选择币种"
-            :filter-option="filterOption" />
+        <!-- <a-auto-complete v-model:value="walltAddress" :options="tokenList" placeholder="请选择币种"
+            :filter-option="filterOption" /> -->
+        <a-select class="select-box" size="small" placeholder="请选择币种" v-model:value="walltAddress"
+            @search="getTokenListSearch" showSearch>
+            <a-select-option v-for="(item, index) in tokenList" :key="index" :value="item.address">
+                {{ item.value }}
+            </a-select-option>
+        </a-select>
     </div>
 
     <div class="table-address mt-40">
@@ -48,6 +54,7 @@
                 </tr>
             </thead>
             <tbody>
+                {{allEvents}}
                 <template v-for="(item,index) in allEvents">
                     <tr>
                         <td>{{index + 1}}</td>
@@ -75,5 +82,45 @@
     <div class="connect-wallt pl-25 pr-25" v-for="connector in connectors" :key="connector.id"
         @click="connectLogin({ connector, chainId })">
         {{ connector.name }}
+    </div>
+</dialogModal>
+<!-- 订单确认 -->
+<dialogModal title="订单确认" v-model="confirmation" @close="confirmation = false">
+    <div class="confirmation-content pl-24 pr-24 pt-24">
+        <div class="confirmation-children flex">
+            <p class="name">币种：</p>
+            <p class="content">{{sendData['name']}}</p>
+        </div>
+        <div class="confirmation-children flex">
+            <p class="name">地址总数：</p>
+            <p class="content">{{tokenAmountList.length}}</p>
+        </div>
+        <div class="confirmation-children flex">
+            <p class="name">交易总数：</p>
+            <p class="content">1</p>
+        </div>
+        <div class="confirmation-children flex">
+            <p class="name">代币发送总数：</p>
+            <p class="content">{{sendData['allAmount']}}</p>
+        </div>
+        <div class="confirmation-children flex">
+            <p class="name">代币余额：</p>
+            <p class="content">{{sendData['balance']}}</p>
+        </div>
+        <div class="confirmation-children flex">
+            <p class="name">您的余额：</p>
+            <p class="content">{{sendData['formatted']}}{{sendData['symbolWallt']}}</p>
+        </div>
+        <div class="confirmation-children flex">
+            <p class="name">预估消耗：</p>
+            <p class="content">{{sendData['gasPrice']}}</p>
+        </div>
+        <div class="confirmation-children flex">
+            <p class="name">手续费：</p>
+            <p class="content">{{sendData['fee']}}</p>
+        </div>
+        <div class="btn">
+            确认
+        </div>
     </div>
 </dialogModal>
