@@ -36,9 +36,11 @@ import json from "highlight.js/lib/languages/json";
 import yaml from "highlight.js/lib/languages/json";
 hljs.registerLanguage("javascript", javascript);
 import {
-    Affix, Avatar, Button, Breadcrumb, Card, Carousel, Checkbox, Comment, Col, Collapse, Dropdown, DatePicker, Form, Image, Input, InputNumber, List, Layout, LocaleProvider, Menu, AutoComplete, Modal, Popover, Popconfirm, Pagination, Row, Radio, Select, SelectOption, Switch, Steps, Tabs, Timeline, Tooltip, Tree, Upload, Progress, Spin, Table, Slider, Badge
+    Affix, Avatar, Button, Breadcrumb, Card, Carousel, Checkbox, Comment, Col, Collapse, Dropdown, DatePicker, Form, Image, Input, InputNumber, List, Layout,
+    LocaleProvider, Menu, AutoComplete, Modal, Popover, Popconfirm, Pagination, Row, Radio,RadioButton, Select, SelectOption,
+    Switch, Steps, Tabs, Timeline,Tree, Upload, Progress, Spin, Table,
+    Slider, Badge,Tooltip
 } from 'ant-design-vue';
-
 const app = createApp(App)
 app.directive('loading', loadingDirective)
 app.directive('route-loading', routeDirective)
@@ -60,7 +62,6 @@ app.use(router)
     .use(Tabs)
     .use(Table)
     .use(Modal)
-    .use(Tooltip)
     .use(Input)
     .use(Carousel)
     .use(Affix)
@@ -87,6 +88,7 @@ app.use(router)
     .use(Slider)
     .use(Badge)
     .use(AutoComplete)
+    .use(Tooltip)
 app.component('dialogModal', dialogModal)
 app.use(WagmiPlugin, { config }).use(VueQueryPlugin, {})
 app.use(hljsVuePlugin)

@@ -1,76 +1,105 @@
 .contract-content {
-	width: 100%;
-	justify-content: space-between;
+  width: 100%;
+  justify-content: space-between;
 
-	.highlight {
-		width: 929px;
-		height: 1310px;
-		border-radius: 8px;
-		background: rgba(25, 26, 28, 1);
-		backdrop-filter: blur(40px);
-		overflow: hidden;
-	}
+  .highlight {
+    width: 929px;
+    height: 1310px;
+    border-radius: 8px;
+    background: rgba(25, 26, 28, 1);
+    backdrop-filter: blur(40px);
+    overflow: hidden;
+  }
 
-	.set-radio {
-		width: 436px;
-		border: 1px solid rgba(49, 49, 49, 1);
-		border-radius: 8px;
-		padding: 24px;
+  .set-radio {
+    width: 436px;
+    border: 1px solid rgba(49, 49, 49, 1);
+    border-radius: 8px;
+    padding: 24px;
 
-		.title {
-			font-size: 18px;
-			font-weight: 600;
-			color: #fff;
-		}
+    .title {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
 
-		input {
-			width: 100%;
-			border: 1px solid rgba(104, 104, 104, 1);
-			border-radius: 8px;
-			height: 40px;
-			padding: 12px;
-			font-size: 16px;
-			background-color: transparent;
-			color: #fff;
+    input {
+      width: 100%;
+      border: 1px solid rgba(104, 104, 104, 1);
+      border-radius: 8px;
+      height: 40px;
+      padding: 12px;
+      font-size: 16px;
+      background-color: transparent;
+      color: #fff;
 
-			&:focus {
-				border: 1px solid rgba(255, 255, 255, 1);
-			}
-		}
+      &:focus {
+        border: 1px solid rgba(255, 255, 255, 1);
+      }
+    }
 
-		// 输入框部分样式
-		.input-section {
-			border-bottom: 1px solid rgba(49, 49, 49, 1);
+    // 输入框部分样式
+    .input-section {
+      border-bottom: 1px solid rgba(49, 49, 49, 1);
 
-			.section-input {
-				font-size: 16px;
-				font-weight: 400;
-				line-height: 16px;
-				color: rgba(104, 104, 104, 1);
-			}
-		}
+      .section-input {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 16px;
+        color: rgba(104, 104, 104, 1);
+      }
+    }
 
-		// 多选框样式
-		.select-section,
-		.radio-section {
-			padding-right: 24px;
-			border-bottom: 1px solid rgba(49, 49, 49, 1);
+    // 多选框样式
+    .select-section,
+    .radio-section {
+      // padding-right: 24px;
+      border-bottom: 1px solid rgba(49, 49, 49, 1);
 
-			.ant-checkbox-group,
-			.ant-radio-group {
-				width: 100%;
-			}
+      .ant-checkbox-group,
+      .ant-radio-group {
+        width: 100%;
+      }
 
-			.section-select,
-			.section-radio {
-				width: 100%;
-				justify-content: space-between;
+      .section-select,
+      .section-radio {
+        width: 100%;
+        justify-content: space-between;
 
-				:deep(span) {
-					color: #fff;
-					font-size: 16px;
-				}
-			}
-		}
-	}
+        :deep(span) {
+          color: #fff;
+          font-size: 16px;
+        }
+      }
+    }
+    .my-checkbox {
+      width: 16px;
+      height: 16px;
+      background: #686868;
+    }
+  }
+  .icon-tip {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url(/images/contract/tips.svg) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    &:hover {
+      background: url(/images/contract/tips-white.svg) no-repeat;
+      background-size: contain;
+    }
+  }
+  .title {
+    align-items: center;
+    :deep(.ant-radio-wrapper),
+    :deep(.ant-checkbox-wrapper) {
+      font-size: 0.09375rem;
+      font-weight: 600;
+      color: #fff;
+      flex-direction: row-reverse;
+    }
+  }
 }
