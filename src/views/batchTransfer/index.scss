@@ -109,48 +109,21 @@
             height: 64px;
 
             :deep(.ant-select-selector) {
+                padding-right: 80px;
                 height: 64px;
                 display: flex;
                 padding-left: 16px;
-                justify-content: space-between;
-                background-color: transparent;
                 border: 1px solid rgba(49, 49, 49, 1);
                 border-radius: 8px;
+                background-color: rgba(15, 15, 15, 1) !important;
+                color: #fff;
+                height: 100%;
+                line-height: 100%;
 
-
-                .ant-select-selection-search-input {
-                    font-size: 16px;
-                    color: #fff;
-                    height: 100% !important;
-                }
-
-                .ant-select-selection-search {
-                    right: 80px;
-                    left: 16px;
-                    font-size: 16px;
-                }
-
-                .ant-select-selection-placeholder {
-                    font-size: 16px;
+                .ant-select-selection-item {
+                    height: 64px;
                     line-height: 64px;
-                }
-
-                &:after {
-                    position: absolute;
-                    right: 10px;
-                    top: 14px;
-                    z-index: 100;
-                    height: 32px;
-                    width: 60px;
-                    display: block;
-                    border-radius: 4px;
-                    background: rgba(255, 255, 255, 0.1);
-                    content: '';
-                    background-image: url(images/icons/zoom.svg);
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    color: #fff;
-                    visibility: visible
+                    font-size: 16px;
                 }
             }
         }
@@ -308,5 +281,6 @@
         font-size: 16px;
         line-height: 40px;
         color: rgba(0, 0, 0, 1);
+        cursor: pointer;
     }
 }

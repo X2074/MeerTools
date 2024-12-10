@@ -52,6 +52,8 @@ let addressList = ref([]);
 let tokenAmountList = ref([]);
 let sendValue = 1;
 let confirmation = ref(false);
+// 交易的时候提前保留的数据
+let sendContent = ref({});
 
 /**
  * 获取token合约
@@ -70,46 +72,6 @@ onMounted(async () => {
         loginWallt.value = true;
     }
     getTokenList();
-    const providerEth = new ethers.providers.Web3Provider(window.ethereum);
-
-    const tokenContract = new ethers.Contract(
-        "0xa03650818CC5162F823e72d6902A9176d8A707B0",
-        erc20,
-        providerEth
-    );
-    try {
-        let data = await tokenContract.symbol();
-        console.log(data, "sadasdasd");
-    } catch (error) {}
-
-    // 授权给合约，允许合约使用账户 token
-    const currentAllowance = await tokenContract.allowance(
-        "0x533f6fece8af41da6c41de7af13d289ba92f9fe9",
-        "0xa03650818CC5162F823e72d6902A9176d8A707B0"
-    );
-
-    // 如果当前授权数量小于转账数量，则先进行授权
-    // try {
-    //     // 先模拟合同写入
-    //     const { request } = await simulateContract(config, {
-    //         address: "0xa03650818CC5162F823e72d6902A9176d8A707B0",
-    //         abi: erc20,
-    //         functionName: "approve",
-    //         args: [
-    //             "0x533f6fece8af41da6c41de7af13d289ba92f9fe9",
-    //             2000000000000000000,
-    //         ],
-    //         gasLimit: 300000,
-    //         gasPrice: 10000000000,
-    //     });
-    //     let hash = await writeContract(config, request);
-    //     console.log(hash, "hash");
-    // } catch (err) {
-    //     console.log(err, "授权部分的错误");
-    //     return err;
-    // }
-    // 通过currentAllowance判断是否授权
-    console.log(currentAllowance.toString(), "currentAllowance");
 });
 // 新增地址
 const addAddress = () => {
@@ -198,19 +160,21 @@ const sendTransfer = async () => {
         Transfer_ABI.address,
         Transfer_ABI.abi
     );
+    let [fee, balance, balanceWallt] = ["", "", null];
     // 获取币种实例
-    let contract20 = await getTokenContract(token.address, erc20);
+    if (token.address) {
+        let contract20 = await getTokenContract(token.address, erc20);
+        try {
+            balance = await contract20.balanceOf(address.value);
+        } catch (error) {
+            console.log(error, "error");
+        }
+    }
     let account = getAccount(config);
     let provider = getPublicClient(config);
     let gasPrice = await provider.getGasPrice();
-    let [fee, balance, balanceWallt] = ["", "", null];
     try {
         fee = await contract.fee();
-    } catch (error) {
-        console.log(error, "error");
-    }
-    try {
-        balance = await contract20.balanceOf(address.value);
     } catch (error) {
         console.log(error, "error");
     }
@@ -231,20 +195,17 @@ const sendTransfer = async () => {
         allAmount: Web3.utils.fromWei(allAmount + "", "ether"),
         name: token["name"],
         symbol: token["symbol"],
-        balance: Web3.utils.fromWei(balance.toString() + "", "ether"),
-        formatted: balanceWallt["formatted"],
+        balance: balance
+            ? Web3.utils.fromWei(balance.toString() + "", "ether")
+            : (balanceWallt["formatted"] * 1).toFixed(2),
+        formatted: (balanceWallt["formatted"] * 1).toFixed(2),
         symbolWallt: balanceWallt["symbol"],
     };
     confirmLoading.value = false;
-    // confirmation.value = true;
+    confirmation.value = true;
     // 如果是eth类型就不需要传token address
     console.log(isEth(token, chainId.value), "isEth(token, chainId.value)");
-
-    if (isEth(token, chainId.value)) {
-        ethSend(account, gasPrice, token);
-    } else {
-        tokenSend(account, gasPrice, token);
-    }
+    sendContent.value = { account, gasPrice, token };
 };
 
 const ethSend = async (account, gasPrice, token) => {
@@ -290,40 +251,38 @@ const tokenSend = async (account, gasPrice, token) => {
     const tokenAmount = allEvents.value.map((item) =>
         parseAmount(item.amount + "", token.decimals).toString()
     );
+    let allTokenAmount = 0;
+    tokenAmount.forEach((item) => {
+        allTokenAmount = allTokenAmount + Number(item);
+    });
     console.log(
         token.address,
         addressList.value,
         tokenAmount,
+        allTokenAmount,
         "tokenAmountList.value"
     );
-    let hash;
-    // 如果当前授权数量小于转账数量，则先进行授权
-    try {
-        // 先模拟合同写入
-        const { request } = await simulateContract(config, {
-            address: "0xa03650818CC5162F823e72d6902A9176d8A707B0",
-            abi: erc20,
-            functionName: "approve",
-            args: [
-                "0x533f6fece8af41da6c41de7af13d289ba92f9fe9",
-                2000000000000000000,
-            ],
-            gasLimit: 300000,
-            gasPrice: 10000000000,
-        });
-        hash = await writeContract(config, request);
-        console.log(hash, "hash");
-    } catch (err) {
-        console.log(err, "授权部分的错误");
-        return err;
+    const providerEth = new ethers.providers.Web3Provider(window.ethereum);
+    const tokenContract = new ethers.Contract(
+        token.address,
+        erc20,
+        providerEth
+    );
+    // 授权给合约，允许合约使用账户 token
+    let currentAllowance = await tokenContract.allowance(
+        account.address,
+        contract.address
+    );
+    currentAllowance = currentAllowance.toString();
+    console.log(
+        Web3.utils.toWei(Web3.utils.toBN(allTokenAmount).toString(), "ether")
+    );
+
+    if (!currentAllowance || allTokenAmount > currentAllowance) {
+        await isApprove(account, token, allTokenAmount);
     }
-    try {
-        const receipt = await waitForTransactionReceipt(config, { hash: hash });
-        console.log(receipt, "receipt");
-    } catch (err) {
-        console.log(err, "err");
-        return err;
-    }
+    return;
+
     // 需要把addressList.value改为toRaw格式
     try {
         // 先模拟合同写入
@@ -341,6 +300,28 @@ const tokenSend = async (account, gasPrice, token) => {
         return hash;
     } catch (err) {
         console.log(err, "绘图部分的错误");
+        return err;
+    }
+};
+// 授权
+const isApprove = async (account, token, allTokenAmount) => {
+    // 如果当前授权数量小于转账数量，则先进行授权
+    let hash;
+    try {
+        // 先模拟合同写入
+        const { request } = await simulateContract(config, {
+            address: token.address,
+            abi: erc20,
+            functionName: "approve",
+            args: [account.address, allTokenAmount * 1],
+            gasLimit: 300000,
+            gasPrice: 10000000000,
+        });
+        hash = await writeContract(config, request);
+        const receipt = await waitForTransactionReceipt(config, { hash: hash });
+        console.log(hash, "hash");
+    } catch (err) {
+        console.log(err, "授权部分的错误");
         return err;
     }
 };
@@ -389,18 +370,33 @@ const getTokenListSearch = async (val) => {
     if (regexA.test(val)) {
         try {
             let contract = await getTokenContract(val, erc20);
+            console.log(contract, "contract");
+
             let data = {};
             if (contract) {
                 data["name"] = await contract.name();
                 data["symbol"] = await contract.symbol();
                 data["address"] = await contract.address;
-                data["decimals"] = data["decimals"].toString();
+                let decimals = await contract.decimals();
+                data["decimals"] = decimals.toString();
                 data["value"] = data["symbol"] + " " + data["address"];
                 console.log(data, "data");
                 tokenList.value.push(data);
                 // walltAddress.value = data["value"];
             }
-        } catch (error) {}
+        } catch (error) {
+            console.log(error, "error");
+        }
+    }
+};
+
+const confirmSend = () => {
+    console.log(toRaw(sendContent.value), "sendContent.value");
+    let data = toRaw(sendContent.value);
+    if (isEth(data["token"], chainId.value)) {
+        ethSend(data["account"], data["gasPrice"], data["token"]);
+    } else {
+        tokenSend(data["account"], data["gasPrice"], data["token"]);
     }
 };
 </script>

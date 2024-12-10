@@ -21,9 +21,7 @@
     </div>
 
     <div class="currency mt-60">
-        <h3>币种{{walltAddress}}</h3>
-        <!-- <a-auto-complete v-model:value="walltAddress" :options="tokenList" placeholder="请选择币种"
-            :filter-option="filterOption" /> -->
+        <h3>币种{{tokenList}}</h3>
         <a-select class="select-box" size="small" placeholder="请选择币种" v-model:value="walltAddress"
             @search="getTokenListSearch" showSearch>
             <a-select-option v-for="(item, index) in tokenList" :key="index" :value="item.address">
@@ -105,11 +103,11 @@
         </div>
         <div class="confirmation-children flex">
             <p class="name">代币余额：</p>
-            <p class="content">{{sendData['balance']}}</p>
+            <p class="content">{{sendData['balance']}} {{sendData['symbol']}}</p>
         </div>
         <div class="confirmation-children flex">
             <p class="name">您的余额：</p>
-            <p class="content">{{sendData['formatted']}}{{sendData['symbolWallt']}}</p>
+            <p class="content">{{sendData['formatted']}} {{sendData['symbolWallt']}}</p>
         </div>
         <div class="confirmation-children flex">
             <p class="name">预估消耗：</p>
@@ -119,7 +117,7 @@
             <p class="name">手续费：</p>
             <p class="content">{{sendData['fee']}}</p>
         </div>
-        <div class="btn">
+        <div class="btn" @click="confirmSend">
             确认
         </div>
     </div>
