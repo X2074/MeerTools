@@ -1,21 +1,61 @@
 <div class="contract-deployment mt-36">
-    <div class="header flex">
-        <div class="introduce">
-            <p class="title">Smart Contract <br /> Deployment</p>
-            <p class="text mt-15">Save the generated contract to your contracts directly and compile it using tools like
-                Hardhat or Truffle. For more detailed guidance, refer to our development documentation.（开发文档连接暂时没有）</p>
-        </div>
-        <img src="/images/contract/deployment.png" alt="">
+  <div class="header flex">
+    <div class="introduce">
+      <p class="title">
+        Smart Contract <br />
+        Deployment
+      </p>
+      <p class="text mt-15">
+        Save the generated contract to your contracts directly and compile it
+        using tools like Hardhat or Truffle. For more detailed guidance, refer
+        to our development documentation.（开发文档连接暂时没有）
+      </p>
     </div>
-    <div class="wizard">
-        <p class="title">Contracts Wizard</p>
-        <p class="text mt-16">Qitmeer Network offers standardized smart contract templates, including token
-            implementations, contract controls, and licensing agreements, for quick deployment.</p>
-    </div>
+    <img src="/images/contract/deployment.png" alt="" />
+  </div>
+  <div class="wizard">
+    <p class="title">Contracts Wizard</p>
+    <p class="text mt-16">
+      Qitmeer Network offers standardized smart contract templates, including
+      token implementations, contract controls, and licensing agreements, for
+      quick deployment.
+    </p>
+  </div>
 
-    <div class="contract-editor flex mt-60">
-        <!-- <contractEdit /> -->
-        <!-- ERC20合约 -->
-        <contractContent20 />
+  <div class="contract-editor mt-60">
+    <div class="tools flex">
+      <div class="left-type flex-center">
+        <div
+          class="btn-item"
+          v-for="(item,i) in contractTypes.slice(0,3)"
+          :key="i"
+        >
+          {{item.name}}
+        </div>
+        <img src="/images/contract/arrow.svg" alt="" class="arrow" />
+      </div>
+      <div class="right-tool flex-center">
+        <div class="btn-item">
+          <img src="/images/contract/z.svg" alt="" />
+          <span>Deploy with Defender</span>
+        </div>
+        <div class="btn-item">
+          <img src="/images/contract/copy.svg" alt="" />
+          <span>Copy to Clipboard</span>
+        </div>
+        <div class="btn-item">
+          <img src="/images/contract/open.svg" alt="" />
+          <span>Open in Remix</span>
+        </div>
+        <div class="btn-item">
+          <img src="/images/contract/down.svg" alt="" />
+          <span>Download</span>
+        </div>
+      </div>
     </div>
+    <div class="mt-40">
+      <!-- ERC20合约 -->
+      <contractContent20 />
+    </div>
+  </div>
 </div>
