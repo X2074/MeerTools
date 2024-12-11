@@ -4,6 +4,7 @@
 <template src="./index.html"></template>
 <script lang="ts" setup>
 import { ref, onMounted, watch, toRaw } from "vue";
+import { QITMEER_HASH } from "@/api/constant";
 import useClipboard from "vue-clipboard3";
 const { toClipboard } = useClipboard();
 import { useConnect, useAccount, useDisconnect } from "@wagmi/vue";
@@ -28,20 +29,22 @@ import {
     getBalance,
     waitForTransactionReceipt,
 } from "@wagmi/core";
-import Transfer_ABI from "@/config/abi/MutilTransfer.json";
+import Transfer_ABI from "@/config/abi/Transfer.json";
 import erc20 from "@/config/abi/erc20.json";
 import { config } from "@/wagmi";
 import { ethers } from "ethers";
+
+let sendHash = ref("");
 let walltAddress = ref(""); //选择的钱包地址
 let walltAddressOld = ref(""); //选择的旧的钱包地址
 let tokenList = ref([]);
-
+let lookHash = ref(false);
 let sendData = ref();
 // 获取登录信息模块
 const { address, chainId, status } = useAccount();
 // 唤起钱包模块
 const { connect, connectors, error } = useConnect();
-let confirmLoading = ref(false);
+let confirmLoading = ref(true);
 // 收款人列表
 let allEvents = ref([]);
 // 钱包选项
@@ -67,12 +70,22 @@ const getTokenContract = async (address, abi) => {
     return tokenContract;
 };
 onMounted(async () => {
-    console.log(status.value, "status");
-    if (status.value == "disconnected") {
-        loginWallt.value = true;
-    }
-    getTokenList();
+    confirmLoading.value = false;
 });
+watch(
+    () => status.value,
+    async (newV) => {
+        console.log(newV, address.value, "address");
+        if (newV == "disconnected") {
+            loginWallt.value = true;
+        }
+        if (newV == "connected") {
+            getTokenList();
+        }
+    },
+    { immediate: true }
+);
+
 // 新增地址
 const addAddress = () => {
     let data = {
@@ -132,8 +145,9 @@ const copy = async (Msg: any) => {
 };
 // 获取所有的币种
 const getTokenList = () => {
+    console.log(chainId.value, "chainId.value");
+
     let _tokenList = [...defaultTokenList[chainId.value]];
-    console.log(NATIVE[chainId.value], "_tokenList");
 
     _tokenList.sort((t1, t2) => {
         return t1.symbol.toLowerCase() < t2.symbol.toLowerCase() ? -1 : 1;
@@ -170,6 +184,7 @@ const sendTransfer = async () => {
             console.log(error, "error");
         }
     }
+
     let account = getAccount(config);
     let provider = getPublicClient(config);
     let gasPrice = await provider.getGasPrice();
@@ -209,20 +224,27 @@ const sendTransfer = async () => {
 };
 
 const ethSend = async (account, gasPrice, token) => {
+    confirmLoading.value = true;
     let contract = await getTokenContract(
         Transfer_ABI.address,
         Transfer_ABI.abi
     );
     let fee = await contract.fee();
-
     let allAmount = tokenAmountList.value.reduce((total, currentValue) => {
         return accAdd(total, parseAmount(currentValue + "", token.decimals));
     }, "0");
     let tokenAmount = tokenAmountList.value.map((item) =>
         parseAmount(item + "", token.decimals).toString()
     );
+    if (
+        !sendData.value["balance"] ||
+        parseAmount(sendData.value["balance"] + "", token.decimals) < allAmount
+    ) {
+        bus.emit("promptModalErr", "账户余额不足");
+        confirmLoading.value = false;
+        return;
+    }
 
-    console.log(accAdd(allAmount, fee.toString()), "allAmount");
     try {
         // 先模拟合同写入
         const { request } = await simulateContract(config, {
@@ -236,6 +258,10 @@ const ethSend = async (account, gasPrice, token) => {
             gasPrice: gasPrice,
         });
         const hash = await writeContract(config, request);
+        const receipt = await waitForTransactionReceipt(config, { hash: hash });
+        sendHash.value = hash;
+        confirmLoading.value = false;
+        lookHash.value = true;
         return hash;
     } catch (err) {
         console.log(err, "绘图部分的错误");
@@ -243,6 +269,7 @@ const ethSend = async (account, gasPrice, token) => {
     }
 };
 const tokenSend = async (account, gasPrice, token) => {
+    confirmLoading.value = true;
     let contract = await getTokenContract(
         Transfer_ABI.address,
         Transfer_ABI.abi
@@ -255,13 +282,16 @@ const tokenSend = async (account, gasPrice, token) => {
     tokenAmount.forEach((item) => {
         allTokenAmount = allTokenAmount + Number(item);
     });
-    console.log(
-        token.address,
-        addressList.value,
-        tokenAmount,
-        allTokenAmount,
-        "tokenAmountList.value"
-    );
+    if (
+        !sendData.value["balance"] ||
+        parseAmount(sendData.value["balance"] + "", token.decimals) <
+            allTokenAmount
+    ) {
+        confirmLoading.value = false;
+        bus.emit("promptModalErr", "账户余额不足");
+        return;
+    }
+
     const providerEth = new ethers.providers.Web3Provider(window.ethereum);
     const tokenContract = new ethers.Contract(
         token.address,
@@ -274,15 +304,10 @@ const tokenSend = async (account, gasPrice, token) => {
         contract.address
     );
     currentAllowance = currentAllowance.toString();
-    console.log(
-        Web3.utils.toWei(Web3.utils.toBN(allTokenAmount).toString(), "ether")
-    );
 
     if (!currentAllowance || allTokenAmount > currentAllowance) {
         await isApprove(account, token, allTokenAmount);
     }
-    return;
-
     // 需要把addressList.value改为toRaw格式
     try {
         // 先模拟合同写入
@@ -297,6 +322,10 @@ const tokenSend = async (account, gasPrice, token) => {
             gasPrice: gasPrice,
         });
         const hash = await writeContract(config, request);
+        const receipt = await waitForTransactionReceipt(config, { hash: hash });
+        sendHash.value = hash;
+        confirmLoading.value = false;
+        lookHash.value = true;
         return hash;
     } catch (err) {
         console.log(err, "绘图部分的错误");
@@ -305,6 +334,7 @@ const tokenSend = async (account, gasPrice, token) => {
 };
 // 授权
 const isApprove = async (account, token, allTokenAmount) => {
+    confirmLoading.value = true;
     // 如果当前授权数量小于转账数量，则先进行授权
     let hash;
     try {
@@ -319,6 +349,7 @@ const isApprove = async (account, token, allTokenAmount) => {
         });
         hash = await writeContract(config, request);
         const receipt = await waitForTransactionReceipt(config, { hash: hash });
+        confirmLoading.value = false;
         console.log(hash, "hash");
     } catch (err) {
         console.log(err, "授权部分的错误");
@@ -391,6 +422,7 @@ const getTokenListSearch = async (val) => {
 };
 
 const confirmSend = () => {
+    confirmation.value = false;
     console.log(toRaw(sendContent.value), "sendContent.value");
     let data = toRaw(sendContent.value);
     if (isEth(data["token"], chainId.value)) {
@@ -398,5 +430,10 @@ const confirmSend = () => {
     } else {
         tokenSend(data["account"], data["gasPrice"], data["token"]);
     }
+};
+
+const confirmHash = () => {
+    lookHash.value = false;
+    window.open(QITMEER_HASH + sendHash.value);
 };
 </script>

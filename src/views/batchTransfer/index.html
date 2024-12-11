@@ -21,12 +21,19 @@
     </div>
 
     <div class="currency mt-60">
-        <h3>币种{{tokenList}}</h3>
+        <h3>币种</h3>
         <a-select class="select-box" size="small" placeholder="请选择币种" v-model:value="walltAddress"
             @search="getTokenListSearch" showSearch>
             <a-select-option v-for="(item, index) in tokenList" :key="index" :value="item.address">
                 {{ item.value }}
             </a-select-option>
+            <!-- 使用 notFound 插槽 -->
+            <template #notFoundContent>
+                <div class="diy-emty pb-20">
+                    <img src="/images/icons/undefined.png" alt="">
+                    <p class="mt-12">没有找到相关内容</p>
+                </div>
+            </template>
         </a-select>
     </div>
 
@@ -42,7 +49,7 @@
 
 
     <div class="table-list">
-        <table>
+        <table cellspacing="0">
             <thead>
                 <tr>
                     <th>序号</th>
@@ -52,14 +59,15 @@
                 </tr>
             </thead>
             <tbody>
-                {{allEvents}}
                 <template v-for="(item,index) in allEvents">
                     <tr>
                         <td>{{index + 1}}</td>
                         <td><input placeholder="收款人地址" type="text" v-model="item.address"></td>
                         <td><input @keypress="onlyAllowNumbers" placeholder="转账金额" type="number" v-model="item.amount">
                         </td>
-                        <td @click="deleteAddress(index)">delete</td>
+                        <td>
+                            <p @click="deleteAddress(index)">delete</p>
+                        </td>
                     </tr>
                 </template>
             </tbody>
@@ -121,4 +129,9 @@
             确认
         </div>
     </div>
+</dialogModal>
+<!-- 交易详情 -->
+<dialogModal v-model="lookHash" :footer="'whether'" @confirm="confirmHash" @close="lookHash = false">
+    <p>HASH:{{sendHash}}</p>
+    <p class="pl-16 pr-16 pt-16">是否查看交易详情？</p>
 </dialogModal>

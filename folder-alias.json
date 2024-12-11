@@ -22,5 +22,11 @@
     },
     "src/views/batchTransfer": {
         "description": "批量转账"
+    },
+    "src/config": {
+        "description": "批量交易需要的abi和其他合约配置"
+    },
+    "src/contract/faucet.js": {
+        "description": "批量交易的合约"
     }
 }

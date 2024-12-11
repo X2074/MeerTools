@@ -1,6 +1,20 @@
 .ant-select-dropdown {
     background-color: #000 !important;
     color: #fff !important;
+
+    .diy-emty {
+        text-align: center;
+
+        img {
+            width: 91px;
+            height: auto;
+        }
+
+        p {
+            font-size: 14px;
+            color: #fff;
+        }
+    }
 }
 
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
