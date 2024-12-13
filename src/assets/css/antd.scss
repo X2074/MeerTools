@@ -65,3 +65,7 @@
         font-size: 16px;
     }
 }
+
+.ant-checkbox-disabled+span {
+    color: #fff !important;
+}
