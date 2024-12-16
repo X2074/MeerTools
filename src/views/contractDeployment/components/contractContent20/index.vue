@@ -5,9 +5,10 @@
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
 
+import { downloadAllFiles } from "@/utils/fileDown";
 const solContent = ref("");
 import { erc20 } from "@openzeppelin/wizard";
-let contarctName = ref("ExampleToken");
+let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
 let premint = ref("0");
 let features = ref("");
@@ -142,5 +143,9 @@ const voteChange = (e) => {
         voteOptionsRadio.value = "";
     }
     solContentChange();
+};
+
+const downLoad = () => {
+    downloadAllFiles(contarctName.value, solContent.value);
 };
 </script>
