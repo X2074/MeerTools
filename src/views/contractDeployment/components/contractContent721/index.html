@@ -1,0 +1,165 @@
+<div class="contract-content flex">
+	<div class="set-radio">
+		<div class="settings input-section pb-32">
+			<p class="title">SETTINGS</p>
+			<div class="section-input ml-24 mt-24">
+				<p class="mb-8">Name</p>
+				<input type="text" @input="dispositionText" v-model="contarctName" />
+			</div>
+			<div class="section-input ml-24 mt-16 mb-16">
+				<p class="mb-8">Symbol</p>
+				<input type="text" @input="dispositionText" v-model="contarctSymbol" />
+			</div>
+			<div class="section-input ml-24">
+				<div class="flex-between">
+					<p class="mb-8">Base URI</p>
+					<a-tooltip placement="right">
+						<template #title>
+							<span>Create an initial amount of tokens for the deployer.</span>
+						</template>
+						<i class="icon-tip"></i>
+					</a-tooltip>
+				</div>
+
+				<input type="text" v-model="baseUrl" placeholder="https://..." @input="dispositionText" />
+			</div>
+			<!-- <div>
+                <a-checkbox v-model:checked="tableAll" @change="onCheckAllChange">
+                </a-checkbox>
+            </div> -->
+		</div>
+		<div class="features select-section pb-32 mt-32">
+			<p class="title">FEATURES</p>
+			<div class="section-select pl-24 mt-24">
+				<a-checkbox-group v-model:value="features" @change="dispositionText">
+					<div class="section-select flex mb-10" v-for="(item,i) in featuresOptions" :key="i">
+						<a-checkbox :value="item.value">{{item.label}}</a-checkbox>
+						<a-tooltip placement="right">
+							<template #title>
+								<span v-html="item.tip"></span>
+							</template>
+							<i class="icon-tip"></i>
+						</a-tooltip>
+					</div>
+				</a-checkbox-group>
+			</div>
+		</div>
+		<div class="access-control radio-section pb-32 mt-32">
+			<p class="title">
+				<a-checkbox value="VOTES" @change="voteChange">VOTES
+				</a-checkbox>
+				<a-tooltip placement="right">
+					<template #title>
+						<span>Keeps track of historical balances for voting in on-chain
+							governance, with a way to delegate one's voting power to a trusted
+							account.
+							<a href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Votes"
+								target="_blank">Read
+								more.</a>
+						</span>
+					</template>
+					<i class="icon-tip"></i>
+				</a-tooltip>
+			</p>
+			<div class="section-radio pl-24 mt-24">
+				<a-radio-group v-model:value="voteOptionsRadio" @change="dispositionText()">
+					<div class="section-radio flex mb-10" v-for="(item,i) in voteOptions" :key="i">
+						<a-radio :value="item.value">{{item.label}}</a-radio>
+						<a-tooltip placement="right">
+							<template #title>
+								<span v-html="item.tip"></span>
+							</template>
+							<i class="icon-tip"></i>
+						</a-tooltip>
+					</div>
+				</a-radio-group>
+			</div>
+		</div>
+		<div class="access-control radio-section pb-32 mt-32">
+			<div class="title">
+				<a-checkbox value="ACCESS CONTROL" :disabled="accessOptionsBol"
+					@change="accessControlRadio?accessControlRadio='':accessControlRadio='ownable';dispositionText()">
+					ACCESS CONTROL</a-checkbox>
+				<a-tooltip placement="right">
+					<template #title>
+						<span>Restrict who can access the functions of a contract or when they
+							can do it.
+							<a href="https://docs.openzeppelin.com/contracts/5.x/api/access" target="_blank">Read
+								more.</a>
+						</span>
+					</template>
+					<i class="icon-tip"></i>
+				</a-tooltip>
+			</div>
+			<div class="section-radio pl-24 mt-24">
+				<a-radio-group v-model:value="accessControlRadio" @change="dispositionText">
+					<div class="section-radio flex mb-10" v-for="(item,i) in accessOptions" :key="i">
+						<a-radio :value="item.value">{{item.label}}</a-radio>
+						<a-tooltip placement="right">
+							<template #title>
+								<span v-html="item.tip"></span>
+							</template>
+							<i class="icon-tip"></i>
+						</a-tooltip>
+					</div>
+				</a-radio-group>
+			</div>
+		</div>
+		<div class="access-control radio-section pb-32 mt-32">
+			<div class="title">
+				<a-checkbox value="UPGRADEABILITY">UPGRADEABILITY</a-checkbox>
+				<a-tooltip placement="right">
+					<template #title>
+						<span>Smart contracts are immutable by default unless deployed behind
+							an upgradeable proxy.
+							<a href="https://docs.openzeppelin.com/upgrades" target="_blank">Read more.</a>
+						</span>
+					</template>
+					<i class="icon-tip"></i>
+				</a-tooltip>
+			</div>
+			<div class="section-radio pl-24 mt-24">
+				<a-radio-group v-model:value="upgradeabilityRadio">
+					<div class="section-radio flex mb-10" v-for="(item,i) in upGradeabilityOptions" :key="i">
+						<a-radio :value="item.value">{{item.label}}</a-radio>
+						<a-tooltip placement="right">
+							<template #title>
+								<span v-html="item.tip"></span>
+							</template>
+							<i class="icon-tip"></i>
+						</a-tooltip>
+					</div>
+				</a-radio-group>
+			</div>
+		</div>
+		<div class="settings input-section pb-32 mt-32">
+			<p class="title">INFO</p>
+			<div class="section-input ml-10 mt-16">
+				<div class="flex-between">
+					<p class="mb-8">Security Contact</p>
+
+					<a-tooltip placement="right">
+						<template #title>
+							<span>Where people can contact you to report security issues. Will only be visible if
+								contract metadata is
+								verified.
+								<a href="https://github.com/ethereum-lists/contracts/blob/main/README.md#tracking-new-deployments"
+									target="_blank">Read more.</a></span>
+						</template>
+						<i class="icon-tip"></i>
+					</a-tooltip>
+				</div>
+
+				<input type="text" placeholder="security@example.com" v-model="contarctSecurityContact"
+					@input="dispositionText" />
+			</div>
+			<div class="section-input ml-10 mt-16 mb-16">
+				<p class="mb-8">License</p>
+				<input type="text" @input="dispositionText" v-model="contarctLicense" />
+			</div>
+		</div>
+	</div>
+	<div class="highlight">
+		<highlightjs autodetect :code="solContent"></highlightjs>
+	</div>
+</div>

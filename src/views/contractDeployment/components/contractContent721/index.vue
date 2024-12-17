@@ -4,7 +4,7 @@
 <template src="./index.html"></template>
 <script lang="ts">
 export default {
-    name: "contractContent20",
+    name: "contractContent721",
 };
 </script>
 <script lang="ts" setup>
@@ -12,10 +12,10 @@ import { ref, onMounted, watch, computed } from "vue";
 
 import { downloadAllFiles } from "@/utils/fileDown";
 const solContent = ref("");
-import { erc20 } from "@openzeppelin/wizard";
+import { erc721 } from "@openzeppelin/wizard";
 let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
-let premint = ref("0");
+let baseUrl = ref("");
 let features = ref("");
 // access是否可以取消
 const accessOptionsBol = ref(false);
@@ -33,6 +33,11 @@ const featuresOptions = ref([
         tip: "Privileged accounts will be able to create more supply.",
     },
     {
+        label: "Auto Increment Ids",
+        value: "incremental",
+        tip: "Privileged accounts will be able to create more supply.",
+    },
+    {
         label: "Burnable",
         value: "burnable",
         tip: 'Token holders will be able to destroy their tokens.<a href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Burnable">Read more.</a>',
@@ -43,13 +48,13 @@ const featuresOptions = ref([
         tip: 'Privileged accounts will be able to pause the functionality marked as whenNotPaused. Useful for emergency response.<a target="_blank" href="https://docs.openzeppelin.com/contracts/5.x/api/utils#Pausable">Read more.</a>',
     },
     {
-        label: "Permit",
-        value: "permit",
+        label: "Enumerable",
+        value: "enumerable",
         tip: 'Without paying gas, token holders will be able to allow third parties to transfer from their account.<a target="_blank" href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Permit">Read more.</a>',
     },
     {
-        label: "Flash Minting",
-        value: "flashminting",
+        label: "URI Storage",
+        value: "uriStorage",
         tip: "Built-in flash loans. Lend tokens without requiring collateral as long as they're returned in the same transaction.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20FlashMint'>Read more.</a>",
     },
 ]);
@@ -96,26 +101,28 @@ const upGradeabilityOptions = [
 ];
 
 onMounted(() => {
-    console.log(erc20, "erc20");
-
+    console.log(erc721, "erc721");
     solContentChange();
 });
 
 const solContentChange = () => {
-    const contract = erc20.print({
+    const contract = erc721.print({
+        name: contarctName.value,
+        baseUri: baseUrl.value,
+        symbol: contarctSymbol.value,
+
         access: accessControlRadio.value ? accessControlRadio.value : false,
-        burnable: features.value.includes("burnable"),
-        flashmint: features.value.includes("flashminting"),
         info: {
             license: contarctLicense.value,
             securityContact: contarctSecurityContact.value,
         },
         mintable: features.value.includes("mintable"),
-        name: contarctName.value,
+        incremental: features.value.includes("incremental"),
         pausable: features.value.includes("pausable"),
-        permit: features.value.includes("permit"),
-        premint: premint.value,
-        symbol: contarctSymbol.value,
+        burnable: features.value.includes("burnable"),
+        enumerable: features.value.includes("enumerable"),
+        uriStorage: features.value.includes("uriStorage"),
+
         votes: voteOptionsRadio.value ? voteOptionsRadio.value : false,
     });
     console.log(contract, "contract");
@@ -140,7 +147,6 @@ const dispositionText = () => {
 };
 
 const voteChange = (e) => {
-    console.log(e.target, "voteChange");
     if (e.target.checked && !voteOptionsRadio.value) {
         voteOptionsRadio.value = "blockNumber";
     }
