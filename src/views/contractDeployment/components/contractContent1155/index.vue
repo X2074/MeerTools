@@ -83,12 +83,6 @@ const upGradeabilityOptions = [
 ];
 
 onMounted(() => {
-    const contract = erc20.print({
-        ...erc20.defaults,
-        upgradeable: "uups", // 设置为 true 以启用可升级功能
-    });
-    console.log(contract, "contract");
-
     solContentChange();
 });
 
@@ -106,7 +100,6 @@ const solContentChange = () => {
         supply: features.value.includes("supplyTracking"),
         pausable: features.value.includes("pausable"),
         updatableUri: features.value.includes("updatableURI"),
-        upgradeable: "uups",
     });
     solContent.value = contract;
 };
