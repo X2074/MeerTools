@@ -102,4 +102,20 @@
       flex-direction: row-reverse;
     }
   }
+  .tree-icon {
+    position: relative;
+    justify-content: start !important;
+    gap: 10px;
+    padding-left: 20px;
+
+    &::before {
+      content: "└";
+      color: #d8dbe2;
+    }
+    .icon-tip {
+      position: absolute;
+      right: 0;
+      top: 6px;
+    }
+  }
 }

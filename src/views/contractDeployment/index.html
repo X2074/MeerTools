@@ -25,7 +25,13 @@
   <div class="contract-editor mt-60">
     <div class="tools flex">
       <div class="left-type flex-center">
-        <div class="btn-item" v-for="(item,i) in contractTypes.slice(0,3)" :key="i" @click="contractType = item.type">
+        <div
+          class="btn-item"
+          :class="contractType == item.type?'active':''"
+          v-for="(item,i) in contractTypes.slice(0,3)"
+          :key="i"
+          @click="contractType = item.type"
+        >
           {{item.name}}
         </div>
         <img src="/images/contract/arrow.svg" alt="" class="arrow" />
@@ -56,7 +62,6 @@
       <contractContent721 v-show="contractType == 'ERC721'" />
       <!-- ERC1155合约 -->
       <!-- <contractContent1155  v-show="contractType == 'ERC721'"/> -->
-
     </div>
   </div>
 </div>

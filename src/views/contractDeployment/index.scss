@@ -62,7 +62,8 @@
         }
       }
       .btn-item {
-        &:hover {
+        &:hover,
+        &.active {
           color: #000;
           background: #fff;
         }
