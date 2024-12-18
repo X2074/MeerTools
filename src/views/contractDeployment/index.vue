@@ -13,10 +13,18 @@ import contractContent20 from "./components/contractContent20/index.vue";
 // ERC721合约
 import contractContent721 from "./components/contractContent721/index.vue";
 // ERC1155合约
-// import contractContent1155 from "./components/contractContent1155/index.vue";
+import contractContent1155 from "./components/contractContent1155/index.vue";
+// Stablecoin合约
+import contractStablecoin from "./components/contractStablecoin/index.vue";
+// realWorldAsset
+import contractRealWorldAsset from "./components/realWorldAsset/index.vue";
+// governor
+import contractGovernor from "./components/governor/index.vue";
+
 let contractType = ref("ERC20");
 // 获取public文件结构
 const filesStructure = ref(null);
+let showMoreContract = ref(false);
 // 获取需要的project文件夹
 const projectFiles = ref([]);
 // 获取需要的文件
@@ -27,9 +35,9 @@ const contractTypes = [
     { name: "ERC20", type: "ERC20" },
     { name: "ERC721", type: "ERC721" },
     { name: "ERC1155", type: "ERC1155" },
-    { name: "Stablecoin*", type: "" },
-    { name: "Real-World Asset*", type: "" },
-    { name: "Governor", type: "" },
-    { name: "Custom", type: "" },
+    { name: "Stablecoin*", type: "stablecoin" },
+    { name: "Real-World Asset*", type: "realWorldAsset" },
+    { name: "Governor", type: "governor" },
+    { name: "Custom", type: "custom" },
 ];
 </script>

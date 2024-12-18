@@ -1,67 +1,125 @@
 <div class="contract-deployment mt-36">
-  <div class="header flex">
-    <div class="introduce">
-      <p class="title">
-        Smart Contract <br />
-        Deployment
-      </p>
-      <p class="text mt-15">
-        Save the generated contract to your contracts directly and compile it
-        using tools like Hardhat or Truffle. For more detailed guidance, refer
-        to our development documentation.（开发文档连接暂时没有）
-      </p>
-    </div>
-    <img src="/images/contract/deployment.png" alt="" />
-  </div>
-  <div class="wizard">
-    <p class="title">Contracts Wizard</p>
-    <p class="text mt-16">
-      Qitmeer Network offers standardized smart contract templates, including
-      token implementations, contract controls, and licensing agreements, for
-      quick deployment.
-    </p>
-  </div>
+	<div class="header flex">
+		<div class="introduce">
+			<p class="title">
+				Smart Contract <br />
+				Deployment
+			</p>
+			<p class="text mt-15">
+				Save the generated contract to your contracts directly and compile it
+				using tools like Hardhat or Truffle. For more detailed guidance, refer
+				to our development documentation.（开发文档连接暂时没有）
+			</p>
+		</div>
+		<img src="/images/contract/deployment.png" alt="" />
+	</div>
+	<div class="wizard">
+		<p class="title">Contracts Wizard</p>
+		<p class="text mt-16">
+			Qitmeer Network offers standardized smart contract templates, including
+			token implementations, contract controls, and licensing agreements, for
+			quick deployment.
+		</p>
+	</div>
 
-  <div class="contract-editor mt-60">
-    <div class="tools flex">
-      <div class="left-type flex-center">
-        <div
-          class="btn-item"
-          :class="contractType == item.type?'active':''"
-          v-for="(item,i) in contractTypes.slice(0,3)"
-          :key="i"
-          @click="contractType = item.type"
-        >
-          {{item.name}}
-        </div>
-        <img src="/images/contract/arrow.svg" alt="" class="arrow" />
-      </div>
-      <div class="right-tool flex-center">
-        <div class="btn-item">
-          <img src="/images/contract/z.svg" alt="" />
-          <span>Deploy with Defender</span>
-        </div>
-        <div class="btn-item">
-          <img src="/images/contract/copy.svg" alt="" />
-          <span>Copy to Clipboard</span>
-        </div>
-        <div class="btn-item">
-          <img src="/images/contract/open.svg" alt="" />
-          <span>Open in Remix</span>
-        </div>
-        <div class="btn-item">
-          <img src="/images/contract/down.svg" alt="" />
-          <span>Download</span>
-        </div>
-      </div>
-    </div>
-    <div class="mt-40">
-      <!-- ERC20合约 -->
-      <contractContent20 v-show="contractType == 'ERC20'" />
-      <!-- ERC721合约 -->
-      <contractContent721 v-show="contractType == 'ERC721'" />
-      <!-- ERC1155合约 -->
-      <!-- <contractContent1155  v-show="contractType == 'ERC721'"/> -->
-    </div>
-  </div>
+	<div class="contract-editor mt-60">
+		<div class="tools flex">
+			<div class="left-type flex-center">
+				<div class="btn-item" :class="{'btn-item-check':contractType == item.type}"
+					v-for="(item,i) in contractTypes.slice(0,3)" :key="i" @click="contractType = item.type">
+					{{item.name}}
+				</div>
+				<div class="more-contract flex-center" v-show="showMoreContract">
+					<div class="btn-item" :class="{'btn-item-check':contractType == item.type}"
+						v-for="(item,i) in contractTypes.slice(3)" :key="i" @click="contractType = item.type">
+						{{item.name}}
+					</div>
+				</div>
+				<img src="/images/contract/arrow.svg" alt="" class="arrow" :class="{'arrow-check':showMoreContract}"
+					@click="showMoreContract = !showMoreContract" />
+			</div>
+			<div class="right-tool flex-center">
+				<!-- <div class="btn-item">
+					<img src="/images/contract/z.svg" alt="" />
+					<span>Deploy with Defender</span>
+				</div> -->
+				<div class="btn-item">
+					<img src="/images/contract/copy.svg" alt="" />
+					<span>Copy to Clipboard</span>
+				</div>
+				<!-- <div class="btn-item">
+					<img src="/images/contract/open.svg" alt="" />
+					<span>Open in Remix</span>
+				</div> -->
+				<a-popover placement="bottom" trigger="click" getPopupContainer="false">
+					<template #content>
+						<div class="down-list">
+							<div class="down-item mb-25 flex">
+								<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+									aria-hidden="true" focusable="false">
+									<path
+										d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z">
+									</path>
+								</svg>
+								<div class="download-option-content ml-15">
+									<p class="download-option-title mb-5">Single file</p>
+									<p class="download-option-txt">Requires installation of npm package
+										(<code>@openzeppelin/contracts</code>).</p>
+									<p class="download-option-txt">Simple to receive updates.</p>
+								</div>
+							</div>
+							<div class="down-item mb-25 flex">
+								<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+									aria-hidden="true" focusable="false">
+									<path
+										d="M20 6H12L10 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6M20 18H16V16H14V18H4V8H14V10H16V8H20V18M16 12V10H18V12H16M14 12H16V14H14V12M18 16H16V14H18V16Z">
+									</path>
+								</svg>
+								<div class="download-option-content ml-15">
+									<p class="download-option-title mb-5">Development Package (Hardhat)</p>
+									<p class="download-option-txt">Sample Hardhat project to get started with
+										development
+										and
+										testing.</p>
+								</div>
+							</div>
+							<div class="down-item flex">
+								<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+									aria-hidden="true" focusable="false">
+									<path
+										d="M20 6H12L10 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6M20 18H16V16H14V18H4V8H14V10H16V8H20V18M16 12V10H18V12H16M14 12H16V14H14V12M18 16H16V14H18V16Z">
+									</path>
+								</svg>
+								<div class="download-option-content ml-15">
+									<p class="download-option-title mb-5">Development Package (Foundry)</p>
+									<p class="download-option-txt">Sample Foundry project to get started with
+										development
+										and
+										testing.</p>
+								</div>
+							</div>
+						</div>
+					</template>
+					<div class="btn-item">
+						<img src="/images/contract/down.svg" alt="" />
+						<span>Download</span>
+					</div>
+				</a-popover>
+			</div>
+		</div>
+		<div class="mt-40">
+			<!-- ERC20合约 -->
+			<contractContent20 v-show="contractType == 'ERC20'" />
+			<!-- ERC721合约 -->
+			<contractContent721 v-show="contractType == 'ERC721'" />
+			<!-- ERC1155合约 -->
+			<contractContent1155 v-show="contractType == 'ERC1155'" />
+			<!-- stablecoin合约 -->
+			<contractStablecoin v-show="contractType == 'stablecoin'" />
+			<!-- realWorldAsset合约 -->
+			<contractRealWorldAsset v-show="contractType == 'realWorldAsset'" />
+			<!-- governor合约 -->
+			<contractGovernor v-show="contractType == 'governor'" />
+		</div>
+	</div>
 </div>

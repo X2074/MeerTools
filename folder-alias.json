@@ -28,5 +28,8 @@
     },
     "src/contract/faucet.js": {
         "description": "批量交易的合约"
+    },
+    "src/views/contractDeployment/components": {
+        "description": "合约种类"
     }
 }

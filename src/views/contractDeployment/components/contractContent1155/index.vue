@@ -1,5 +1,5 @@
 <style scoped lang="scss">
-@import "./index.scss";
+@import "../index.scss";
 </style>
 <template src="./index.html"></template>
 <script lang="ts">

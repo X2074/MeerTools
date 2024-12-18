@@ -24,6 +24,7 @@
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^2.1.2",
     "@highlightjs/vue-plugin": "^2.1.0",
+    "@openzeppelin/contracts": "^5.1.0",
     "@openzeppelin/contracts-upgradeable": "^5.1.0",
     "@openzeppelin/wizard": "^0.4.5",
     "@tanstack/vue-query": ">=5.45.0",
