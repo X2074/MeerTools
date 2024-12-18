@@ -69,3 +69,16 @@
 .ant-checkbox-disabled+span {
     color: #fff !important;
 }
+
+
+
+.ant-popover {
+    .ant-popover-content {
+        border-radius: 8px;
+
+        .ant-popover-inner-content {
+            border-radius: 8px;
+            padding: 0;
+        }
+    }
+}

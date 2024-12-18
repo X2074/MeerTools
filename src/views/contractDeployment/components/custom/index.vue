@@ -4,7 +4,7 @@
 <template src="./index.html"></template>
 <script lang="ts">
 export default {
-    name: "contractContent20",
+    name: "contractContent1155",
 };
 </script>
 <script lang="ts" setup>
@@ -12,16 +12,15 @@ import { ref, onMounted, watch, computed } from "vue";
 
 import { downloadAllFiles } from "@/utils/fileDown";
 const solContent = ref("");
-import { erc20 } from "@openzeppelin/wizard";
+import { stablecoin } from "@openzeppelin/wizard";
 let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
-let premint = ref("0");
 let features = ref("");
 // access是否可以取消
 const accessOptionsBol = ref(false);
+let premint = ref("");
 const accessControlRadio = ref(null);
-const upgradeabilityRadio = ref(null);
-const voteOptionsRadio = ref(null);
+const limitationsRadio = ref(null);
 const contarctLicense = ref("MIT");
 const accessControl = ref("");
 const contarctSecurityContact = ref("");
@@ -50,6 +49,11 @@ const featuresOptions = ref([
     {
         label: "Flash Minting",
         value: "flashminting",
+        tip: "Built-in flash loans. Lend tokens without requiring collateral as long as they're returned in the same transaction.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20FlashMint'>Read more.</a>",
+    },
+    {
+        label: "Custodian",
+        value: "custodian",
         tip: "Built-in flash loans. Lend tokens without requiring collateral as long as they're returned in the same transaction.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20FlashMint'>Read more.</a>",
     },
 ]);
@@ -82,44 +86,42 @@ const accessOptions = ref([
         tip: "Enables a central contract to define a policy that allows certain callers to access certain functions.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/access#AccessManaged'>Read more.</a>",
     },
 ]);
-const upGradeabilityOptions = [
+const limitationsOptions = [
     {
-        label: "Transparent",
-        value: "Transparent",
+        label: "Allowlist",
+        value: "allowlist",
         tip: "Uses more complex proxy with higher overhead, requires less changes in your contract. Can also be used with beacons.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/proxy#TransparentUpgradeableProxy'>Read more.</a>",
     },
     {
-        label: "UUPS",
-        value: "uups",
+        label: "Blocklist",
+        value: "blocklist",
         tip: "Uses simpler proxy with less overhead, requires including extra code in your contract. Allows flexibility for authorizing upgrades.<a  target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/proxy#UUPSUpgradeable'>Read more.</a>",
     },
 ];
 
 onMounted(() => {
-    console.log(erc20, "erc20");
-
     solContentChange();
 });
 
 const solContentChange = () => {
-    const contract = erc20.print({
+    const contract = stablecoin.print({
+        name: contarctName.value,
+        symbol: contarctSymbol.value,
+        premint: premint.value,
         access: accessControlRadio.value ? accessControlRadio.value : false,
-        burnable: features.value.includes("burnable"),
-        flashmint: features.value.includes("flashminting"),
+        limitations: limitationsRadio.value ? limitationsRadio.value : false,
         info: {
             license: contarctLicense.value,
             securityContact: contarctSecurityContact.value,
         },
+
         mintable: features.value.includes("mintable"),
-        name: contarctName.value,
+        burnable: features.value.includes("burnable"),
         pausable: features.value.includes("pausable"),
         permit: features.value.includes("permit"),
-        premint: premint.value,
-        symbol: contarctSymbol.value,
-        votes: voteOptionsRadio.value ? voteOptionsRadio.value : false,
+        flashmint: features.value.includes("flashmint"),
+        custodian: features.value.includes("custodian"),
     });
-    console.log(contract, "contract");
-
     solContent.value = contract;
 };
 // 文本相关的配置
@@ -127,7 +129,8 @@ const dispositionText = () => {
     // 如果选中了mintablehuost或pausable 则需要选中accessOptions里面的选项
     if (
         features.value.includes("mintable") ||
-        features.value.includes("pausable")
+        features.value.includes("pausable") ||
+        features.value.includes("custodian")
     ) {
         accessOptionsBol.value = true;
         if (!accessControlRadio.value) {
@@ -137,20 +140,5 @@ const dispositionText = () => {
         accessOptionsBol.value = false;
     }
     solContentChange();
-};
-
-const voteChange = (e) => {
-    console.log(e.target, "voteChange");
-    if (e.target.checked && !voteOptionsRadio.value) {
-        voteOptionsRadio.value = "blockNumber";
-    }
-    if (!e.target.checked && voteOptionsRadio.value) {
-        voteOptionsRadio.value = "";
-    }
-    solContentChange();
-};
-
-const downLoad = () => {
-    downloadAllFiles(contarctName.value, solContent.value);
 };
 </script>
