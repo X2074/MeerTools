@@ -28,22 +28,19 @@
           @input="dispositionText"
         />
       </div>
-      <!-- <div>
-                <a-checkbox v-model:checked="tableAll" @change="onCheckAllChange">
-                </a-checkbox>
-            </div> -->
     </div>
     <div class="features select-section pb-32 mt-32">
       <p class="title">FEATURES</p>
       <div class="section-select pl-24 mt-24">
-        {{features}}==
         <div>
           <div
             class="section-select flex mb-10"
             v-for="(item,i) in featuresOpt1"
             :key="i"
           >
-            <a-checkbox v-model:checked="featureCheck.mintable"
+            <a-checkbox
+              v-model:checked="featureCheck.mintable"
+              @change="mintableChange"
               >{{item.label}}</a-checkbox
             >
             <a-tooltip placement="right">
@@ -58,7 +55,9 @@
             v-for="(item,i) in featuresOpt2"
             :key="i"
           >
-            <a-checkbox v-model:checked="featureCheck.incremental"
+            <a-checkbox
+              v-model:checked="featureCheck.incremental"
+              @change="incrementalChange"
               >{{item.label}}</a-checkbox
             >
             <a-tooltip placement="right">

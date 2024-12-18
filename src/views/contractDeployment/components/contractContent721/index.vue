@@ -26,7 +26,10 @@ const contarctLicense = ref("MIT");
 const accessControl = ref("");
 const contarctSecurityContact = ref("");
 const upGradeability = ref("");
-const featureCheck = ref({});
+const featureCheck = ref({
+  mintable: false,
+  incremental: false,
+});
 const featuresOpt1 = ref([
   {
     label: "Mintable",
@@ -173,7 +176,17 @@ const voteChange = (e) => {
   }
   solContentChange();
 };
-
+const mintableChange = () => {
+  if (!featureCheck.value.mintable) {
+    featureCheck.value.incremental = false;
+  }
+};
+const incrementalChange = () => {
+  if (featureCheck.value.incremental) {
+    featureCheck.value.mintable = true;
+  }
+  console.log(featureCheck.value.incremental, "featureCheck.incremental");
+};
 const downLoad = () => {
   downloadAllFiles(contarctName.value, solContent.value);
 };

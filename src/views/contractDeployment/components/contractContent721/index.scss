@@ -105,12 +105,12 @@
   .tree-icon {
     position: relative;
     justify-content: start !important;
-    gap: 10px;
+    gap: 2px;
     padding-left: 20px;
 
     &::before {
       content: "└";
-      color: #d8dbe2;
+      color: #6a6a6a;
     }
     .icon-tip {
       position: absolute;
