@@ -4,15 +4,15 @@
 <template src="./index.html"></template>
 <script lang="ts">
 export default {
-    name: "contractContent1155",
+  name: "contractContent1155",
 };
 </script>
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
 
 import { downloadAllFiles } from "@/utils/fileDown";
-const solContent = ref("");
 import { erc1155, erc20 } from "@openzeppelin/wizard";
+const solContent = ref("");
 let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
 let baseUrl = ref("");
@@ -26,97 +26,97 @@ const accessControl = ref("");
 const contarctSecurityContact = ref("");
 const upGradeability = ref("");
 const featuresOptions = ref([
-    {
-        label: "Mintable",
-        value: "mintable",
-        tip: "Privileged accounts will be able to create more supply.",
-    },
-    {
-        label: "Burnable",
-        value: "burnable",
-        tip: 'Token holders will be able to destroy their tokens.<a href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Burnable">Read more.</a>',
-    },
-    {
-        label: "Supply Tracking",
-        value: "supplyTracking",
-        tip: 'Without paying gas, token holders will be able to allow third parties to transfer from their account.<a target="_blank" href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Permit">Read more.</a>',
-    },
-    {
-        label: "Pausable",
-        value: "pausable",
-        tip: 'Privileged accounts will be able to pause the functionality marked as whenNotPaused. Useful for emergency response.<a target="_blank" href="https://docs.openzeppelin.com/contracts/5.x/api/utils#Pausable">Read more.</a>',
-    },
-    {
-        label: "Updatable URI",
-        value: "updatableURI",
-        tip: "Built-in flash loans. Lend tokens without requiring collateral as long as they're returned in the same transaction.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20FlashMint'>Read more.</a>",
-    },
+  {
+    label: "Mintable",
+    value: "mintable",
+    tip: "Privileged accounts will be able to create more supply.",
+  },
+  {
+    label: "Burnable",
+    value: "burnable",
+    tip: 'Token holders will be able to destroy their tokens.<a href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Burnable">Read more.</a>',
+  },
+  {
+    label: "Supply Tracking",
+    value: "supplyTracking",
+    tip: "Keeps track of total supply of tokens.",
+  },
+  {
+    label: "Pausable",
+    value: "pausable",
+    tip: 'Privileged accounts will be able to pause the functionality marked as whenNotPaused. Useful for emergency response.<a target="_blank" href="https://docs.openzeppelin.com/contracts/5.x/api/utils#Pausable">Read more.</a>',
+  },
+  {
+    label: "Updatable URI",
+    value: "updatableURI",
+    tip: "Privileged accounts will be able to set a new URI for all token types. Clients will replace any instance of {id} in the URI with the tokenId.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/token/erc1155#ERC1155-_setURI-string-'>Read more.</a>",
+  },
 ]);
 const accessOptions = ref([
-    {
-        label: "Ownable",
-        value: "ownable",
-        tip: "Simple mechanism with a single account authorized for all privileged actions.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/access#Ownable' >Read more.</a>",
-    },
-    {
-        label: "Roles",
-        value: "roles",
-        tip: "Flexible mechanism with a separate role for each privileged action. A role can have many authorized accounts.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/access#AccessControl'>Read more.</a>",
-    },
-    {
-        label: "Managed",
-        value: "managed",
-        tip: "Enables a central contract to define a policy that allows certain callers to access certain functions.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/access#AccessManaged'>Read more.</a>",
-    },
+  {
+    label: "Ownable",
+    value: "ownable",
+    tip: "Simple mechanism with a single account authorized for all privileged actions.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/access#Ownable' >Read more.</a>",
+  },
+  {
+    label: "Roles",
+    value: "roles",
+    tip: "Flexible mechanism with a separate role for each privileged action. A role can have many authorized accounts.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/access#AccessControl'>Read more.</a>",
+  },
+  {
+    label: "Managed",
+    value: "managed",
+    tip: "Enables a central contract to define a policy that allows certain callers to access certain functions.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/access#AccessManaged'>Read more.</a>",
+  },
 ]);
 const upGradeabilityOptions = [
-    {
-        label: "Transparent",
-        value: "Transparent",
-        tip: "Uses more complex proxy with higher overhead, requires less changes in your contract. Can also be used with beacons.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/proxy#TransparentUpgradeableProxy'>Read more.</a>",
-    },
-    {
-        label: "UUPS",
-        value: "uups",
-        tip: "Uses simpler proxy with less overhead, requires including extra code in your contract. Allows flexibility for authorizing upgrades.<a  target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/proxy#UUPSUpgradeable'>Read more.</a>",
-    },
+  {
+    label: "Transparent",
+    value: "Transparent",
+    tip: "Uses more complex proxy with higher overhead, requires less changes in your contract. Can also be used with beacons.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/proxy#TransparentUpgradeableProxy'>Read more.</a>",
+  },
+  {
+    label: "UUPS",
+    value: "uups",
+    tip: "Uses simpler proxy with less overhead, requires including extra code in your contract. Allows flexibility for authorizing upgrades.<a  target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/proxy#UUPSUpgradeable'>Read more.</a>",
+  },
 ];
 
 onMounted(() => {
-    solContentChange();
+  solContentChange();
 });
 
 const solContentChange = () => {
-    const contract = erc1155.print({
-        name: contarctName.value,
-        uri: baseUrl.value,
-        access: accessControlRadio.value ? accessControlRadio.value : false,
-        info: {
-            license: contarctLicense.value,
-            securityContact: contarctSecurityContact.value,
-        },
-        mintable: features.value.includes("mintable"),
-        burnable: features.value.includes("burnable"),
-        supply: features.value.includes("supplyTracking"),
-        pausable: features.value.includes("pausable"),
-        updatableUri: features.value.includes("updatableURI"),
-    });
-    solContent.value = contract;
+  const contract = erc1155.print({
+    name: contarctName.value,
+    uri: baseUrl.value,
+    access: accessControlRadio.value ? accessControlRadio.value : false,
+    info: {
+      license: contarctLicense.value,
+      securityContact: contarctSecurityContact.value,
+    },
+    mintable: features.value.includes("mintable"),
+    burnable: features.value.includes("burnable"),
+    supply: features.value.includes("supplyTracking"),
+    pausable: features.value.includes("pausable"),
+    updatableUri: features.value.includes("updatableURI"),
+  });
+  solContent.value = contract;
 };
 // 文本相关的配置
 const dispositionText = () => {
-    // 如果选中了mintablehuost或pausable 则需要选中accessOptions里面的选项
-    if (
-        features.value.includes("mintable") ||
-        features.value.includes("pausable")
-    ) {
-        accessOptionsBol.value = true;
-        if (!accessControlRadio.value) {
-            accessControlRadio.value = "ownable";
-        }
-    } else {
-        accessOptionsBol.value = false;
+  // 如果选中了mintablehuost或pausable 则需要选中accessOptions里面的选项
+  if (
+    features.value.includes("mintable") ||
+    features.value.includes("pausable")
+  ) {
+    accessOptionsBol.value = true;
+    if (!accessControlRadio.value) {
+      accessControlRadio.value = "ownable";
     }
-    solContentChange();
+  } else {
+    accessOptionsBol.value = false;
+  }
+  solContentChange();
 };
 </script>
