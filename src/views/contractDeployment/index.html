@@ -28,13 +28,13 @@
         <div
           class="btn-item"
           :class="{'btn-item-check':contractType == item.type}"
-          v-for="(item,i) in contractTypes.slice(0,3)"
+          v-for="(item,i) in contractTypes"
           :key="i"
           @click="contractType = item.type"
         >
           {{item.name}}
         </div>
-        <div class="more-contract flex-center" v-show="showMoreContract">
+        <!--  <div class="more-contract flex-center" v-show="showMoreContract">
           <div
             class="btn-item"
             :class="{'btn-item-check':contractType == item.type}"
@@ -51,7 +51,7 @@
           class="arrow"
           :class="{'arrow-check':showMoreContract}"
           @click="showMoreContract = !showMoreContract"
-        />
+        /> -->
       </div>
       <div class="right-tool flex-center">
         <!-- <div class="btn-item">

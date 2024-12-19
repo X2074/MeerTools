@@ -50,9 +50,11 @@
   }
 
   .tools {
+    gap: 30px;
     .left-type {
       gap: 16px;
-      width: 436px;
+      width: 0;
+      flex: 1;
       flex-wrap: wrap;
       position: relative;
 
@@ -74,8 +76,8 @@
         left: 0;
         background-color: rgb(13, 13, 13);
         gap: 16px;
-        width: 436px;
-        flex-wrap: wrap;
+        /*  width: 436px;
+        flex-wrap: wrap; */
       }
 
       .btn-item {
@@ -95,8 +97,6 @@
     }
 
     .right-tool {
-      width: 0;
-      flex: 1;
       gap: 16px;
       justify-content: end;
     }
@@ -115,7 +115,7 @@
       cursor: pointer;
       position: relative;
 
-      >* {
+      > * {
         cursor: pointer;
       }
 
