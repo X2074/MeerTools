@@ -76,6 +76,10 @@
     .ant-popover-content {
         border-radius: 8px;
 
+        .ant-popover-inner {
+            background-color: transparent;
+        }
+
         .ant-popover-inner-content {
             border-radius: 8px;
             padding: 0;
