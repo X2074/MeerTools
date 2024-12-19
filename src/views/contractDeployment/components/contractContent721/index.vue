@@ -12,6 +12,10 @@ import { ref, onMounted, watch, computed } from "vue";
 
 import { downloadAllFiles } from "@/utils/fileDown";
 import { erc721 } from "@openzeppelin/wizard";
+import { saveAs } from "file-saver";
+import bus from "@/utils/bus.js";
+import useClipboard from "vue-clipboard3";
+const { toClipboard } = useClipboard();
 const solContent = ref("");
 let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
@@ -187,7 +191,25 @@ const incrementalChange = () => {
     }
     console.log(featureCheck.value.incremental, "featureCheck.incremental");
 };
-const downLoad = () => {
-    downloadAllFiles(contarctName.value, solContent.value);
-};
+
+// 复制
+bus.on("ERC721copy", async (type) => {
+    try {
+        //复制
+        await toClipboard(solContent.value);
+        bus.emit("promptModalSuccess", "ERC20复制成功");
+    } catch (e) {
+        //复制失败
+        bus.emit("promptModalErr", "ERC20复制失败");
+    }
+});
+// 下载文件
+bus.on("ERC721down", async (type) => {
+    const blob = new Blob([solContent.value], { type: "text/plain" });
+    saveAs(blob, contarctName.value + ".sol");
+});
+// 下载文件夹
+bus.on("ERC721zip", async (type) => {
+    downloadAllFiles(contarctName.value, solContent.value, type);
+});
 </script>

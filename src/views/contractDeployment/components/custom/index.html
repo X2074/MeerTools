@@ -1,32 +1,10 @@
 <div class="contract-content flex">
 	<div class="set-radio">
-		<div class="settings input-section pb-10">
-			<p class="title"><strong> * Experimental: </strong><span>Some of the following features are not audited and
-					subject to change</span></p>
-		</div>
-		<div class="settings input-section pb-32 pt-20">
+		<div class="settings input-section pb-32">
 			<p class="title">SETTINGS</p>
 			<div class="section-input ml-24 mt-24">
 				<p class="mb-8">Name</p>
 				<input type="text" @input="dispositionText" v-model="contarctName" />
-			</div>
-			<div class="section-input ml-24 mt-16 mb-16">
-				<p class="mb-8">Symbol</p>
-				<input type="text" @input="dispositionText" v-model="contarctSymbol" />
-			</div>
-			<div class="section-input ml-24">
-				<div class="flex-between">
-					<p class="mb-8">Premint</p>
-
-					<a-tooltip placement="right">
-						<template #title>
-							<span>Create an initial amount of tokens for the deployer.</span>
-						</template>
-						<i class="icon-tip"></i>
-					</a-tooltip>
-				</div>
-
-				<input type="text" v-model="premint" @input="dispositionText" />
 			</div>
 		</div>
 		<div class="features select-section pb-32 mt-32">
@@ -43,62 +21,6 @@
 						</a-tooltip>
 					</div>
 				</a-checkbox-group>
-			</div>
-		</div>
-		<div class="access-control radio-section pb-32 mt-32">
-			<div class="title flex flex-between">
-				<a-checkbox value="UPGRADEABILITY">LIMITATIONS</a-checkbox>
-				<a-tooltip placement="right">
-					<template #title>
-						<span>Restricts certain users from transferring tokens, either via allowing or blocking them.
-						</span>
-					</template>
-					<i class="icon-tip"></i>
-				</a-tooltip>
-			</div>
-			<div class="section-radio pl-24 mt-24">
-				<a-radio-group v-model:value="limitationsRadio">
-					<div class="section-radio flex mb-10" v-for="(item,i) in limitationsOptions" :key="i">
-						<a-radio :value="item.value">{{item.label}}</a-radio>
-						<a-tooltip placement="right">
-							<template #title>
-								<span v-html="item.tip"></span>
-							</template>
-							<i class="icon-tip"></i>
-						</a-tooltip>
-					</div>
-				</a-radio-group>
-			</div>
-		</div>
-		<div class="access-control radio-section pb-32 mt-32">
-			<p class="title  flex flex-between flex-center">
-				<a-checkbox value="VOTES" @change="voteChange">VOTES
-				</a-checkbox>
-				<a-tooltip placement="right">
-					<template #title>
-						<span>Keeps track of historical balances for voting in on-chain
-							governance, with a way to delegate one's voting power to a trusted
-							account.
-							<a href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Votes"
-								target="_blank">Read
-								more.</a>
-						</span>
-					</template>
-					<i class="icon-tip"></i>
-				</a-tooltip>
-			</p>
-			<div class="section-radio pl-24 mt-24">
-				<a-radio-group v-model:value="voteOptionsRadio" @change="dispositionText()">
-					<div class="section-radio flex mb-10" v-for="(item,i) in voteOptions" :key="i">
-						<a-radio :value="item.value">{{item.label}}</a-radio>
-						<a-tooltip placement="right">
-							<template #title>
-								<span v-html="item.tip"></span>
-							</template>
-							<i class="icon-tip"></i>
-						</a-tooltip>
-					</div>
-				</a-radio-group>
 			</div>
 		</div>
 		<div class="access-control radio-section pb-32 mt-32">

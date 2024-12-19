@@ -9,8 +9,11 @@ export default {
 </script>
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
-
 import { downloadAllFiles } from "@/utils/fileDown";
+import { saveAs } from "file-saver";
+import bus from "@/utils/bus.js";
+import useClipboard from "vue-clipboard3";
+const { toClipboard } = useClipboard();
 const solContent = ref("");
 import { erc20 } from "@openzeppelin/wizard";
 let contarctName = ref("MyToken");
@@ -153,4 +156,27 @@ const voteChange = (e) => {
 const downLoad = () => {
     downloadAllFiles(contarctName.value, solContent.value);
 };
+
+// 复制
+bus.on("ERC20copy", async (type) => {
+    console.log(type, "typetype");
+    try {
+        //复制
+        await toClipboard(solContent.value);
+        bus.emit("promptModalSuccess", "ERC20复制成功");
+    } catch (e) {
+        //复制失败
+        bus.emit("promptModalErr", "ERC20复制失败");
+    }
+});
+// 下载文件
+bus.on("ERC20down", async (type) => {
+    const blob = new Blob([solContent.value], { type: "text/plain" });
+    saveAs(blob, contarctName.value + ".sol");
+});
+// 下载文件夹
+bus.on("ERC20zip", async (type) => {
+    console.log(contarctName.value, "contarctName.value");
+    downloadAllFiles(contarctName.value, solContent.value, type);
+});
 </script>
