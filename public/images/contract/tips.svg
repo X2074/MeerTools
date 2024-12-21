@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" fill="none">
-<path d="M7.9987 14.6663C9.83963 14.6663 11.5063 13.9201 12.7127 12.7137C13.9192 11.5073 14.6654 9.84061 14.6654 7.99967C14.6654 6.15874 13.9192 4.49207 12.7127 3.28563C11.5063 2.0792 9.83963 1.33301 7.9987 1.33301C6.15776 1.33301 4.4911 2.0792 3.28465 3.28563C2.07822 4.49207 1.33203 6.15874 1.33203 7.99967C1.33203 9.84061 2.07822 11.5073 3.28465 12.7137C4.4911 13.9201 6.15776 14.6663 7.9987 14.6663Z" stroke="rgba(104, 104, 104, 1)" stroke-width="1" stroke-linejoin="round"  style="mix-blend-mode:normal">
-</path>
-<path d="M8.0013 3.66699C8.46154 3.66699 8.83464 4.04009 8.83464 4.50033C8.83464 4.96056 8.46154 5.33366 8.0013 5.33366C7.54107 5.33366 7.16797 4.96056 7.16797 4.50033C7.16797 4.04009 7.54107 3.66699 8.0013 3.66699Z" fill-rule="evenodd" style="mix-blend-mode:normal" fill="#686868" >
-</path>
-<path    stroke="rgba(104, 104, 104, 1)" stroke-width="1" stroke-linejoin="round" stroke-linecap="square" style="mix-blend-mode:normal" d="M8.16667 11.3337L8.16667 6.66699L7.83333 6.66699L7.5 6.66699">
-</path>
-<path    stroke="rgba(104, 104, 104, 1)" stroke-width="1" stroke-linejoin="round" stroke-linecap="square" style="mix-blend-mode:normal" d="M7 11.333L9.33333 11.333">
-</path>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path stroke="rgba(104, 104, 104, 1)" stroke-linejoin="round" d="M7.999 14.666c1.84 0 3.507-.746 4.714-1.952A6.65 6.65 0 0 0 14.665 8c0-1.841-.746-3.508-1.952-4.714a6.65 6.65 0 0 0-4.714-1.953c-1.841 0-3.508.746-4.714 1.953A6.65 6.65 0 0 0 1.332 8c0 1.84.746 3.507 1.953 4.714a6.65 6.65 0 0 0 4.714 1.952Z" style="mix-blend-mode:normal"/><path fill="#686868" fill-rule="evenodd" d="M8.001 3.667a.833.833 0 1 1 0 1.667.833.833 0 0 1 0-1.667" style="mix-blend-mode:normal"/><path stroke="rgba(104, 104, 104, 1)" stroke-linecap="square" stroke-linejoin="round" d="M8.167 11.334V6.667H7.5M7 11.333h2.333" style="mix-blend-mode:normal"/></svg>
