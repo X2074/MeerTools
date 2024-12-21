@@ -106,7 +106,6 @@ const limitationsOptions = [
 ];
 
 onMounted(() => {
-    console.log(realWorldAsset, "realWorldAsset");
     solContentChange();
 });
 
@@ -129,6 +128,7 @@ const solContentChange = () => {
         custodian: features.value.includes("custodian"),
     });
     solContent.value = contract;
+    bus.emit("loadingIndex", "realWorldAsset");
 };
 // 文本相关的配置
 const dispositionText = () => {

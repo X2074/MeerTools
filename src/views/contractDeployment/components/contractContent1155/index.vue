@@ -106,6 +106,7 @@ const solContentChange = () => {
         updatableUri: features.value.includes("updatableURI"),
     });
     solContent.value = contract;
+    bus.emit("loadingIndex", "erc1155");
 };
 // 文本相关的配置
 const dispositionText = () => {

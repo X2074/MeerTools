@@ -116,12 +116,6 @@ onMounted(() => {
     console.log(erc721, "erc721");
     solContentChange();
 });
-/* watch(features, (newV, oldV) => {
-  console.log(newV, "nn");
-  if (newV.indexOf("incremental") > -1 && newV.indexOf("mintable") == -1) {
-    features.value.push("mintable");
-  }
-}); */
 const solContentChange = () => {
     const contract = erc721.print({
         name: contarctName.value,
@@ -145,6 +139,7 @@ const solContentChange = () => {
     console.log(contract, "contract");
 
     solContent.value = contract;
+    bus.emit("loadingIndex", "erc721");
 };
 // 文本相关的配置
 const dispositionText = (e) => {

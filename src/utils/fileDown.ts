@@ -19,7 +19,7 @@ export async function downloadAllFiles(replacementName?, replacement?, filesType
             }
             // 如果存在这个数据，说明要替换.sol文件内容
             if (replacement) {
-                if (item.includes("MyToken.sol")) {
+                if (item.includes("MyToken")) {
                     item = item.replace(/MyToken/g, replacementName); // 使用正则表达式匹配替换文件名
                     console.log(item, "itemitem");
 

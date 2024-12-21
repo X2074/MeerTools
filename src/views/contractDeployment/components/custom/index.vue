@@ -50,7 +50,6 @@ const accessOptions = ref([
 ]);
 
 onMounted(() => {
-    console.log(custom, "custom");
     solContentChange();
 });
 
@@ -65,6 +64,7 @@ const solContentChange = () => {
         pausable: features.value.includes("pausable"),
     });
     solContent.value = contract;
+    bus.emit("loadingIndex", "custom");
 };
 // 文本相关的配置
 const dispositionText = () => {

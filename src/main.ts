@@ -28,18 +28,15 @@ import hljsVuePlugin from "@highlightjs/vue-plugin";
 //import "highlight.js/lib/common"; //单一加载
 //按需引入语言
 import javascript from "highlight.js/lib/languages/javascript";
-import java from "highlight.js/lib/languages/java";
-import sql from "highlight.js/lib/languages/sql";
-import xml from "highlight.js/lib/languages/xml";
-import html from "highlight.js/lib/languages/vbscript-html";
-import json from "highlight.js/lib/languages/json";
-import yaml from "highlight.js/lib/languages/json";
+// import java from "highlight.js/lib/languages/java";
+// import sql from "highlight.js/lib/languages/sql";
+// import xml from "highlight.js/lib/languages/xml";
+// import html from "highlight.js/lib/languages/vbscript-html";
+// import json from "highlight.js/lib/languages/json";
+// import yaml from "highlight.js/lib/languages/json";
 hljs.registerLanguage("javascript", javascript);
 import {
-    Affix, Avatar, Button, Breadcrumb, Card, Carousel, Checkbox, Comment, Col, Collapse, Dropdown, DatePicker, Form, Image, Input, InputNumber, List, Layout,
-    LocaleProvider, Menu, AutoComplete, Modal, Popover, Popconfirm, Pagination, Row, Radio,RadioButton, Select, SelectOption,
-    Switch, Steps, Tabs, Timeline,Tree, Upload, Progress, Spin, Table,
-    Slider, Badge,Tooltip
+    Checkbox, Input, Radio, Select, SelectOption, Tooltip, Popover
 } from 'ant-design-vue';
 const app = createApp(App)
 app.directive('loading', loadingDirective)
@@ -48,46 +45,12 @@ app.directive('route-loading', routeDirective)
 app.use(VueAxios, axios)
 app.use(router)
     .use(VueCropper)
-    .use(Upload)
-    .use(Button)
-    .use(Breadcrumb)
-    .use(InputNumber)
-    .use(Avatar)
-    .use(Dropdown)
-    .use(Menu)
-    .use(Row)
-    .use(Col)
-    .use(Card)
     .use(Checkbox)
-    .use(Tabs)
-    .use(Table)
-    .use(Modal)
     .use(Input)
-    .use(Carousel)
-    .use(Affix)
-    .use(List)
-    .use(Comment)
     .use(Select)
     .use(SelectOption)
-    .use(Image)
-    .use(Form)
-    .use(Timeline)
-    .use(Tree)
-    .use(LocaleProvider)
     .use(Radio)
-    .use(Switch)
-    .use(Collapse)
-    .use(Layout)
-    .use(Steps)
     .use(Popover)
-    .use(Pagination)
-    .use(Popconfirm)
-    .use(DatePicker)
-    .use(Progress)
-    .use(Spin)
-    .use(Slider)
-    .use(Badge)
-    .use(AutoComplete)
     .use(Tooltip)
 app.component('dialogModal', dialogModal)
 app.use(WagmiPlugin, { config }).use(VueQueryPlugin, {})

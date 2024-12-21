@@ -21,28 +21,15 @@
           </a-tooltip>
         </div>
 
-        <input
-          type="text"
-          v-model="baseUrl"
-          placeholder="https://..."
-          @input="dispositionText"
-        />
+        <input type="text" v-model="baseUrl" placeholder="https://..." @input="dispositionText" />
       </div>
     </div>
     <div class="features select-section pb-32 mt-32">
       <p class="title">FEATURES</p>
       <div class="section-select pl-24 mt-24">
         <div>
-          <div
-            class="section-select flex mb-10"
-            v-for="(item,i) in featuresOpt1"
-            :key="i"
-          >
-            <a-checkbox
-              v-model:checked="featureCheck.mintable"
-              @change="mintableChange"
-              >{{item.label}}</a-checkbox
-            >
+          <div class="section-select flex mb-10" v-for="(item,i) in featuresOpt1" :key="i">
+            <a-checkbox v-model:checked="featureCheck.mintable" @change="mintableChange">{{item.label}}</a-checkbox>
             <a-tooltip placement="right">
               <template #title>
                 <span v-html="item.tip"></span>
@@ -50,16 +37,9 @@
               <i class="icon-tip"></i>
             </a-tooltip>
           </div>
-          <div
-            class="section-select flex mb-10 tree-icon"
-            v-for="(item,i) in featuresOpt2"
-            :key="i"
-          >
-            <a-checkbox
-              v-model:checked="featureCheck.incremental"
-              @change="incrementalChange"
-              >{{item.label}}</a-checkbox
-            >
+          <div class="section-select flex mb-10 tree-icon" v-for="(item,i) in featuresOpt2" :key="i">
+            <a-checkbox v-model:checked="featureCheck.incremental" @change="incrementalChange">{{item.label}}
+            </a-checkbox>
             <a-tooltip placement="right">
               <template #title>
                 <span v-html="item.tip"></span>
@@ -70,11 +50,7 @@
         </div>
 
         <a-checkbox-group v-model:value="features" @change="dispositionText">
-          <div
-            class="section-select flex mb-10"
-            v-for="(item,i) in featuresOptions"
-            :key="i"
-          >
+          <div class="section-select flex mb-10" v-for="(item,i) in featuresOptions" :key="i">
             <a-checkbox :value="item.value">{{item.label}}</a-checkbox>
             <a-tooltip placement="right">
               <template #title>
@@ -88,33 +64,22 @@
     </div>
     <div class="access-control radio-section pb-32 mt-32">
       <p class="title">
-        <a-checkbox value="VOTES" @change="voteChange">VOTES </a-checkbox>
+        <a-checkbox check="VOTES" @change="voteChange">VOTES </a-checkbox>
         <a-tooltip placement="right">
           <template #title>
-            <span
-              >Keeps track of historical balances for voting in on-chain
+            <span>Keeps track of historical balances for voting in on-chain
               governance, with a way to delegate one's voting power to a trusted
               account.
-              <a
-                href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Votes"
-                target="_blank"
-                >Read more.</a
-              >
+              <a href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Votes" target="_blank">Read
+                more.</a>
             </span>
           </template>
           <i class="icon-tip"></i>
         </a-tooltip>
       </p>
       <div class="section-radio pl-24 mt-24">
-        <a-radio-group
-          v-model:value="voteOptionsRadio"
-          @change="dispositionText()"
-        >
-          <div
-            class="section-radio flex mb-10"
-            v-for="(item,i) in voteOptions"
-            :key="i"
-          >
+        <a-radio-group v-model:value="voteOptionsRadio" @change="dispositionText()">
+          <div class="section-radio flex mb-10" v-for="(item,i) in voteOptions" :key="i">
             <a-radio :value="item.value">{{item.label}}</a-radio>
             <a-tooltip placement="right">
               <template #title>
@@ -128,38 +93,22 @@
     </div>
     <div class="access-control radio-section pb-32 mt-32">
       <div class="title">
-        <a-checkbox
-          value="ACCESS CONTROL"
-          :disabled="accessOptionsBol"
-          @change="accessControlRadio?accessControlRadio='':accessControlRadio='ownable';dispositionText()"
-        >
-          ACCESS CONTROL</a-checkbox
-        >
+        <a-checkbox check="ACCESS CONTROL" :disabled="accessOptionsBol"
+          @change="accessControlRadio?accessControlRadio='':accessControlRadio='ownable';dispositionText()">
+          ACCESS CONTROL</a-checkbox>
         <a-tooltip placement="right">
           <template #title>
-            <span
-              >Restrict who can access the functions of a contract or when they
+            <span>Restrict who can access the functions of a contract or when they
               can do it.
-              <a
-                href="https://docs.openzeppelin.com/contracts/5.x/api/access"
-                target="_blank"
-                >Read more.</a
-              >
+              <a href="https://docs.openzeppelin.com/contracts/5.x/api/access" target="_blank">Read more.</a>
             </span>
           </template>
           <i class="icon-tip"></i>
         </a-tooltip>
       </div>
       <div class="section-radio pl-24 mt-24">
-        <a-radio-group
-          v-model:value="accessControlRadio"
-          @change="dispositionText"
-        >
-          <div
-            class="section-radio flex mb-10"
-            v-for="(item,i) in accessOptions"
-            :key="i"
-          >
+        <a-radio-group v-model:value="accessControlRadio" @change="dispositionText">
+          <div class="section-radio flex mb-10" v-for="(item,i) in accessOptions" :key="i">
             <a-radio :value="item.value">{{item.label}}</a-radio>
             <a-tooltip placement="right">
               <template #title>
@@ -173,15 +122,12 @@
     </div>
     <div class="access-control radio-section pb-32 mt-32">
       <div class="title">
-        <a-checkbox value="UPGRADEABILITY">UPGRADEABILITY</a-checkbox>
+        <a-checkbox check="UPGRADEABILITY">UPGRADEABILITY</a-checkbox>
         <a-tooltip placement="right">
           <template #title>
-            <span
-              >Smart contracts are immutable by default unless deployed behind
+            <span>Smart contracts are immutable by default unless deployed behind
               an upgradeable proxy.
-              <a href="https://docs.openzeppelin.com/upgrades" target="_blank"
-                >Read more.</a
-              >
+              <a href="https://docs.openzeppelin.com/upgrades" target="_blank">Read more.</a>
             </span>
           </template>
           <i class="icon-tip"></i>
@@ -189,11 +135,7 @@
       </div>
       <div class="section-radio pl-24 mt-24">
         <a-radio-group v-model:value="upgradeabilityRadio">
-          <div
-            class="section-radio flex mb-10"
-            v-for="(item,i) in upGradeabilityOptions"
-            :key="i"
-          >
+          <div class="section-radio flex mb-10" v-for="(item,i) in upGradeabilityOptions" :key="i">
             <a-radio :value="item.value">{{item.label}}</a-radio>
             <a-tooltip placement="right">
               <template #title>
@@ -213,26 +155,17 @@
 
           <a-tooltip placement="right">
             <template #title>
-              <span
-                >Where people can contact you to report security issues. Will
+              <span>Where people can contact you to report security issues. Will
                 only be visible if contract metadata is verified.
-                <a
-                  href="https://github.com/ethereum-lists/contracts/blob/main/README.md#tracking-new-deployments"
-                  target="_blank"
-                  >Read more.</a
-                ></span
-              >
+                <a href="https://github.com/ethereum-lists/contracts/blob/main/README.md#tracking-new-deployments"
+                  target="_blank">Read more.</a></span>
             </template>
             <i class="icon-tip"></i>
           </a-tooltip>
         </div>
 
-        <input
-          type="text"
-          placeholder="security@example.com"
-          v-model="contarctSecurityContact"
-          @input="dispositionText"
-        />
+        <input type="text" placeholder="security@example.com" v-model="contarctSecurityContact"
+          @input="dispositionText" />
       </div>
       <div class="section-input ml-10 mt-16 mb-16">
         <p class="mb-8">License</p>

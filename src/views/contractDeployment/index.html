@@ -1,4 +1,4 @@
-<div class="contract-deployment mt-36">
+<div class="contract-deployment mt-36" v-route-loading="contractLoading">
 	<div class="header flex">
 		<div class="introduce">
 			<p class="title">
@@ -116,7 +116,7 @@
 		</div>
 		<div class="mt-40">
 			<!-- ERC20合约 -->
-			<contractContent20 v-show="contractType == 'ERC20'" />
+			<contractContent20 v-show="contractType == 'ERC20'" ref="contractERC20" />
 			<!-- ERC721合约 -->
 			<contractContent721 v-show="contractType == 'ERC721'" />
 			<!-- ERC1155合约 -->

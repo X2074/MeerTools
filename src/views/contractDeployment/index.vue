@@ -4,11 +4,7 @@
 <template src="./index.html"></template>
 <script lang="ts" setup>
 import { ref, onMounted, watch } from "vue";
-import axios from "axios";
-import JSZip from "jszip";
-import { saveAs } from "file-saver";
 import bus from "@/utils/bus.js";
-const files = import.meta.glob("/public/**/*");
 // ERC20合约
 import contractContent20 from "./components/contractContent20/index.vue";
 // ERC721合约
@@ -25,15 +21,20 @@ import contractGovernor from "./components/governor/index.vue";
 import contractCustom from "./components/custom/index.vue";
 
 let contractType = ref("ERC20");
-// 获取public文件结构
-const filesStructure = ref(null);
+let contractLoading = ref(true);
 let showMoreContract = ref(false);
-// 获取需要的project文件夹
-const projectFiles = ref([]);
-// 获取需要的文件
-const projectFile = ref(null);
-const visible = ref(false);
-onMounted(() => {});
+
+let loadingIndex = ref(0);
+onMounted(() => {
+    checkContractType(contractTypes.value[0]);
+});
+bus.on("loadingIndex", (type) => {
+    loadingIndex.value++;
+    console.log(loadingIndex.value);
+    if (loadingIndex.value >= contractTypes.value.length) {
+        contractLoading.value = false;
+    }
+});
 const contractTypes = ref([
     { name: "ERC20", type: "ERC20", index: 0 },
     { name: "ERC721", type: "ERC721", index: 1 },
@@ -62,8 +63,6 @@ const checkContractType = (data) => {
 // 将下载，复制的逻辑放在对应的合约组件里面，方便数据的处理
 // 复制数据
 const copySol = () => {
-    console.log(contractType.value + "copy");
-
     bus.emit(contractType.value + "copy", contractType.value);
 };
 // 下载数据

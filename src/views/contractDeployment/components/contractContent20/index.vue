@@ -99,8 +99,6 @@ const upGradeabilityOptions = [
 ];
 
 onMounted(() => {
-    console.log(erc20, "erc20");
-
     solContentChange();
 });
 
@@ -121,9 +119,8 @@ const solContentChange = () => {
         symbol: contarctSymbol.value,
         votes: voteOptionsRadio.value ? voteOptionsRadio.value : false,
     });
-    console.log(contract, "contract");
-
     solContent.value = contract;
+    bus.emit("loadingIndex", "erc20");
 };
 // 文本相关的配置
 const dispositionText = () => {
@@ -179,4 +176,5 @@ bus.on("ERC20zip", async (type) => {
     console.log(contarctName.value, "contarctName.value");
     downloadAllFiles(contarctName.value, solContent.value, type);
 });
+defineExpose({ solContentChange });
 </script>

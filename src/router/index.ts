@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import bus from '@/utils/bus.js'
 
 // 引入文件，动态路由
@@ -47,10 +47,8 @@ const router = createRouter({
 
 // 全局前置守卫 按照创建顺序调用 守卫是异步执行的
 router.beforeEach((to, from, next) => {
-    // 只有进入首页和页面刷新的时候才加载loading，因为首页加载比较慢
-    if (!to.name || to.name == 'index' || !from.name) {
-        bus.emit('homePageLoad', true)
-    }
+    // 页面加载慢，全部添加loading
+    bus.emit('homePageLoad', true)
     if (to.matched.length === 0) {  // 如果未匹配到路由
         from.name ? next({ name: from.name }) : next('/index')
     } else {

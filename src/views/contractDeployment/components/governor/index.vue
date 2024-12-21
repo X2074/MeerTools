@@ -45,7 +45,6 @@ const contarctSecurityContact = ref("");
 const upGradeability = ref("");
 
 onMounted(() => {
-    console.log(governor, "governor");
     solContentChange();
 });
 
@@ -83,6 +82,7 @@ const solContentChange = () => {
         },
     });
     solContent.value = contract;
+    bus.emit("loadingIndex", "governor");
 };
 // 文本相关的配置
 const dispositionText = () => {

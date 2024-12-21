@@ -2,11 +2,8 @@
   <div class="set-radio">
     <div class="settings input-section pb-10">
       <p class="title title1">
-        <strong> * Experimental: </strong
-        ><span
-          >Some of the following features are not audited and subject to
-          change</span
-        >
+        <strong> * Experimental: </strong><span>Some of the following features are not audited and subject to
+          change</span>
       </p>
     </div>
     <div class="settings input-section pb-32 pt-20">
@@ -24,9 +21,7 @@
           <p class="mb-8">Voting Period</p>
           <a-tooltip placement="right">
             <template #title>
-              <span
-                >Length of period during which people can cast their vote.</span
-              >
+              <span>Length of period during which people can cast their vote.</span>
             </template>
             <i class="icon-tip"></i>
           </a-tooltip>
@@ -38,19 +33,13 @@
           <p class="mb-8">Proposal Threshold</p>
           <a-tooltip placement="right">
             <template #title>
-              <span
-                >Minimum number of votes an account must have to create a
-                proposal.</span
-              >
+              <span>Minimum number of votes an account must have to create a
+                proposal.</span>
             </template>
             <i class="icon-tip"></i>
           </a-tooltip>
         </div>
-        <input
-          type="text"
-          v-model="proposalThreshold"
-          @input="dispositionText"
-        />
+        <input type="text" v-model="proposalThreshold" @input="dispositionText" />
       </div>
       <div class="section-input ml-24 mt-16 mb-16">
         <div class="flex-between">
@@ -70,18 +59,8 @@
             <i class="icon-tip"></i>
           </a-tooltip>
         </div>
-        <input
-          type="text"
-          v-if="quorumType == 'percent'"
-          v-model="proposalPercent"
-          @input="dispositionText"
-        />
-        <input
-          type="text"
-          v-if="quorumType == 'absolute'"
-          v-model="proposalAbsolute"
-          @input="dispositionText"
-        />
+        <input type="text" v-if="quorumType == 'percent'" v-model="proposalPercent" @input="dispositionText" />
+        <input type="text" v-if="quorumType == 'absolute'" v-model="proposalAbsolute" @input="dispositionText" />
       </div>
       <div class="section-input ml-24 mt-16 mb-16">
         <div class="flex-between">
@@ -95,36 +74,24 @@
         </div>
         <input type="text" v-model="tokenDecimals" @input="dispositionText" />
         <div class="section-select pl-24 mt-24">
-          <a-checkbox-group
-            v-model:value="tokenDecimalsType"
-            @change="dispositionText"
-          >
+          <a-checkbox-group v-model:value="tokenDecimalsType" @change="dispositionText">
             <div class="section-select flex mb-10">
-              <a-checkbox value="updatableSettings"
-                >Updatable Settings</a-checkbox
-              >
+              <a-checkbox check="updatableSettings">Updatable Settings</a-checkbox>
               <a-tooltip placement="right">
                 <template #title>
-                  <span
-                    >Allow governance to update voting settings (delay, period,
-                    proposal threshold).</span
-                  >
+                  <span>Allow governance to update voting settings (delay, period,
+                    proposal threshold).</span>
                 </template>
                 <i class="icon-tip"></i>
               </a-tooltip>
             </div>
             <div class="section-select flex mb-10">
-              <a-checkbox value="storage">Storage</a-checkbox>
+              <a-checkbox check="storage">Storage</a-checkbox>
               <a-tooltip placement="right">
                 <template #title>
-                  <span
-                    >Enable storage of proposal details and enumerability of
-                    proposals.<a
-                      href="https://docs.openzeppelin.com/contracts/5.x/api/governance#GovernorStorage"
-                      target="_blank"
-                      >Read more.</a
-                    ></span
-                  >
+                  <span>Enable storage of proposal details and enumerability of
+                    proposals.<a href="https://docs.openzeppelin.com/contracts/5.x/api/governance#GovernorStorage"
+                      target="_blank">Read more.</a></span>
                 </template>
                 <i class="icon-tip"></i>
               </a-tooltip>
@@ -141,14 +108,10 @@
             <a-radio value="erc20votes">ERC20Votes</a-radio>
             <a-tooltip placement="right">
               <template #title>
-                <span
-                  >Represent voting power with a votes-enabled ERC20 token.
+                <span>Represent voting power with a votes-enabled ERC20 token.
                   Voters can entrust their voting power to a delegate.<a
-                    href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Votes"
-                    target="_blank"
-                    >Read more.</a
-                  ></span
-                >
+                    href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20Votes" target="_blank">Read
+                    more.</a></span>
               </template>
               <i class="icon-tip"></i>
             </a-tooltip>
@@ -157,14 +120,10 @@
             <a-radio value="erc721votes">ERC721Votes</a-radio>
             <a-tooltip placement="right">
               <template #title>
-                <span
-                  >Represent voting power with a votes-enabled ERC721 token.
+                <span>Represent voting power with a votes-enabled ERC721 token.
                   Voters can entrust their voting power to a delegate.
-                  <a
-                    href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc721#ERC721Votes"
-                    target="_blank"
-                    >Read more.</a
-                  >
+                  <a href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc721#ERC721Votes"
+                    target="_blank">Read more.</a>
                 </span>
               </template>
               <i class="icon-tip"></i>
@@ -181,34 +140,22 @@
             <a-radio value="blocknumber">Block Number</a-radio>
             <a-tooltip placement="right">
               <template #title>
-                <span
-                  >The token uses voting durations expressed as block numbers.
-                  <a
-                    href="https://docs.openzeppelin.com/contracts/5.x/governance#governor"
-                    target="_blank"
-                    >Read more.</a
-                  ></span
-                >
+                <span>The token uses voting durations expressed as block numbers.
+                  <a href="https://docs.openzeppelin.com/contracts/5.x/governance#governor" target="_blank">Read
+                    more.</a></span>
               </template>
               <i class="icon-tip"></i>
             </a-tooltip>
           </div>
           <div class="section-radio flex mb-10 seconds-radio">
             <span>1 block =</span>
-            <input
-              class="seconds"
-              type="text"
-              :disabled="limitationsRadio == 'timestamp'"
-              v-model="tokenClockMode"
-            />
+            <input class="seconds" type="text" :disabled="limitationsRadio == 'timestamp'" v-model="tokenClockMode" />
             <span>seconds</span>
             <a-tooltip placement="right">
               <template #title>
-                <span
-                  >Assumed block time for converting voting time periods into
+                <span>Assumed block time for converting voting time periods into
                   block numbers. Block time may drift and impact these periods
-                  in the future.</span
-                >
+                  in the future.</span>
               </template>
               <i class="icon-tip"></i>
             </a-tooltip>
@@ -217,14 +164,9 @@
             <a-radio value="timestamp">Timestamp</a-radio>
             <a-tooltip placement="right">
               <template #title>
-                <span
-                  >The token uses voting durations expressed as timestamps.
-                  <a
-                    href="https://docs.openzeppelin.com/contracts/5.x/governance#timestamp_based_governance"
-                    target="_blank"
-                    >Read more.</a
-                  ></span
-                >
+                <span>The token uses voting durations expressed as timestamps.
+                  <a href="https://docs.openzeppelin.com/contracts/5.x/governance#timestamp_based_governance"
+                    target="_blank">Read more.</a></span>
               </template>
               <i class="icon-tip"></i>
             </a-tooltip>
@@ -234,15 +176,11 @@
     </div>
     <div class="access-control radio-section pb-32 mt-32">
       <div class="title flex flex-between">
-        <a-checkbox
-          value="TIMELOCK"
-          @change="timeLockRadio?timeLockRadio='':timeLockRadio='TimelockController'"
-          >TIMELOCK</a-checkbox
-        >
+        <a-checkbox check="TIMELOCK" @change="timeLockRadio?timeLockRadio='':timeLockRadio='TimelockController'">
+          TIMELOCK</a-checkbox>
         <a-tooltip placement="right">
           <template #title>
-            <span
-              >Add a delay to actions taken by the Governor. Gives users time to
+            <span>Add a delay to actions taken by the Governor. Gives users time to
               exit the system if they disagree with governance decisions.
             </span>
           </template>
@@ -255,16 +193,11 @@
             <a-radio value="openzeppelin">TimelockController</a-radio>
             <a-tooltip placement="right">
               <template #title>
-                <span
-                  >Module compatible with OpenZeppelin's TimelockController.
+                <span>Module compatible with OpenZeppelin's TimelockController.
                   Allows multiple proposers and executors, in addition to the
                   Governor itself.
-                  <a
-                    href="https://docs.openzeppelin.com/contracts/5.x/api/governance#GovernorTimelockControl"
-                    target="_blank"
-                    >Read more.</a
-                  ></span
-                >
+                  <a href="https://docs.openzeppelin.com/contracts/5.x/api/governance#GovernorTimelockControl"
+                    target="_blank">Read more.</a></span>
               </template>
               <i class="icon-tip"></i>
             </a-tooltip>
@@ -273,15 +206,10 @@
             <a-radio value="compound">Compound</a-radio>
             <a-tooltip placement="right">
               <template #title>
-                <span
-                  >Module compatible with Compound's Timelock contract. Useful
+                <span>Module compatible with Compound's Timelock contract. Useful
                   if assets and roles are already held in this contract.
-                  <a
-                    href="https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol"
-                    target="_blank"
-                    >Read more.</a
-                  ></span
-                >
+                  <a href="https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol"
+                    target="_blank">Read more.</a></span>
               </template>
               <i class="icon-tip"></i>
             </a-tooltip>
@@ -296,26 +224,17 @@
           <p class="mb-8">Security Contact</p>
           <a-tooltip placement="right">
             <template #title>
-              <span
-                >Where people can contact you to report security issues. Will
+              <span>Where people can contact you to report security issues. Will
                 only be visible if contract metadata is verified.
-                <a
-                  href="https://github.com/ethereum-lists/contracts/blob/main/README.md#tracking-new-deployments"
-                  target="_blank"
-                  >Read more.</a
-                ></span
-              >
+                <a href="https://github.com/ethereum-lists/contracts/blob/main/README.md#tracking-new-deployments"
+                  target="_blank">Read more.</a></span>
             </template>
             <i class="icon-tip"></i>
           </a-tooltip>
         </div>
 
-        <input
-          type="text"
-          placeholder="security@example.com"
-          v-model="contarctSecurityContact"
-          @input="dispositionText"
-        />
+        <input type="text" placeholder="security@example.com" v-model="contarctSecurityContact"
+          @input="dispositionText" />
       </div>
       <div class="section-input ml-10 mt-16 mb-16">
         <p class="mb-8">License</p>

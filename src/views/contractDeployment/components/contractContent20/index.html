@@ -47,7 +47,7 @@
 		</div>
 		<div class="access-control radio-section pb-32 mt-32">
 			<p class="title">
-				<a-checkbox value="VOTES" @change="voteChange">VOTES
+				<a-checkbox check="VOTES" @change="voteChange">VOTES
 				</a-checkbox>
 				<a-tooltip placement="right">
 					<template #title>
@@ -78,7 +78,7 @@
 		</div>
 		<div class="access-control radio-section pb-32 mt-32">
 			<div class="title">
-				<a-checkbox value="ACCESS CONTROL" :disabled="accessOptionsBol"
+				<a-checkbox check="ACCESS CONTROL" :disabled="accessOptionsBol"
 					@change="accessControlRadio?accessControlRadio='':accessControlRadio='ownable';dispositionText()">
 					ACCESS CONTROL</a-checkbox>
 				<a-tooltip placement="right">
@@ -108,7 +108,7 @@
 		</div>
 		<!-- <div class="access-control radio-section pb-32 mt-32">
       <div class="title">
-        <a-checkbox value="UPGRADEABILITY">UPGRADEABILITY</a-checkbox>
+        <a-checkbox check="UPGRADEABILITY">UPGRADEABILITY</a-checkbox>
         <a-tooltip placement="right">
           <template #title>
             <span>Smart contracts are immutable by default unless deployed behind
