@@ -14,7 +14,8 @@ export default ({ mode }) => defineConfig({
     //   filename: 'stats.html', // 输出的文件名
     // })
   ],
-  assetsInclude: ['**/*.md', '**/*.sh', '**/*.sol'],
+  // 禁止解析pubblic'文件夹下的文件
+  assetsInclude: ['**/*.md', '**/*.json', '**/*.txt', '**/*.sh', '**/*.sol'],
   resolve: {
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
     alias: {
