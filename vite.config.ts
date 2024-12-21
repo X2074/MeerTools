@@ -1,15 +1,20 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { visualizer } from 'rollup-plugin-visualizer';
 // @ts-ignore
 import path from 'path'
-import styleImport from 'vite-plugin-style-import'
 const timeStamp = new Date().getTime()
 export default ({ mode }) => defineConfig({
   base: '/',
   publicDir: 'public',
   plugins: [
-    vue()
+    vue(),
+    // visualizer({
+    //   open: true, // 构建完成后自动打开分析图
+    //   filename: 'stats.html', // 输出的文件名
+    // })
   ],
+  assetsInclude: ['**/*.md', '**/*.sh', '**/*.sol'],
   resolve: {
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
     alias: {
@@ -51,7 +56,7 @@ export default ({ mode }) => defineConfig({
         // target: 'https://test.meertalk.org/',
         // target: 'https://qitmeer.io/',
         changeOrigin: true // 是否跨域
-    },
+      },
     }
   },
   build: {
