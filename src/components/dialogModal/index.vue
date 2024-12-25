@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineProps } from "vue";
+import { ref, onMounted } from "vue";
 import bus from "@/utils/bus.js";
 /*
 *modelValue:关闭，开启

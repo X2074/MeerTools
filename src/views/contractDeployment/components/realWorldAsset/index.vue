@@ -7,12 +7,13 @@
 <template src="./index.html"></template>
 <script lang="ts">
 export default {
-    name: "contractContent1155",
+    name: "contractRealWorldAsset",
 };
 </script>
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
-
+import { Buffer } from "buffer";
+import { REMIX_URL } from "@/api/constant";
 import { saveAs } from "file-saver";
 import bus from "@/utils/bus.js";
 import useClipboard from "vue-clipboard3";
@@ -162,5 +163,10 @@ bus.on("realWorldAssetcopy", async (type) => {
 bus.on("realWorldAssetdown", async (type) => {
     const blob = new Blob([solContent.value], { type: "text/plain" });
     saveAs(blob, contarctName.value + ".sol");
+});
+// 打开remix
+bus.on("realWorldAssetRemix", async (type) => {
+    let base64 = Buffer.from(solContent.value, "utf-8").toString("base64");
+    window.open(REMIX_URL + "/?#code=" + base64 + "&theme=Dark");
 });
 </script>

@@ -4,11 +4,13 @@
 <template src="./index.html"></template>
 <script lang="ts">
 export default {
-    name: "contractContent1155",
+    name: "contractCustom",
 };
 </script>
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
+import { Buffer } from "buffer";
+import { REMIX_URL } from "@/api/constant";
 import { downloadAllFiles } from "@/utils/fileDown";
 import { saveAs } from "file-saver";
 import bus from "@/utils/bus.js";
@@ -98,5 +100,10 @@ bus.on("customdown", async (type) => {
 // 下载文件夹
 bus.on("customzip", async (type) => {
     downloadAllFiles(contarctName.value, solContent.value, type);
+});
+// 打开remix
+bus.on("customRemix", async (type) => {
+    let base64 = Buffer.from(solContent.value, "utf-8").toString("base64");
+    window.open(REMIX_URL + "/?#code=" + base64 + "&theme=Dark");
 });
 </script>

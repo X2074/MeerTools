@@ -1,3 +1,5 @@
+
+export const REMIX_URL = "https://remix.ethereum.org"
 // 浏览器hash
 export const QITMEER_HASH = "https://testnet-qng.qitmeer.io/tx/"
 // token

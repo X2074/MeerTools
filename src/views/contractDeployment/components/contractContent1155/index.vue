@@ -9,7 +9,8 @@ export default {
 </script>
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
-
+import { Buffer } from "buffer";
+import { REMIX_URL } from "@/api/constant";
 import { downloadAllFiles } from "@/utils/fileDown";
 import { erc1155 } from "@openzeppelin/wizard";
 import { saveAs } from "file-saver";
@@ -143,5 +144,10 @@ bus.on("ERC1155down", async (type) => {
 // 下载文件夹
 bus.on("ERC1155zip", async (type) => {
     downloadAllFiles(contarctName.value, solContent.value, type);
+});
+// 打开remix
+bus.on("ERC1155Remix", async (type) => {
+    let base64 = Buffer.from(solContent.value, "utf-8").toString("base64");
+    window.open(REMIX_URL + "/?#code=" + base64 + "&theme=Dark");
 });
 </script>

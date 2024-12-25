@@ -10,6 +10,8 @@ export default {
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
 import { downloadAllFiles } from "@/utils/fileDown";
+import { Buffer } from "buffer";
+import { REMIX_URL } from "@/api/constant";
 import { saveAs } from "file-saver";
 import bus from "@/utils/bus.js";
 import useClipboard from "vue-clipboard3";
@@ -175,6 +177,11 @@ bus.on("ERC20down", async (type) => {
 bus.on("ERC20zip", async (type) => {
     console.log(contarctName.value, "contarctName.value");
     downloadAllFiles(contarctName.value, solContent.value, type);
+});
+// 打开remix
+bus.on("ERC20Remix", async (type) => {
+    let base64 = Buffer.from(solContent.value, "utf-8").toString("base64");
+    window.open(REMIX_URL + "/?#code=" + base64 + "&theme=Dark");
 });
 defineExpose({ solContentChange });
 </script>

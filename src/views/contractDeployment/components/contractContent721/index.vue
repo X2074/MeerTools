@@ -9,7 +9,8 @@ export default {
 </script>
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
-
+import { Buffer } from "buffer";
+import { REMIX_URL } from "@/api/constant";
 import { downloadAllFiles } from "@/utils/fileDown";
 import { erc721 } from "@openzeppelin/wizard";
 import { saveAs } from "file-saver";
@@ -143,13 +144,12 @@ const solContentChange = () => {
 };
 // 文本相关的配置
 const dispositionText = (e) => {
-    console.log(e);
-    /*   if (
-    features.value.indexOf("incremental") > -1 &&
-    features.value.indexOf("mintable") == -1
-  ) {
-    features.value.push("mintable");
-  } */
+    if (
+        features.value.indexOf("incremental") > -1 &&
+        features.value.indexOf("mintable") == -1
+    ) {
+        features.value.push("mintable");
+    }
 
     // 如果选中了mintablehuost或pausable 则需要选中accessOptions里面的选项
     if (
@@ -206,5 +206,9 @@ bus.on("ERC721down", async (type) => {
 // 下载文件夹
 bus.on("ERC721zip", async (type) => {
     downloadAllFiles(contarctName.value, solContent.value, type);
+}); // 打开remix
+bus.on("ERC721Remix", async (type) => {
+    let base64 = Buffer.from(solContent.value, "utf-8").toString("base64");
+    window.open(REMIX_URL + "/?#code=" + base64 + "&theme=Dark");
 });
 </script>

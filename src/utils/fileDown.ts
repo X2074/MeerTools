@@ -20,10 +20,14 @@ export async function downloadAllFiles(replacementName?, replacement?, filesType
             // 如果存在这个数据，说明要替换.sol文件内容
             if (replacement) {
                 if (item.includes("MyToken")) {
+                    if (item.includes("MyToken.sol")) {//替换.sol文件内容
+                        data = replacement;
+                    }
+                    if (item.includes("MyToken.s.sol") || item.includes("MyToken.t.sol")) {
+                        data = data.replace(/MyToken/g, replacementName);
+                    }
                     item = item.replace(/MyToken/g, replacementName); // 使用正则表达式匹配替换文件名
-                    console.log(item, "itemitem");
 
-                    data = replacement; //替换当前文件内容
                 }
             }
             item = item.replace("/public/files/" + filesType + '/', "");

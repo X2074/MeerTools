@@ -73,4 +73,8 @@ const downloadSol = () => {
 const downFils = (type) => {
     bus.emit(contractType.value + "zip", type);
 };
+// 打开Remix
+const openRemix = () => {
+    bus.emit(contractType.value + "Remix", contractType.value);
+};
 </script>
