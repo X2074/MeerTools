@@ -118,6 +118,8 @@ onMounted(() => {
     solContentChange();
 });
 const solContentChange = () => {
+    console.log(featureCheck.value, "featureCheck.value");
+
     const contract = erc721.print({
         name: contarctName.value,
         baseUri: baseUrl.value,
@@ -128,8 +130,8 @@ const solContentChange = () => {
             license: contarctLicense.value,
             securityContact: contarctSecurityContact.value,
         },
-        mintable: features.value.includes("mintable"),
-        incremental: features.value.includes("incremental"),
+        mintable: featureCheck.value["mintable"],
+        incremental: featureCheck.value["incremental"],
         pausable: features.value.includes("pausable"),
         burnable: features.value.includes("burnable"),
         enumerable: features.value.includes("enumerable"),
@@ -179,11 +181,13 @@ const mintableChange = () => {
     if (!featureCheck.value.mintable) {
         featureCheck.value.incremental = false;
     }
+    solContentChange();
 };
 const incrementalChange = () => {
     if (featureCheck.value.incremental) {
         featureCheck.value.mintable = true;
     }
+    solContentChange();
     console.log(featureCheck.value.incremental, "featureCheck.incremental");
 };
 
@@ -206,9 +210,12 @@ bus.on("ERC721down", async (type) => {
 // 下载文件夹
 bus.on("ERC721zip", async (type) => {
     downloadAllFiles(contarctName.value, solContent.value, type);
-}); // 打开remix
+});
+// 打开remix
 bus.on("ERC721Remix", async (type) => {
+    console.log(solContent.value, "solContent.value");
     let base64 = Buffer.from(solContent.value, "utf-8").toString("base64");
+    console.log(base64, "base64");
     window.open(REMIX_URL + "/?#code=" + base64 + "&theme=Dark");
 });
 </script>
