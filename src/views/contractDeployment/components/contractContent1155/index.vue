@@ -21,10 +21,12 @@ const { toClipboard } = useClipboard();
 let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
 let baseUrl = ref("");
-let features = ref("");
+let features = ref(["updatableURI"]);
 // access是否可以取消
 const accessOptionsBol = ref(false);
-const accessControlRadio = ref(null);
+const accessControlRadio = ref("ownable");
+// 控制access是否可以取消
+const accessControlCheck = ref(true);
 const upgradeabilityRadio = ref(null);
 const contarctLicense = ref("MIT");
 const accessControl = ref("");
@@ -114,17 +116,28 @@ const dispositionText = () => {
     // 如果选中了mintablehuost或pausable 则需要选中accessOptions里面的选项
     if (
         features.value.includes("mintable") ||
-        features.value.includes("pausable")
+        features.value.includes("pausable") ||
+        features.value.includes("updatableURI")
     ) {
         accessOptionsBol.value = true;
+        accessControlCheck.value = true;
         if (!accessControlRadio.value) {
             accessControlRadio.value = "ownable";
         }
     } else {
         accessOptionsBol.value = false;
+        accessControlRadio.value = "";
+        accessOptionsBol.value = false;
+        accessControlCheck.value = false;
     }
     solContentChange();
 };
+// 文本相关的配置
+const dispositionAccess = () => {
+    accessControlCheck.value = true;
+    solContentChange();
+};
+
 // 复制
 bus.on("ERC1155copy", async (type) => {
     try {

@@ -76,7 +76,7 @@
         <div class="section-select pl-24 mt-24">
           <a-checkbox-group v-model:value="tokenDecimalsType" @change="dispositionText">
             <div class="section-select flex mb-10">
-              <a-checkbox check="updatableSettings">Updatable Settings</a-checkbox>
+              <a-checkbox value="updatableSettings">Updatable Settings</a-checkbox>
               <a-tooltip placement="right">
                 <template #title>
                   <span>Allow governance to update voting settings (delay, period,
@@ -86,7 +86,7 @@
               </a-tooltip>
             </div>
             <div class="section-select flex mb-10">
-              <a-checkbox check="storage">Storage</a-checkbox>
+              <a-checkbox value="storage">Storage</a-checkbox>
               <a-tooltip placement="right">
                 <template #title>
                   <span>Enable storage of proposal details and enumerability of
@@ -103,7 +103,8 @@
     <div class="access-control radio-section pb-32 mt-32">
       <p class="title">VOTES</p>
       <div class="section-select pl-24 mt-24">
-        <a-radio-group v-model:value="votesRadio">
+        {{votesRadio}}
+        <a-radio-group v-model:value="votesRadio" @change="dispositionText">
           <div class="section-radio flex mb-10">
             <a-radio value="erc20votes">ERC20Votes</a-radio>
             <a-tooltip placement="right">

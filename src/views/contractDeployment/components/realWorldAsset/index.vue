@@ -25,13 +25,18 @@ let contarctSymbol = ref("RWA");
 let features = ref("");
 // access是否可以取消
 const accessOptionsBol = ref(false);
+let limotationCheck = ref(false);
+let votesCheck = ref(false);
+let accessCheck = ref(false);
 let premint = ref("");
 const accessControlRadio = ref(null);
 const limitationsRadio = ref(null);
+const limitaCheck = ref(false);
 const contarctLicense = ref("MIT");
 const accessControl = ref("");
 const contarctSecurityContact = ref("");
 const upGradeability = ref("");
+let voteOptionsRadio = ref("");
 const featuresOptions = ref([
     {
         label: "Mintable",
@@ -55,7 +60,7 @@ const featuresOptions = ref([
     },
     {
         label: "Flash Minting",
-        value: "flashminting",
+        value: "flashmint",
         tip: "Built-in flash loans. Lend tokens without requiring collateral as long as they're returned in the same transaction.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20FlashMint'>Read more.</a>",
     },
     {
@@ -107,6 +112,8 @@ const limitationsOptions = [
 ];
 
 onMounted(() => {
+    console.log(realWorldAsset, "realWorldAsset");
+
     solContentChange();
 });
 
@@ -137,15 +144,75 @@ const dispositionText = () => {
     if (
         features.value.includes("mintable") ||
         features.value.includes("pausable") ||
-        features.value.includes("custodian")
+        features.value.includes("custodian") ||
+        limitationsRadio.value
     ) {
         accessOptionsBol.value = true;
+        accessCheck.value = true;
         if (!accessControlRadio.value) {
             accessControlRadio.value = "ownable";
         }
     } else {
         accessOptionsBol.value = false;
     }
+    if (limitationsRadio.value) {
+        limitaCheck.value = true;
+    }
+    if (voteOptionsRadio.value) {
+        votesCheck.value = true;
+    }
+    if (
+        !features.value.includes("mintable") &&
+        !features.value.includes("pausable") &&
+        !features.value.includes("custodian") &&
+        !limitationsRadio.value
+    ) {
+        accessOptionsBol.value = false;
+        accessCheck.value = false;
+        accessControlRadio.value = "";
+    }
+    solContentChange();
+};
+
+const voteChange = () => {
+    if (!votesCheck.value) {
+        voteOptionsRadio.value = "";
+    } else {
+        if (!voteOptionsRadio.value) {
+            voteOptionsRadio.value = "blockNumber";
+        }
+    }
+    solContentChange();
+};
+
+const limotationChange = () => {
+    if (!limotationCheck.value) {
+        limitationsRadio.value = "";
+    } else {
+        accessOptionsBol.value = true;
+        accessCheck.value = true;
+        if (!accessControlRadio.value) {
+            accessControlRadio.value = "ownable";
+        }
+        if (!limitationsRadio.value) {
+            limitationsRadio.value = "allowlist";
+        }
+    }
+    solContentChange();
+};
+// 文本相关的配置
+const dispositionAccess = () => {
+    if (accessCheck.value && !accessControlRadio.value) {
+        accessControlRadio.value = "ownable";
+    }
+    if (!accessCheck.value) {
+        accessControlRadio.value = "";
+    }
+    solContentChange();
+};
+// 文本相关的配置
+const dispositionRadioAccess = () => {
+    accessCheck.value = true;
     solContentChange();
 };
 // 复制

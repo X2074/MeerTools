@@ -25,6 +25,7 @@ let contarctSymbol = ref("MST");
 let features = ref("");
 // access是否可以取消
 const accessOptionsBol = ref(false);
+let accessCheck = ref(false);
 let premint = ref("");
 const accessControlRadio = ref(null);
 const limitationsRadio = ref(null);
@@ -55,7 +56,7 @@ const featuresOptions = ref([
     },
     {
         label: "Flash Minting",
-        value: "flashminting",
+        value: "flashmint",
         tip: "Built-in flash loans. Lend tokens without requiring collateral as long as they're returned in the same transaction.<a target='_blank' href='https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#ERC20FlashMint'>Read more.</a>",
     },
     {
@@ -138,9 +139,11 @@ const dispositionText = () => {
     if (
         features.value.includes("mintable") ||
         features.value.includes("pausable") ||
-        features.value.includes("custodian")
+        features.value.includes("custodian") ||
+        limitationsRadio.value
     ) {
         accessOptionsBol.value = true;
+        accessCheck.value = true;
         if (!accessControlRadio.value) {
             accessControlRadio.value = "ownable";
         }

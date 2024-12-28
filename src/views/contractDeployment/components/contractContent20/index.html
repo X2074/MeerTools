@@ -78,8 +78,8 @@
 		</div>
 		<div class="access-control radio-section pb-32 mt-32">
 			<div class="title">
-				<a-checkbox check="ACCESS CONTROL" :disabled="accessOptionsBol"
-					@change="accessControlRadio?accessControlRadio='':accessControlRadio='ownable';dispositionText()">
+				<a-checkbox v-model:checked="accessControlCheck" :disabled="accessOptionsBol"
+					@change="accessControlRadio?accessControlRadio='':accessControlRadio='ownable';solContentChange()">
 					ACCESS CONTROL</a-checkbox>
 				<a-tooltip placement="right">
 					<template #title>
@@ -93,7 +93,7 @@
 				</a-tooltip>
 			</div>
 			<div class="section-radio pl-24 mt-24">
-				<a-radio-group v-model:value="accessControlRadio" @change="dispositionText">
+				<a-radio-group v-model:value="accessControlRadio" @change="dispositionAccess">
 					<div class="section-radio flex mb-10" v-for="(item,i) in accessOptions" :key="i">
 						<a-radio :value="item.value">{{item.label}}</a-radio>
 						<a-tooltip placement="right">

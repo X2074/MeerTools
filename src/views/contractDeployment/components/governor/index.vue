@@ -38,6 +38,8 @@ const votesRadio = ref("");
 const contarctLicense = ref("MIT");
 const proposalThreshold = ref("");
 const tokenDecimals = ref("18");
+// 记录decimals老数据，切换cote的时候使用
+const tokenDecimalsOld = ref("");
 const tokenDecimalsType = ref([]);
 const tokenClockMode = ref("12");
 const tokenClockModeRadio = ref("");
@@ -47,6 +49,8 @@ const contarctSecurityContact = ref("");
 const upGradeability = ref("");
 
 onMounted(() => {
+    console.log(governor, "governor");
+
     solContentChange();
 });
 
@@ -112,6 +116,12 @@ const dispositionText = () => {
     if (proposalPercent.value && !regex.test(proposalPercent.value)) {
         bus.emit("promptModalErr", "格式有误");
         return;
+    }
+    if (votesRadio.value == "erc20votes") {
+        tokenDecimals.value = tokenDecimalsOld.value;
+    } else if (votesRadio.value == "erc721votes") {
+        tokenDecimalsOld.value = tokenDecimals.value;
+        tokenDecimals.value = "0";
     }
     solContentChange();
 };

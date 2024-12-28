@@ -22,9 +22,10 @@ let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
 let baseUrl = ref("");
 let features = ref([]);
-// access是否可以取消
 const accessOptionsBol = ref(false);
 const accessControlRadio = ref(null);
+// 控制access是否可以取消
+const accessControlCheck = ref(false);
 const upgradeabilityRadio = ref(null);
 const voteOptionsRadio = ref(null);
 const contarctLicense = ref("MIT");
@@ -159,15 +160,26 @@ const dispositionText = (e) => {
         features.value.includes("pausable")
     ) {
         accessOptionsBol.value = true;
+        accessControlCheck.value = true;
         if (!accessControlRadio.value) {
             accessControlRadio.value = "ownable";
         }
     } else {
         accessOptionsBol.value = false;
     }
+    if (!features.value || !features.value.length) {
+        accessControlRadio.value = "";
+        accessOptionsBol.value = false;
+        accessControlCheck.value = false;
+    }
     solContentChange();
 };
 
+// 文本相关的配置
+const dispositionAccess = () => {
+    accessControlCheck.value = true;
+    solContentChange();
+};
 const voteChange = (e) => {
     if (e.target.checked && !voteOptionsRadio.value) {
         voteOptionsRadio.value = "blockNumber";

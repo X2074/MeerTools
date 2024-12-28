@@ -23,6 +23,7 @@ let contarctSymbol = ref("ETK");
 let premint = ref("0");
 let features = ref("");
 // access是否可以取消
+const accessControlCheck = ref(false);
 const accessOptionsBol = ref(false);
 const accessControlRadio = ref(null);
 const upgradeabilityRadio = ref(null);
@@ -132,12 +133,21 @@ const dispositionText = () => {
         features.value.includes("pausable")
     ) {
         accessOptionsBol.value = true;
+        accessControlCheck.value = true;
         if (!accessControlRadio.value) {
             accessControlRadio.value = "ownable";
         }
     } else {
         accessOptionsBol.value = false;
+        accessControlRadio.value = "";
+        accessOptionsBol.value = false;
+        accessControlCheck.value = false;
     }
+    solContentChange();
+};
+// 文本相关的配置
+const dispositionAccess = () => {
+    accessControlCheck.value = true;
     solContentChange();
 };
 
