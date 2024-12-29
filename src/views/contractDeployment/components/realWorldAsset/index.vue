@@ -234,10 +234,10 @@ bus.on("realWorldAssetcopy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "ERC20复制成功");
+        bus.emit("promptModalSuccess", "Real-World Asset*复制成功");
     } catch (e) {
         //复制失败
-        bus.emit("promptModalErr", "ERC20复制失败");
+        bus.emit("promptModalErr", "Real-World Asset*复制失败");
     }
 });
 // 下载文件

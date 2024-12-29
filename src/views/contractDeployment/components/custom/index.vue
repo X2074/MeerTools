@@ -94,10 +94,10 @@ bus.on("customcopy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "ERC20复制成功");
+        bus.emit("promptModalSuccess", "Custom复制成功");
     } catch (e) {
         //复制失败
-        bus.emit("promptModalErr", "ERC20复制失败");
+        bus.emit("promptModalErr", "Custom复制失败");
     }
 });
 // 下载文件
