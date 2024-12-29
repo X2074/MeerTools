@@ -130,14 +130,11 @@ const dispositionText = () => {
         accessOptionsBol.value = false;
         accessControlCheck.value = false;
     }
+    if (accessControlRadio.value) {
+        accessControlCheck.value = true;
+    }
     solContentChange();
 };
-// 文本相关的配置
-const dispositionAccess = () => {
-    accessControlCheck.value = true;
-    solContentChange();
-};
-
 // 复制
 bus.on("ERC1155copy", async (type) => {
     try {

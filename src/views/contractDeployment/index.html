@@ -30,7 +30,8 @@
 					{{item.name}}
 				</div>
 
-				<a-popover placement="bottom" trigger="click" @visibleChange="showMoreContract = !showMoreContract">
+				<a-popover placement="bottom" trigger="click" @visibleChange="showMoreContract = !showMoreContract"
+					:getPopupContainer="(triggerNode) => triggerNode.parentNode">
 					<template #content>
 						<div class="more-contract flex-center">
 							<div class="btn-item" :class="{'btn-item-check':contractType == item.type}"

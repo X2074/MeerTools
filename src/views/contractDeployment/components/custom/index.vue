@@ -21,6 +21,7 @@ import { custom } from "@openzeppelin/wizard";
 let contarctName = ref("MyContract");
 let features = ref("");
 // access是否可以取消
+const accessControlCheck = ref(false);
 const accessOptionsBol = ref(false);
 const accessControlRadio = ref(null);
 const contarctLicense = ref("MIT");
@@ -81,6 +82,13 @@ const dispositionText = () => {
     }
     solContentChange();
 };
+
+// 文本相关的配置
+const dispositionAccess = () => {
+    accessControlCheck.value = true;
+    solContentChange();
+};
+
 // 复制
 bus.on("customcopy", async (type) => {
     try {

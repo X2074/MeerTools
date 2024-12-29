@@ -177,7 +177,8 @@
     </div>
     <div class="access-control radio-section pb-32 mt-32">
       <div class="title flex flex-between">
-        <a-checkbox check="TIMELOCK" @change="timeLockRadio?timeLockRadio='':timeLockRadio='TimelockController'">
+        <a-checkbox v-model:checked="timelockCheck"
+          @change="timeLockRadio?timeLockRadio='':timeLockRadio='openzeppelin'">
           TIMELOCK</a-checkbox>
         <a-tooltip placement="right">
           <template #title>
@@ -189,7 +190,7 @@
         </a-tooltip>
       </div>
       <div class="section-radio pl-24 mt-24">
-        <a-radio-group v-model:value="timeLockRadio">
+        <a-radio-group v-model:value="timeLockRadio" @change="dispositionRadio">
           <div class="section-radio flex mb-10">
             <a-radio value="openzeppelin">TimelockController</a-radio>
             <a-tooltip placement="right">

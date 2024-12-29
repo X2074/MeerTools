@@ -172,14 +172,12 @@ const dispositionText = (e) => {
         accessOptionsBol.value = false;
         accessControlCheck.value = false;
     }
+    if (accessControlRadio.value) {
+        accessControlCheck.value = true;
+    }
     solContentChange();
 };
 
-// 文本相关的配置
-const dispositionAccess = () => {
-    accessControlCheck.value = true;
-    solContentChange();
-};
 const voteChange = (e) => {
     if (e.target.checked && !voteOptionsRadio.value) {
         voteOptionsRadio.value = "blockNumber";

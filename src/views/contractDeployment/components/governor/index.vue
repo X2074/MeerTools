@@ -47,6 +47,8 @@ const proposalPercent = ref("4");
 const proposalAbsolute = ref("");
 const contarctSecurityContact = ref("");
 const upGradeability = ref("");
+// timelock联动
+let timelockCheck = ref(false);
 
 onMounted(() => {
     console.log(governor, "governor");
@@ -125,6 +127,12 @@ const dispositionText = () => {
     }
     solContentChange();
 };
+
+const dispositionRadio = () => {
+    timelockCheck.value = true;
+    solContentChange();
+};
+
 // 复制
 bus.on("governorcopy", async (type) => {
     try {

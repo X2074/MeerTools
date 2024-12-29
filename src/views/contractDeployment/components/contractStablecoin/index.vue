@@ -25,9 +25,14 @@ let contarctSymbol = ref("MST");
 let features = ref("");
 // access是否可以取消
 const accessOptionsBol = ref(false);
+// 多选与单选的联动
+let limotationCheck = ref(false);
+let votesCheck = ref(false);
 let accessCheck = ref(false);
+
 let premint = ref("");
 const accessControlRadio = ref(null);
+let voteOptionsRadio = ref("");
 const limitationsRadio = ref(null);
 const contarctLicense = ref("MIT");
 const accessControl = ref("");
@@ -149,6 +154,46 @@ const dispositionText = () => {
         }
     } else {
         accessOptionsBol.value = false;
+    }
+    if (voteOptionsRadio.value) {
+        votesCheck.value = true;
+    }
+    if (accessControlRadio.value) {
+        accessCheck.value = true;
+    }
+    solContentChange();
+};
+const limotationChange = () => {
+    if (!limotationCheck.value) {
+        limitationsRadio.value = "";
+        if (
+            !features.value.includes("mintable") &&
+            !features.value.includes("pausable") &&
+            !features.value.includes("custodian")
+        ) {
+            accessOptionsBol.value = false;
+            accessCheck.value = false;
+            accessControlRadio.value = "";
+        }
+    } else {
+        accessOptionsBol.value = true;
+        accessCheck.value = true;
+        if (!accessControlRadio.value) {
+            accessControlRadio.value = "ownable";
+        }
+        if (!limitationsRadio.value) {
+            limitationsRadio.value = "allowlist";
+        }
+    }
+    solContentChange();
+};
+const voteChange = () => {
+    if (!votesCheck.value) {
+        voteOptionsRadio.value = "";
+    } else {
+        if (!voteOptionsRadio.value) {
+            voteOptionsRadio.value = "blockNumber";
+        }
     }
     solContentChange();
 };

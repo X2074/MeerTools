@@ -30,7 +30,7 @@ let votesCheck = ref(false);
 let accessCheck = ref(false);
 let premint = ref("");
 const accessControlRadio = ref(null);
-const limitationsRadio = ref(null);
+const limitationsRadio = ref("");
 const limitaCheck = ref(false);
 const contarctLicense = ref("MIT");
 const accessControl = ref("");
@@ -188,6 +188,15 @@ const voteChange = () => {
 const limotationChange = () => {
     if (!limotationCheck.value) {
         limitationsRadio.value = "";
+        if (
+            !features.value.includes("mintable") &&
+            !features.value.includes("pausable") &&
+            !features.value.includes("custodian")
+        ) {
+            accessOptionsBol.value = false;
+            accessCheck.value = false;
+            accessControlRadio.value = "";
+        }
     } else {
         accessOptionsBol.value = true;
         accessCheck.value = true;
@@ -198,6 +207,11 @@ const limotationChange = () => {
             limitationsRadio.value = "allowlist";
         }
     }
+    solContentChange();
+};
+// limotation文本相关的配置
+const dispositionLimotation = () => {
+    limotationCheck.value = true;
     solContentChange();
 };
 // 文本相关的配置
