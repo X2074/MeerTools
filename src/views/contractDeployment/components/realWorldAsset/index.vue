@@ -22,7 +22,7 @@ import { realWorldAsset } from "@openzeppelin/wizard";
 const solContent = ref("");
 let contarctName = ref("MyRWA");
 let contarctSymbol = ref("RWA");
-let features = ref("");
+let features = ref(["permit"]);
 // access是否可以取消
 const accessOptionsBol = ref(false);
 let limotationCheck = ref(false);

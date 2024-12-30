@@ -22,7 +22,7 @@ const solContent = ref("");
 import { stablecoin } from "@openzeppelin/wizard";
 let contarctName = ref("MyStablecoin");
 let contarctSymbol = ref("MST");
-let features = ref("");
+let features = ref(["permit"]);
 // access是否可以取消
 const accessOptionsBol = ref(false);
 // 多选与单选的联动

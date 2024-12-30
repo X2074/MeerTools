@@ -21,7 +21,7 @@ import { erc20 } from "@openzeppelin/wizard";
 let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
 let premint = ref("0");
-let features = ref("");
+let features = ref(["permit"]);
 // access是否可以取消
 const accessControlCheck = ref(false);
 const accessOptionsBol = ref(false);
@@ -143,6 +143,11 @@ const dispositionText = () => {
         accessOptionsBol.value = false;
         accessControlCheck.value = false;
     }
+    solContentChange();
+};
+// access文本相关的配置
+const dispositionAccess = () => {
+    accessControlCheck.value = true;
     if (accessControlRadio.value) {
         accessControlCheck.value = true;
     }

@@ -130,9 +130,11 @@ const dispositionText = () => {
         accessOptionsBol.value = false;
         accessControlCheck.value = false;
     }
-    if (accessControlRadio.value) {
-        accessControlCheck.value = true;
-    }
+    solContentChange();
+};
+// access文本相关的配置
+const dispositionAccess = () => {
+    accessControlCheck.value = true;
     solContentChange();
 };
 // 复制

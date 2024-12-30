@@ -33,26 +33,24 @@ const delayDay = ref("1 day");
 const periodWeek = ref("1 week");
 const premint = ref("");
 const quorumType = ref("percent");
-const timeLockRadio = ref(null);
-const votesRadio = ref("");
+const timeLockRadio = ref("openzeppelin");
+const votesRadio = ref("erc20votes");
 const contarctLicense = ref("MIT");
 const proposalThreshold = ref("");
 const tokenDecimals = ref("18");
 // 记录decimals老数据，切换cote的时候使用
 const tokenDecimalsOld = ref("");
-const tokenDecimalsType = ref([]);
+const tokenDecimalsType = ref(["updatableSettings"]);
 const tokenClockMode = ref("12");
-const tokenClockModeRadio = ref("");
+const tokenClockModeRadio = ref("blocknumber");
 const proposalPercent = ref("4");
 const proposalAbsolute = ref("");
 const contarctSecurityContact = ref("");
 const upGradeability = ref("");
 // timelock联动
-let timelockCheck = ref(false);
+let timelockCheck = ref(true);
 
 onMounted(() => {
-    console.log(governor, "governor");
-
     solContentChange();
 });
 
