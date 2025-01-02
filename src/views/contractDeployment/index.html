@@ -53,7 +53,8 @@
 					<img src="/images/contract/copy.svg" alt="" />
 					<span>Copy to Clipboard</span>
 				</div>
-				<div class="btn-item" @click="openRemix">
+				<div class="btn-item" v-if="contractType != 'stablecoin' || contractType != 'realWorldAsset'"
+					@click="openRemix">
 					<img src="/images/contract/open.svg" alt="" />
 					<span>Open in Remix</span>
 				</div>

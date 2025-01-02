@@ -134,6 +134,7 @@ const solContentChange = () => {
         permit: features.value.includes("permit"),
         flashmint: features.value.includes("flashmint"),
         custodian: features.value.includes("custodian"),
+        votes: voteOptionsRadio.value ? voteOptionsRadio.value : false,
     });
     solContent.value = contract;
     bus.emit("loadingIndex", "stablecoin");
@@ -154,6 +155,9 @@ const dispositionText = () => {
         }
     } else {
         accessOptionsBol.value = false;
+    }
+    if (limitationsRadio.value) {
+        limotationCheck.value = true;
     }
     if (voteOptionsRadio.value) {
         votesCheck.value = true;
@@ -215,7 +219,10 @@ bus.on("stablecoindown", async (type) => {
 });
 // 打开remix
 bus.on("stablecoinRemix", async (type) => {
+    console.log(solContent.value, "solContent.value");
+
     let base64 = Buffer.from(solContent.value, "utf-8").toString("base64");
+    console.log(base64, "base64");
     window.open(REMIX_URL + "/?#code=" + base64 + "&theme=Dark");
 });
 </script>

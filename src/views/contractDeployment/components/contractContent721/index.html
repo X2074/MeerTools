@@ -64,7 +64,7 @@
     </div>
     <div class="access-control radio-section pb-32 mt-32">
       <p class="title">
-        <a-checkbox check="VOTES" @change="voteChange">VOTES </a-checkbox>
+        <a-checkbox v-model:checked="votesCheck" @change="voteChange">VOTES </a-checkbox>
         <a-tooltip placement="right">
           <template #title>
             <span>Keeps track of historical balances for voting in on-chain
@@ -120,7 +120,7 @@
         </a-radio-group>
       </div>
     </div>
-    <div class="access-control radio-section pb-32 mt-32">
+    <!-- <div class="access-control radio-section pb-32 mt-32">
       <div class="title">
         <a-checkbox check="UPGRADEABILITY">UPGRADEABILITY</a-checkbox>
         <a-tooltip placement="right">
@@ -146,7 +146,7 @@
           </div>
         </a-radio-group>
       </div>
-    </div>
+    </div> -->
     <div class="settings input-section pb-32 mt-32">
       <p class="title">INFO</p>
       <div class="section-input ml-10 mt-16">

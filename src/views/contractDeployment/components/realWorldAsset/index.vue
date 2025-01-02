@@ -134,6 +134,7 @@ const solContentChange = () => {
         permit: features.value.includes("permit"),
         flashmint: features.value.includes("flashmint"),
         custodian: features.value.includes("custodian"),
+        votes: voteOptionsRadio.value ? voteOptionsRadio.value : false,
     });
     solContent.value = contract;
     bus.emit("loadingIndex", "realWorldAsset");

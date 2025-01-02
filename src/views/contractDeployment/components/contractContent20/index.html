@@ -47,7 +47,7 @@
 		</div>
 		<div class="access-control radio-section pb-32 mt-32">
 			<p class="title">
-				<a-checkbox check="VOTES" @change="voteChange">VOTES
+				<a-checkbox v-model:checked="votesCheck" @change="voteChange">VOTES
 				</a-checkbox>
 				<a-tooltip placement="right">
 					<template #title>

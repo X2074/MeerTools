@@ -133,9 +133,9 @@
       </div>
     </div>
     <div class="access-control radio-section pb-32 mt-32">
-      <p class="title">TOKEN CLOCK MODE</p>
+      <p class="title">TOKEN CLOCK MODE{{tokenClockModeRadio}}</p>
       <div class="section-select pl-24 mt-24">
-        <a-radio-group v-model:value="tokenClockModeRadio">
+        <a-radio-group v-model:value="tokenClockModeRadio" @change="dispositionText">
           <div class="section-radio flex mb-10">
             <a-radio value="blocknumber">Block Number</a-radio>
             <a-tooltip placement="right">
@@ -177,7 +177,7 @@
     <div class="access-control radio-section pb-32 mt-32">
       <div class="title flex flex-between">
         <a-checkbox v-model:checked="timelockCheck"
-          @change="timeLockRadio?timeLockRadio='':timeLockRadio='openzeppelin'">
+          @change="timeLockRadio?timeLockRadio='':timeLockRadio='openzeppelin';solContentChange()">
           TIMELOCK</a-checkbox>
         <a-tooltip placement="right">
           <template #title>

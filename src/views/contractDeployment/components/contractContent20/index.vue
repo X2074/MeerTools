@@ -22,8 +22,9 @@ let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
 let premint = ref("0");
 let features = ref(["permit"]);
-// access是否可以取消
+// 多选与单选的联动
 const accessControlCheck = ref(false);
+let votesCheck = ref(false);
 const accessOptionsBol = ref(false);
 const accessControlRadio = ref(null);
 const upgradeabilityRadio = ref(null);
@@ -143,6 +144,9 @@ const dispositionText = () => {
         accessOptionsBol.value = false;
         accessControlCheck.value = false;
     }
+    if (voteOptionsRadio.value) {
+        votesCheck.value = true;
+    }
     solContentChange();
 };
 // access文本相关的配置
@@ -155,12 +159,12 @@ const dispositionAccess = () => {
 };
 
 const voteChange = (e) => {
-    console.log(e.target, "voteChange");
-    if (e.target.checked && !voteOptionsRadio.value) {
-        voteOptionsRadio.value = "blockNumber";
-    }
-    if (!e.target.checked && voteOptionsRadio.value) {
+    if (!votesCheck.value) {
         voteOptionsRadio.value = "";
+    } else {
+        if (!voteOptionsRadio.value) {
+            voteOptionsRadio.value = "blockNumber";
+        }
     }
     solContentChange();
 };

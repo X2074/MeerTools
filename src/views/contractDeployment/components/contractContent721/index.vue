@@ -24,8 +24,9 @@ let baseUrl = ref("");
 let features = ref([]);
 const accessOptionsBol = ref(false);
 const accessControlRadio = ref(null);
-// 控制access是否可以取消
+// 多选与单选的联动
 const accessControlCheck = ref(false);
+let votesCheck = ref(false);
 const upgradeabilityRadio = ref(null);
 const voteOptionsRadio = ref(null);
 const contarctLicense = ref("MIT");
@@ -175,6 +176,9 @@ const dispositionText = (e) => {
     if (accessControlRadio.value) {
         accessControlCheck.value = true;
     }
+    if (voteOptionsRadio.value) {
+        votesCheck.value = true;
+    }
     solContentChange();
 };
 
@@ -184,11 +188,12 @@ const dispositionAccess = () => {
     solContentChange();
 };
 const voteChange = (e) => {
-    if (e.target.checked && !voteOptionsRadio.value) {
-        voteOptionsRadio.value = "blockNumber";
-    }
-    if (!e.target.checked && voteOptionsRadio.value) {
+    if (!votesCheck.value) {
         voteOptionsRadio.value = "";
+    } else {
+        if (!voteOptionsRadio.value) {
+            voteOptionsRadio.value = "blockNumber";
+        }
     }
     solContentChange();
 };

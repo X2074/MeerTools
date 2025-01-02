@@ -30,7 +30,6 @@ onMounted(() => {
 });
 bus.on("loadingIndex", (type) => {
     loadingIndex.value++;
-    console.log(loadingIndex.value);
     if (loadingIndex.value >= contractTypes.value.length) {
         contractLoading.value = false;
     }

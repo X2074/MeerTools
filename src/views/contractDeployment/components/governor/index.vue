@@ -36,7 +36,7 @@ const quorumType = ref("percent");
 const timeLockRadio = ref("openzeppelin");
 const votesRadio = ref("erc20votes");
 const contarctLicense = ref("MIT");
-const proposalThreshold = ref("");
+const proposalThreshold = ref("1");
 const tokenDecimals = ref("18");
 // 记录decimals老数据，切换cote的时候使用
 const tokenDecimalsOld = ref("");
@@ -51,6 +51,8 @@ const upGradeability = ref("");
 let timelockCheck = ref(true);
 
 onMounted(() => {
+    console.log(governor, "governor");
+
     solContentChange();
 });
 
@@ -106,23 +108,27 @@ const dispositionText = () => {
         return;
     }
     if (!regex.test(tokenDecimals.value) || !regex.test(tokenClockMode.value)) {
-        bus.emit("promptModalErr", "格式有误");
+        bus.emit("promptModalErr", "格式有误03");
         return;
     }
     if (proposalAbsolute.value && !regex.test(proposalAbsolute.value)) {
-        bus.emit("promptModalErr", "格式有误");
+        bus.emit("promptModalErr", "格式有误04");
         return;
     }
     if (proposalPercent.value && !regex.test(proposalPercent.value)) {
-        bus.emit("promptModalErr", "格式有误");
+        bus.emit("promptModalErr", "格式有误05");
         return;
     }
-    if (votesRadio.value == "erc20votes") {
-        tokenDecimals.value = tokenDecimalsOld.value;
-    } else if (votesRadio.value == "erc721votes") {
-        tokenDecimalsOld.value = tokenDecimals.value;
-        tokenDecimals.value = "0";
-    }
+    // if (tokenDecimalsOld.value) {
+    //     if (votesRadio.value == "erc20votes") {
+    //         tokenDecimals.value = tokenDecimalsOld.value;
+    //     } else if (votesRadio.value == "erc721votes") {
+    //         tokenDecimalsOld.value = tokenDecimals.value;
+    //         tokenDecimals.value = "0";
+    //     }
+    // } else {
+    //     tokenDecimalsOld.value = tokenDecimals.value;
+    // }
     solContentChange();
 };
 
