@@ -149,7 +149,8 @@
           </div>
           <div class="section-radio flex mb-10 seconds-radio">
             <span>1 block =</span>
-            <input class="seconds" type="text" :disabled="limitationsRadio == 'timestamp'" v-model="tokenClockMode" />
+            <input class="seconds" type="text" :disabled="limitationsRadio == 'timestamp'" v-model="tokenClockMode"
+              @input="dispositionText" />
             <span>seconds</span>
             <a-tooltip placement="right">
               <template #title>
