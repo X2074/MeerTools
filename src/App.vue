@@ -35,8 +35,8 @@
 import { ref, watch, onMounted, nextTick } from "vue";
 import bus from "@/utils/bus.js";
 import prompt from "@/components/prompt/index.vue";
-import headerCell from "@/components/blackCommon/header/index.vue";
-import footerCell from "@/components/blackCommon/footer/index.vue";
+import headerCell from "@/components/header/index.vue";
+import footerCell from "@/components/footer/index.vue";
 
 let isPc = ref(false);
 let homePageLoad = ref(false);

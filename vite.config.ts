@@ -15,7 +15,8 @@ export default ({ mode }) => defineConfig({
     // })
   ],
   // 禁止解析pubblic'文件夹下的文件
-  assetsInclude: ['**/*.md', '**/*.json', '**/*.txt', '**/*.sh', '**/*.sol'],
+  // , '**/*.json'
+  assetsInclude: ['**/*.md', '**/*.txt', '**/*.sh', '**/*.sol'],
   resolve: {
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
     alias: {
@@ -29,36 +30,7 @@ export default ({ mode }) => defineConfig({
     // host:'10.10.34.183',
     hmr: true,
     cors: true,
-    open: true,
-    proxy: {
-      // 当地址中有/api的时候会触发代理机制
-      '/api/v1': {
-        // 要代理的服务器地址  这里不用写 api
-        target: 'https://test1.dimai.io/',
-        changeOrigin: true // 是否跨域
-      },
-      '/crypto/v1': {
-        // 要代理的服务器地址  这里不用写 api
-        target: 'https://test1.dimai.io/',
-        // target: 'https://qitmeer.io/',
-        changeOrigin: true // 是否跨域
-      },
-      '/offchaindata': {
-        // 要代理的服务器地址  这里不用写 api
-        target: 'https://test1.dimai.io/',
-        // target: 'https://qitmeer.io/',
-        changeOrigin: true, // 是否跨域,
-        // rewrite: (path) => path.replace(/^\/offchaindata/, ""), // 将ccc替换为空
-      },
-      // 当地址中有/api的时候会触发代理机制
-      '/qitmeer-auth/api': {
-        // 要代理的服务器地址  这里不用写 api
-        target: 'http://16.163.42.221:8080/',
-        // target: 'https://test.meertalk.org/',
-        // target: 'https://qitmeer.io/',
-        changeOrigin: true // 是否跨域
-      },
-    }
+    open: true
   },
   build: {
     // assetsDir: 'src/assets',

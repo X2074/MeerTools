@@ -264,7 +264,7 @@ const ethSend = async (account, gasPrice, token) => {
         lookHash.value = true;
         return hash;
     } catch (err) {
-        console.log(err, "绘图部分的错误");
+        console.log(err, "错误");
         return err;
     }
 };
@@ -328,7 +328,7 @@ const tokenSend = async (account, gasPrice, token) => {
         lookHash.value = true;
         return hash;
     } catch (err) {
-        console.log(err, "绘图部分的错误");
+        console.log(err, "错误");
         return err;
     }
 };
