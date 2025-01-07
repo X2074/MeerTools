@@ -1,95 +1,97 @@
-@import 'public/css/abstracts/mixin.scss';
+@import "public/css/abstracts/mixin.scss";
 
 .header-out {
-    width: 100vw;
-    height: 76px;
-    padding: 0 240px;
-    background: rgba(255, 255, 255, 0.05);
+  width: 100vw;
+  height: 76px;
+  padding: 0 240px;
+  background: rgba(255, 255, 255, 0.05);
 
-    .header {
-        .logo {
-            width: 110px;
-            height: 44px;
-        }
-
-        .tool-menus {
-            color: #fff;
-            font-size: 18px;
-
-            .menus-item {
-                cursor: pointer;
-                position: relative;
-                padding: 10px 0;
-
-                img {
-                    transform: rotateZ(0);
-                    transition: all 0.3 linear;
-                }
-
-                .menus-item-children {
-                    position: absolute;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    top: 35px;
-                    opacity: 0;
-                    height: 0;
-                    overflow: hidden;
-                    padding-top: 25px;
-
-                    .menu-item-list {
-                        padding: 16px 0;
-                        width: 176px;
-                        height: 222px;
-                        border-radius: 8px;
-                        background: rgba(0, 0, 0, 1);
-                        border: 1px solid rgba(255, 255, 255, 1);
-
-                        p {
-                            cursor: pointer;
-                            height: 38px;
-                            line-height: 38px;
-                            padding: 0 24px;
-                            font-size: 16px;
-                            color: #fff;
-
-                            &:hover {
-                                background: rgba(255, 255, 255, 0.1);
-                            }
-                        }
-                    }
-                }
-
-                &:hover {
-                    img {
-                        transform: rotateZ(180deg);
-                        transition: all 0.3 linear;
-                    }
-
-                    .menus-item-children {
-                        opacity: 1;
-                        height: auto;
-                        transition: opacity 0.3s ease-in-out;
-                    }
-                }
-            }
-        }
-
-        .wallt-loginout {
-            width: 165px;
-            height: 40px;
-            border-radius: 8px;
-            background: rgba(172, 255, 67, 1);
-            font-size: 16px;
-            color: #000;
-            line-height: 40px;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 1);
-        }
-
-        .wallt-login {
-            font-size: 16px;
-            color: rgba(172, 255, 67, 1);
-        }
+  .header {
+    .logo {
+      width: 110px;
+      height: 44px;
     }
+
+    .tool-menus {
+      color: #fff;
+      font-size: 18px;
+
+      .menus-item {
+        cursor: pointer;
+        position: relative;
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        img {
+          transform: rotateZ(0);
+          transition: all 0.3 linear;
+        }
+
+        .menus-item-children {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 35px;
+          opacity: 0;
+          height: 0;
+          overflow: hidden;
+          padding-top: 25px;
+
+          .menu-item-list {
+            padding: 16px 0;
+            min-width: 176px;
+            height: 222px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 1);
+            border: 1px solid rgba(255, 255, 255, 1);
+
+            p {
+              cursor: pointer;
+              height: 38px;
+              line-height: 38px;
+              padding: 0 24px;
+              font-size: 16px;
+              color: #fff;
+              white-space: nowrap;
+              &:hover {
+                background: rgba(255, 255, 255, 0.1);
+              }
+            }
+          }
+        }
+
+        &:hover {
+          img {
+            transform: rotateZ(180deg);
+            transition: all 0.3 linear;
+          }
+
+          .menus-item-children {
+            opacity: 1;
+            height: auto;
+            transition: opacity 0.3s ease-in-out;
+          }
+        }
+      }
+    }
+
+    .wallt-loginout {
+      width: 165px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(172, 255, 67, 1);
+      font-size: 16px;
+      color: #000;
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 1);
+    }
+
+    .wallt-login {
+      font-size: 16px;
+      color: rgba(172, 255, 67, 1);
+    }
+  }
 }
