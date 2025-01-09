@@ -100,23 +100,23 @@ const dispositionText = () => {
     console.log(delayDay.value, "delayDay.value");
 
     if (!regexDay.test(delayDay.value)) {
-        bus.emit("promptModalErr", "格式有误001");
+        bus.emit("promptModalErr", "Format Error !001");
         return;
     }
     if (!regexWeek.test(periodWeek.value)) {
-        bus.emit("promptModalErr", "格式有误02");
+        bus.emit("promptModalErr", "Format Error !02");
         return;
     }
     if (!regex.test(tokenDecimals.value) || !regex.test(tokenClockMode.value)) {
-        bus.emit("promptModalErr", "格式有误03");
+        bus.emit("promptModalErr", "Format Error !03");
         return;
     }
     if (proposalAbsolute.value && !regex.test(proposalAbsolute.value)) {
-        bus.emit("promptModalErr", "格式有误04");
+        bus.emit("promptModalErr", "Format Error !04");
         return;
     }
     if (proposalPercent.value && !regex.test(proposalPercent.value)) {
-        bus.emit("promptModalErr", "格式有误05");
+        bus.emit("promptModalErr", "Format Error !05");
         return;
     }
     // if (tokenDecimalsOld.value) {
@@ -142,10 +142,10 @@ bus.on("governorcopy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "Governor复制成功");
+        bus.emit("promptModalSuccess", "Governor Copy Successful !");
     } catch (e) {
-        //复制失败
-        bus.emit("promptModalErr", "Governor复制失败");
+        // Copy Failed
+        bus.emit("promptModalErr", "Governor Copy Failed !");
     }
 });
 // 下载文件

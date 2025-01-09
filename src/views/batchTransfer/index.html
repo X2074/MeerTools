@@ -1,8 +1,8 @@
 <div class="batch-transfer" v-route-loading="confirmLoading">
     <div class="header flex">
         <div class="header-text">
-            <h2>批量转账</h2>
-            <p class="mt-24">高效便捷，操作简单，快速实现资金的集中调配和分散管理。</p>
+            <h2>Batch Transfer</h2>
+            <p class="mt-24">Efficient and convenient—quickly centralize funds and manage them with ease.</p>
         </div>
         <img src="/images/batchTransfer/transfer.png" alt="">
     </div>
@@ -10,7 +10,7 @@
     <div class="wallt-id flex">
         <div class="wallt-id-area flex">
             <div class="id">
-                账户 ID-ELEVEN
+                Acct ID-ELEVEN
                 <div class="id-address flex mt-16">
                     <p class="mr-8">{{status == "connected" ? address : status}}</p>
                     <img v-if="status == 'connected'" @click="copy(address)" src="/images/icons/copy.png" alt="">
@@ -21,7 +21,7 @@
     </div>
 
     <div class="currency mt-60">
-        <h3>币种</h3>
+        <h3>Token</h3>
         <a-select class="select-box" size="small" placeholder="请选择币种" v-model:value="walltAddress"
             @search="getTokenListSearch" showSearch>
             <a-select-option v-for="(item, index) in tokenList" :key="index" :value="item.address">
@@ -31,7 +31,7 @@
             <template #notFoundContent>
                 <div class="diy-emty pb-20">
                     <img src="/images/icons/undefined.png" alt="">
-                    <p class="mt-12">没有找到相关内容</p>
+                    <p class="mt-12">No Content Found !</p>
                 </div>
             </template>
         </a-select>
@@ -39,10 +39,11 @@
 
     <div class="table-address mt-40">
         <div class="header">
-            <h3>请填写详细信息</h3>
+            <h3>Enter Details</h3>
             <div class="text-demo mt-10 flex">
-                <p class="text">填写收款人地址自动生成序号；请按照顺序填写收款人的地址，并且输入相应的转账金额。</p>
-                <p class="demo" @click="lookDemo">查看例子</p>
+                <p class="text">Serial numbers are auto-generated based on the receiving addresses entered. Please enter
+                    receiving addresses sequentially and specify the corresponding transfer amounts. </p>
+                <p class="demo" @click="lookDemo">Example</p>
             </div>
         </div>
     </div>
@@ -52,18 +53,19 @@
         <table cellspacing="0">
             <thead>
                 <tr>
-                    <th>序号</th>
-                    <th>收款人地址</th>
-                    <th>转账金额</th>
-                    <th>操作</th>
+                    <th>No.</th>
+                    <th>Receiving Address</th>
+                    <th>Transfer Amount</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <template v-for="(item,index) in allEvents">
                     <tr>
                         <td>{{index + 1}}</td>
-                        <td><input placeholder="收款人地址" type="text" v-model="item.address"></td>
-                        <td><input @keypress="onlyAllowNumbers" placeholder="转账金额" type="number" v-model="item.amount">
+                        <td><input placeholder="Receiving Address" type="text" v-model="item.address"></td>
+                        <td><input @keypress="onlyAllowNumbers" placeholder="Transfer Amount" type="number"
+                                v-model="item.amount">
                         </td>
                         <td>
                             <p @click="deleteAddress(index)">delete</p>
@@ -94,44 +96,44 @@
 <dialogModal title="订单确认" v-model="confirmation" @close="confirmation = false">
     <div class="confirmation-content pl-24 pr-24 pt-24">
         <div class="confirmation-children flex">
-            <p class="name">币种：</p>
+            <p class="name">Token：</p>
             <p class="content">{{sendData['name']}}</p>
         </div>
         <div class="confirmation-children flex">
-            <p class="name">地址总数：</p>
+            <p class="name">Total Addresses:</p>
             <p class="content">{{tokenAmountList.length}}</p>
         </div>
         <div class="confirmation-children flex">
-            <p class="name">交易总数：</p>
+            <p class="name">Total Transactions:</p>
             <p class="content">1</p>
         </div>
         <div class="confirmation-children flex">
-            <p class="name">代币发送总数：</p>
+            <p class="name">Total Tokens Sent:</p>
             <p class="content">{{sendData['allAmount']}}</p>
         </div>
         <div class="confirmation-children flex">
-            <p class="name">代币余额：</p>
+            <p class="name">Token Balance:</p>
             <p class="content">{{sendData['balance']}} {{sendData['symbol']}}</p>
         </div>
         <div class="confirmation-children flex">
-            <p class="name">您的余额：</p>
+            <p class="name">Your Balance:</p>
             <p class="content">{{sendData['formatted']}} {{sendData['symbolWallt']}}</p>
         </div>
         <div class="confirmation-children flex">
-            <p class="name">预估消耗：</p>
+            <p class="name">Estimate Fees:</p>
             <p class="content">{{sendData['gasPrice']}}</p>
         </div>
         <div class="confirmation-children flex">
-            <p class="name">手续费：</p>
+            <p class="name">Fee:</p>
             <p class="content">{{sendData['fee']}}</p>
         </div>
         <div class="btn" @click="confirmSend">
-            确认
+            Confirm
         </div>
     </div>
 </dialogModal>
 <!-- 交易详情 -->
 <dialogModal v-model="lookHash" :footer="'whether'" @confirm="confirmHash" @close="lookHash = false">
     <p>HASH:{{sendHash}}</p>
-    <p class="pl-16 pr-16 pt-16">是否查看交易详情？</p>
+    <p class="pl-16 pr-16 pt-16">View Txn Details?</p>
 </dialogModal>

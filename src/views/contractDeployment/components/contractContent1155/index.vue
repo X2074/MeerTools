@@ -142,10 +142,10 @@ bus.on("ERC1155copy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "ERC1155复制成功");
+        bus.emit("promptModalSuccess", "ERC1155 Copy Successful !");
     } catch (e) {
-        //复制失败
-        bus.emit("promptModalErr", "ERC1155复制失败");
+        // Copy Failed
+        bus.emit("promptModalErr", "ERC1155 Copy Failed !");
     }
 });
 // 下载文件

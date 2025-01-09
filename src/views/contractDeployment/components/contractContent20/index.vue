@@ -179,10 +179,10 @@ bus.on("ERC20copy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "ERC20复制成功");
+        bus.emit("promptModalSuccess", "ERC20 Copy Successful !");
     } catch (e) {
-        //复制失败
-        bus.emit("promptModalErr", "ERC20复制失败");
+        // Copy Failed
+        bus.emit("promptModalErr", "ERC20 Copy Failed !");
     }
 });
 // 下载文件

@@ -101,7 +101,7 @@ const deleteAddress = (index) => {
 // 确认地址-交易
 const confirmAddress = () => {
     if (!allEvents.value || !allEvents.value.length) {
-        bus.emit("promptModalErr", "请添加收款人信息");
+        bus.emit("promptModalErr", "Please Add Receiving Information !");
         return;
     }
     let dataAddress = [];
@@ -121,11 +121,11 @@ const confirmAddress = () => {
         }
     });
     if (dataAddress && dataAddress.length) {
-        bus.emit("promptModalErr", "收款人地址有误");
+        bus.emit("promptModalErr", "Invalid Receiving Address !");
         return;
     }
     if (dataAmount && dataAmount.length) {
-        bus.emit("promptModalErr", "转账金额有误");
+        bus.emit("promptModalErr", "Invalid Transfer Amount !");
         return;
     }
     sendTransfer();
@@ -137,10 +137,10 @@ const copy = async (Msg: any) => {
     try {
         //复制
         await toClipboard(Msg);
-        bus.emit("promptModalSuccess", "复制成功");
+        bus.emit("promptModalSuccess", " Copy Successful !");
     } catch (e) {
-        //复制失败
-        bus.emit("promptModalErr", "复制失败");
+        // Copy Failed
+        bus.emit("promptModalErr", " Copy Failed !");
     }
 };
 // 获取所有的币种
@@ -240,7 +240,7 @@ const ethSend = async (account, gasPrice, token) => {
         !sendData.value["balance"] ||
         parseAmount(sendData.value["balance"] + "", token.decimals) < allAmount
     ) {
-        bus.emit("promptModalErr", "账户余额不足");
+        bus.emit("promptModalErr", "Insufficient Balance !");
         confirmLoading.value = false;
         return;
     }
@@ -288,7 +288,7 @@ const tokenSend = async (account, gasPrice, token) => {
             allTokenAmount
     ) {
         confirmLoading.value = false;
-        bus.emit("promptModalErr", "账户余额不足");
+        bus.emit("promptModalErr", "Insufficient Balance !");
         return;
     }
 

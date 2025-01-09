@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import router from './router/index'
 import VueAxios from 'vue-axios'
 import dialogModal from "@/components/dialogModal/index.vue"
-import axios from './utils/request'
 import App from './App.vue'
 import './style.css'
 import { config } from './wagmi'
@@ -41,8 +40,6 @@ import {
 const app = createApp(App)
 app.directive('loading', loadingDirective)
 app.directive('route-loading', routeDirective)
-
-app.use(VueAxios, axios)
 app.use(router)
     .use(VueCropper)
     .use(Checkbox)

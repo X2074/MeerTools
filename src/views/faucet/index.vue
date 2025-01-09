@@ -110,7 +110,7 @@ const sendMeer = async () => {
         // 判断地址是否存在
         if (!isValid) {
             console.log("地址有误，请重新填写");
-            bus.emit("promptModalErr", "地址有误，请重新填写");
+            bus.emit("promptModalErr", "Invalid Address, Please Re-enter !");
             faucetLoading.value = false;
             return;
         }

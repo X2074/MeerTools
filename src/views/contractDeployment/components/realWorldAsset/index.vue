@@ -235,10 +235,10 @@ bus.on("realWorldAssetcopy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "Real-World Asset*复制成功");
+        bus.emit("promptModalSuccess", "Real-World Asset* Copy Successful !");
     } catch (e) {
-        //复制失败
-        bus.emit("promptModalErr", "Real-World Asset*复制失败");
+        // Copy Failed
+        bus.emit("promptModalErr", "Real-World Asset* Copy Failed !");
     }
 });
 // 下载文件

@@ -216,10 +216,10 @@ bus.on("ERC721copy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "ERC721复制成功");
+        bus.emit("promptModalSuccess", "ERC721 Copy Successful !");
     } catch (e) {
-        //复制失败
-        bus.emit("promptModalErr", "ERC721复制失败");
+        // Copy Failed
+        bus.emit("promptModalErr", "ERC721 Copy Failed !");
     }
 });
 // 下载文件

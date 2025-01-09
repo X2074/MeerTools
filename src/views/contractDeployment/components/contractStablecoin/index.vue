@@ -206,10 +206,10 @@ bus.on("stablecoincopy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "Stablecoin复制成功");
+        bus.emit("promptModalSuccess", "Stablecoin Copy Successful !");
     } catch (e) {
-        //复制失败
-        bus.emit("promptModalErr", "Stablecoin复制失败");
+        // Copy Failed
+        bus.emit("promptModalErr", "Stablecoin Copy Failed !");
     }
 });
 // 下载文件

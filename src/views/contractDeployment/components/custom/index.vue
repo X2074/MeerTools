@@ -94,10 +94,10 @@ bus.on("customcopy", async (type) => {
     try {
         //复制
         await toClipboard(solContent.value);
-        bus.emit("promptModalSuccess", "Custom复制成功");
+        bus.emit("promptModalSuccess", "Custom Copy Successful !");
     } catch (e) {
-        //复制失败
-        bus.emit("promptModalErr", "Custom复制失败");
+        // Copy Failed
+        bus.emit("promptModalErr", "Custom Copy Failed !");
     }
 });
 // 下载文件
