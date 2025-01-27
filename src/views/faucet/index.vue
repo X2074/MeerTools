@@ -11,6 +11,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import faucetContract from "@/contract/faucet.js";
 import { JsonRpcProvider } from "@ethersproject/providers/lib/json-rpc-provider.js";
 import bus from "@/utils/bus.js";
+import { RPC } from "@/api/constant";
 let sendSuccess = ref(false); //交易成功
 let transactionHash = ref(""); //交易成功的hash
 let faucetLoading = ref(true);
@@ -24,9 +25,7 @@ onMounted(async () => {
     dayjs.extend(relativeTime);
     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
         try {
-            let providerRpc = new ethers.providers.JsonRpcProvider(
-                "https://testnet-qng.rpc.qitmeer.io"
-            );
+            let providerRpc = new ethers.providers.JsonRpcProvider(RPC);
             let wallet = new ethers.Wallet(pKey, providerRpc);
             console.log(wallet, "wallet.value");
             const contract = faucetContract(wallet);
@@ -67,9 +66,7 @@ onMounted(async () => {
 const showList = async (pages?) => {
     faucetLoading.value = true;
     let eventName = "SendToken";
-    let providerRpc = new ethers.providers.JsonRpcProvider(
-        "https://testnet-qng.rpc.qitmeer.io"
-    );
+    let providerRpc = new ethers.providers.JsonRpcProvider(RPC);
     const contract = faucetContract(providerRpc);
     contract
         .queryFilter(eventName)
@@ -115,9 +112,7 @@ const sendMeer = async () => {
             return;
         }
         // 判断地址领取资格
-        let providerRpc = new ethers.providers.JsonRpcProvider(
-            "https://testnet-qng.rpc.qitmeer.io"
-        );
+        let providerRpc = new ethers.providers.JsonRpcProvider(RPC);
         let wallet = new ethers.Wallet(pKey, providerRpc);
         const contract = faucetContract(wallet);
         console.log(contract, "contract");
