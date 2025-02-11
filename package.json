@@ -44,7 +44,7 @@
     "jszip": "^3.10.1",
     "markdown-it": "^13.0.2",
     "mitt": "^3.0.1",
-    "node-sass": "^7.0.1",
+    "node-sass": "^8.0.0",
     "postcss-pxtorem": "^6.1.0",
     "qrcodejs2-fix": "^0.0.1",
     "rollup-plugin-visualizer": "^5.12.0",

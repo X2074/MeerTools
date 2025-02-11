@@ -79,7 +79,8 @@
         </div>
     </div>
 
-    <div class="confirm-btn" :class="!allEvents || !allEvents.length ?'un-confirm-btn':''" @click="confirmAddress">确认
+    <div class="confirm-btn" :class="!allEvents || !allEvents.length ?'un-confirm-btn':''" @click="confirmAddress">
+        Confirm
     </div>
 </div>
 
@@ -93,7 +94,7 @@
     </div>
 </dialogModal>
 <!-- 订单确认 -->
-<dialogModal title="订单确认" v-model="confirmation" @close="confirmation = false">
+<dialogModal title="Order Confirmation" v-model="confirmation" @close="confirmation = false">
     <div class="confirmation-content pl-24 pr-24 pt-24">
         <div class="confirmation-children flex">
             <p class="name">Token：</p>
