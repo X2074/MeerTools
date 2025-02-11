@@ -60,15 +60,15 @@ const menus = [
         ],
     },
     { name: "Block Explorer", path: "" },
-    {
-        name: "Block Explorer",
-        child: [
-            {
-                name: "xx",
-                path: "",
-            },
-        ],
-    },
+    // {
+    //     name: "Block Explorer",
+    //     child: [
+    //         {
+    //             name: "xx",
+    //             path: "",
+    //         },
+    //     ],
+    // },
     { name: "qitmeer", path: "https://qitmeer.io/" },
 ];
 const goPath = (path) => {
