@@ -26,7 +26,7 @@
       <div class="item-left">
         <p class="p1">Woowow</p>
         <p class="p2">AI Agent-Based NFT Trading Platform</p>
-        <p class="p3">Woolow leads the path of NFT innovation!</p>
+        <p class="p3">Woowow leads the path of NFT innovation!</p>
       </div>
       <div class="item-right">
         <img src="/images/index/woowow.svg" alt="" />
@@ -56,7 +56,12 @@
     </div>
     <div class="tool-body">
       <div class="tool-left">
-        <div class="tool-item" v-for="(item,i) in tool" :key="i">
+        <div
+          class="tool-item"
+          v-for="(item,i) in tool"
+          :key="i"
+          @click="goTo(item.link)"
+        >
           <p class="p1">{{item.title}}</p>
           <p class="p2">{{item.txt}}</p>
         </div>
@@ -79,7 +84,7 @@
       A one-stop platform for on-chain information queries, offering
       comprehensive insights into on-chain data.
     </p>
-    <a class="btn active" target="_blank" href="">
+    <a class="btn active" target="_blank" href="https://qng.qitmeer.io/">
       <span>Go</span>
       <i></i>
     </a>

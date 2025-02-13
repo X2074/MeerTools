@@ -4,26 +4,32 @@
 <template src="./index.html"></template>
 <script lang="ts" setup>
 import { ref, onMounted, watch } from "vue";
+import router from "@/router";
 const tool = [
   {
     title: "Faucet",
     txt: "Get your free MEER test tokens and start your blockchain journey.",
+    link: "https://faucet.qitmeer.io",
   },
   {
     title: "Batch Transfer",
     txt: "A convenient on-chain transfer tool that makes it easy to manage asset distribution.",
+    link: "/batchTransfer",
   },
   {
     title: "Smart Contract Auto Deployment",
     txt: "One-click deployment, simplifying the development of smart contracts.",
+    link: "/batchTransfer",
   },
   {
     title: "Supply Query",
     txt: "Obtain the circulation and total supply dynamics of MEER in real time.",
+    link: "/supplyQuery",
   },
   {
     title: "Ecological Project Review",
     txt: "Ensuring our ecosystem projects meet the highest standards.",
+    link: "",
   },
 ];
 
@@ -47,10 +53,18 @@ const ecological = [
     img: "/images/index/kahf.svg",
   },
   {
-    title: "Candy Swap",
-    txt: "Candy swap is a decentralized trading platform using AMM, empowering users to trade assets seamlessly.",
+    title: "Candyswap",
+    txt: "Candyswap is a decentralized trading platform using AMM, empowering users to trade assets seamlessly.",
     link: "https://candyswap.exchange/swap",
     img: "/images/index/candy.svg",
   },
 ];
+const goTo = (link) => {
+  /* if (link.indexOf("http") > -1) {
+    window.open(link, "_blank");
+    return;
+  } */
+  let path = router.resolve({ path: link });
+  window.open(path.href, "_blank");
+};
 </script>
