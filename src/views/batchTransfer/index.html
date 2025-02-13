@@ -36,7 +36,6 @@
             </template>
         </a-select>
     </div>
-
     <div class="table-address mt-40">
         <div class="header">
             <h3>Enter Details</h3>
@@ -64,7 +63,7 @@
                     <tr>
                         <td>{{index + 1}}</td>
                         <td><input placeholder="Receiving Address" type="text" v-model="item.address"></td>
-                        <td><input @keypress="onlyAllowNumbers" placeholder="Transfer Amount" type="number"
+                        <td><input @keypress="onlyAllowNumbers" placeholder="Transfer Amount" type="text"
                                 v-model="item.amount">
                         </td>
                         <td>
