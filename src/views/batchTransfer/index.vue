@@ -7,16 +7,11 @@ import { ref, onMounted, watch, toRaw } from "vue";
 import { QITMEER_HASH } from "@/config/constants/constant";
 import useClipboard from "vue-clipboard3";
 const { toClipboard } = useClipboard();
-import { useConnect, useAccount, useDisconnect } from "@wagmi/vue";
+import { useConnect, useAccount } from "@wagmi/vue";
+import { watchAccount } from "@wagmi/core";
 import defaultTokenList from "@/config/tokens/index";
 import Web3 from "web3";
-import {
-    accAdd,
-    accMul,
-    formatAmount,
-    formatBalance,
-    parseAmount,
-} from "@/utils/format";
+import { accAdd, parseAmount } from "@/utils/format";
 import { waitForWaltConnect } from "@/utils";
 import { NATIVE } from "@/config/constants/native";
 import bus from "@/utils/bus.js";
@@ -36,7 +31,6 @@ import { ethers } from "ethers";
 
 let sendHash = ref("");
 let walltAddress = ref(""); //选择的钱包地址
-let walltAddressOld = ref(""); //选择的旧的钱包地址
 let tokenList = ref([]);
 let lookHash = ref(false);
 let sendData = ref();
@@ -53,7 +47,6 @@ let loginWallt = ref(false);
 let addressList = ref([]);
 // 每个账户转账数量的数组
 let tokenAmountList = ref([]);
-let sendValue = 1;
 let confirmation = ref(false);
 // 交易的时候提前保留的数据
 let sendContent = ref({});
@@ -62,7 +55,6 @@ let sendContent = ref({});
  * 获取token合约
  */
 const getTokenContract = async (address, abi) => {
-    const account = getAccount(config);
     // 使用ethers生成ether合约实例，用来处理viem实例不易处理的问题
     const providerEth = new ethers.providers.Web3Provider(window.ethereum);
     const tokenContract = new ethers.Contract(address, abi, providerEth);
@@ -85,7 +77,21 @@ watch(
     },
     { immediate: true }
 );
-
+// 监听账户切换操作
+watchAccount(config, {
+    onChange(res) {
+        if (res.isConnected) {
+            walltAddress.value = "";
+            allEvents.value = [];
+            getTokenList();
+        } else {
+            // 第一次获取的状态是false，此处需要做特殊处理，判断是否真的未登录状态
+            // if (store.getters.token !== '') {
+            // store.dispatch('user/logout')
+            // }
+        }
+    },
+});
 // 新增地址
 const addAddress = () => {
     let data = {
@@ -112,6 +118,7 @@ const confirmAddress = () => {
     const regexN = /^\d+(\.\d+)?$/;
     // 数据初始化
     tokenAmountList.value = [];
+    addressList.value = [];
     allEvents.value.forEach((item, index) => {
         addressList.value.push(item.address);
         tokenAmountList.value.push(item.amount);
@@ -180,6 +187,8 @@ const sendTransfer = async () => {
     // 获取币种实例
     if (token.address) {
         let contract20 = await getTokenContract(token.address, erc20);
+        console.log(contract20, "contract20", address.value);
+
         try {
             balance = await contract20.balanceOf(address.value);
         } catch (error) {
@@ -260,6 +269,8 @@ const ethSend = async (account, gasPrice, token) => {
             gasPrice: gasPrice,
         });
         const hash = await writeContract(config, request);
+        console.log(hash, "hashhashhash");
+
         const receipt = await waitForTransactionReceipt(config, { hash: hash });
         sendHash.value = hash;
         confirmLoading.value = false;
@@ -268,6 +279,7 @@ const ethSend = async (account, gasPrice, token) => {
         return hash;
     } catch (err) {
         bus.emit("promptModalErr", "Transaction Failed !");
+        confirmLoading.value = false;
         console.log(err, "错误");
         return err;
     }
@@ -278,6 +290,7 @@ const tokenSend = async (account, gasPrice, token) => {
         Transfer_ABI.address,
         Transfer_ABI.abi
     );
+
     let fee = await contract.fee();
     const tokenAmount = allEvents.value.map((item) =>
         parseAmount(item.amount + "", token.decimals).toString()
@@ -334,6 +347,7 @@ const tokenSend = async (account, gasPrice, token) => {
         return hash;
     } catch (err) {
         bus.emit("promptModalErr", "Transaction Failed !");
+        confirmLoading.value = false;
         console.log(err, "错误");
         return err;
     }
