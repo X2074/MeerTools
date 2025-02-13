@@ -47,6 +47,7 @@
       display: flex;
       justify-content: space-between;
       gap: 24px;
+      transition: all 0.2s ease;
       .item-left {
         width: 75%;
         display: flex;
@@ -82,6 +83,12 @@
           width: 100%;
           height: auto;
         }
+      }
+      * {
+        cursor: pointer;
+      }
+      &:hover {
+        box-shadow: 0px 0px 16px 0px #ffffff40;
       }
     }
     .card-item3 {
