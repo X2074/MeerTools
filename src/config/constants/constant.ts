@@ -6,7 +6,7 @@ export const QITMEER_HASH = "https://testnet-qng.qitmeer.io/tx/"
  * w3m项目id
  * @type {string}
  */
-export const W3M_PROJECT_ID = '57906c2a53779d0eeed9b515095f6d3b'
+export const W3M_PROJECT_ID = 'b0b51ca4619ee8217d0b75248e29c3ae'
 /**
  * 可用网络的rpc信息
  */

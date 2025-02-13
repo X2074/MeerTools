@@ -6,7 +6,7 @@ import { useConnect, useAccount, useDisconnect } from "@wagmi/vue";
 import { config } from "@/wagmi";
 import { changeChain } from "@/utils/wallet";
 import { waitForWaltConnect } from "@/utils";
-import { DEFAULT_CHAINID } from "@/api/constant";
+import { DEFAULT_CHAINID } from "@/config/constants/constant";
 import { useRouter } from "vue-router";
 import store from "@/store";
 import bus from "@/utils/bus.js";
@@ -59,7 +59,7 @@ const menus = [
             },
         ],
     },
-    { name: "Block Explorer", path: "" },
+    { name: "Block Explorer", path: "https://qng.qitmeer.io/" },
     // {
     //     name: "Block Explorer",
     //     child: [

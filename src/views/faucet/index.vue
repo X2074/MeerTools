@@ -9,9 +9,9 @@ import dayjs from "dayjs";
 
 import relativeTime from "dayjs/plugin/relativeTime";
 import faucetContract from "@/contract/faucet.js";
-import { JsonRpcProvider } from "@ethersproject/providers/lib/json-rpc-provider.js";
+import { QITMEER_HASH } from "@/config/constants/constant";
 import bus from "@/utils/bus.js";
-import { RPC } from "@/api/constant";
+import { RPC } from "@/config/constants/constant";
 let sendSuccess = ref(false); //交易成功
 let transactionHash = ref(""); //交易成功的hash
 let faucetLoading = ref(true);
@@ -179,5 +179,8 @@ const sendMeer = async () => {
 };
 const pageChange = (e) => {
     current.value = e;
+};
+const confirmHash = (sendHash) => {
+    window.open(QITMEER_HASH + sendHash);
 };
 </script>

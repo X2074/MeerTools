@@ -11,7 +11,7 @@
 </div>
 <div class="content-block">
   <div class="cards">
-    <div class="card-item">
+    <a class="card-item" href="https://dimai.ai/index" target="_blank">
       <div class="item-left">
         <p class="p1">DimAI</p>
         <p class="p2">AIGC-Powered One-Stop NFT Creation Platform</p>
@@ -21,18 +21,22 @@
         </p>
       </div>
       <div class="item-right"><img src="/images/index/dimai.svg" alt="" /></div>
-    </div>
-    <div class="card-item shadow">
+    </a>
+    <a class="card-item" href="https://woowow.io/" target="_blank">
       <div class="item-left">
         <p class="p1">Woowow</p>
         <p class="p2">AI Agent-Based NFT Trading Platform</p>
-        <p class="p3">Woolow leads the path of NFT innovation!</p>
+        <p class="p3">Woowow leads the path of NFT innovation!</p>
       </div>
       <div class="item-right">
         <img src="/images/index/woowow.svg" alt="" />
       </div>
-    </div>
-    <div class="card-item card-item3">
+    </a>
+    <a
+      class="card-item card-item3"
+      href="https://t.me/Julian0818"
+      target="_blank"
+    >
       <div class="item-left">
         <p class="p1">Advertising for Rent</p>
         <p class="p2">Brand Display for Lease</p>
@@ -42,7 +46,7 @@
         </p>
       </div>
       <div class="item-right"><img src="/images/index/dimai.svg" alt="" /></div>
-    </div>
+    </a>
   </div>
   <div class="tool">
     <div class="title">
@@ -52,7 +56,12 @@
     </div>
     <div class="tool-body">
       <div class="tool-left">
-        <div class="tool-item" v-for="(item,i) in tool" :key="i">
+        <div
+          class="tool-item"
+          v-for="(item,i) in tool"
+          :key="i"
+          @click="goTo(item.link)"
+        >
           <p class="p1">{{item.title}}</p>
           <p class="p2">{{item.txt}}</p>
         </div>
@@ -75,7 +84,7 @@
       A one-stop platform for on-chain information queries, offering
       comprehensive insights into on-chain data.
     </p>
-    <a class="btn active" target="_blank" href="">
+    <a class="btn active" target="_blank" href="https://qng.qitmeer.io/">
       <span>Go</span>
       <i></i>
     </a>

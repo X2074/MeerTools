@@ -1,6 +1,6 @@
 import { http, createConfig } from '@wagmi/core'
 import { walletConnect, injected } from '@wagmi/vue/connectors'
-import { CHAINS, DEFAULT_CHAINID, W3M_PROJECT_ID } from '@/api/constant'
+import { CHAINS, DEFAULT_CHAINID, W3M_PROJECT_ID } from '@/config/constants/constant'
 
 export const config = createConfig({
 	chains: CHAINS,

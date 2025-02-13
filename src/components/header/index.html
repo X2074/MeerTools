@@ -7,9 +7,7 @@
     <div class="tool-menus">
       <div class="menu-list flex">
         <div class="menus-item mr-38" v-for="(item,i) in menus" :key="i">
-          <span v-if="item.path" @click="goPath(child.path)"
-            >{{item.name}}</span
-          >
+          <span v-if="item.path" @click="goPath(item.path)">{{item.name}}</span>
           <span v-else>{{item.name}}</span>
           <img
             v-if="item.child && item.child.length>0"

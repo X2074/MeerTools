@@ -46,9 +46,10 @@
 
       display: flex;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
+      transition: all 0.2s ease;
       .item-left {
-        width: 75%;
+        width: 90%;
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -82,6 +83,12 @@
           width: 100%;
           height: auto;
         }
+      }
+      * {
+        cursor: pointer;
+      }
+      &:hover {
+        box-shadow: 0px 0px 16px 0px #ffffff40;
       }
     }
     .card-item3 {

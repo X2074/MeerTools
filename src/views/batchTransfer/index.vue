@@ -4,7 +4,7 @@
 <template src="./index.html"></template>
 <script lang="ts" setup>
 import { ref, onMounted, watch, toRaw } from "vue";
-import { QITMEER_HASH } from "@/api/constant";
+import { QITMEER_HASH } from "@/config/constants/constant";
 import useClipboard from "vue-clipboard3";
 const { toClipboard } = useClipboard();
 import { useConnect, useAccount, useDisconnect } from "@wagmi/vue";
@@ -110,6 +110,8 @@ const confirmAddress = () => {
     const regexA = /^0x[a-fA-F0-9]{40}$/;
     // 正则表达式用于匹配数字（包括小数）但不允许科学计数法
     const regexN = /^\d+(\.\d+)?$/;
+    // 数据初始化
+    tokenAmountList.value = [];
     allEvents.value.forEach((item, index) => {
         addressList.value.push(item.address);
         tokenAmountList.value.push(item.amount);
@@ -262,8 +264,10 @@ const ethSend = async (account, gasPrice, token) => {
         sendHash.value = hash;
         confirmLoading.value = false;
         lookHash.value = true;
+        bus.emit("promptModalSuccess", "Transaction Completed !");
         return hash;
     } catch (err) {
+        bus.emit("promptModalErr", "Transaction Failed !");
         console.log(err, "错误");
         return err;
     }
@@ -326,8 +330,10 @@ const tokenSend = async (account, gasPrice, token) => {
         sendHash.value = hash;
         confirmLoading.value = false;
         lookHash.value = true;
+        bus.emit("promptModalSuccess", "Transaction Completed !");
         return hash;
     } catch (err) {
+        bus.emit("promptModalErr", "Transaction Failed !");
         console.log(err, "错误");
         return err;
     }
@@ -389,7 +395,9 @@ const lookDemo = () => {
 // 限制输入数字
 const onlyAllowNumbers = (event) => {
     const char = String.fromCharCode(event.which);
-    if (!/[0-9]/.test(char)) {
+    console.log(char, "char");
+
+    if (!/^[0-9.]+$/.test(char)) {
         event.preventDefault(); // 阻止输入非数字字符
     }
 };

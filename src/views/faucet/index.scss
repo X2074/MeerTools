@@ -93,6 +93,13 @@
 						width: 20%;
 					}
 				}
+
+				td {
+
+					&:nth-child(1) {
+						cursor: pointer;
+					}
+				}
 			}
 
 			.header {
