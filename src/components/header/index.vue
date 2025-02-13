@@ -109,11 +109,7 @@ const connectLogin = (data) => {
         // 开始登录加载状态
         confirmLoading.value = true;
         waitForWaltConnect().then((isLoaded) => {
-            if (isLoaded) {
-                confirmLoading.value = false;
-            } else {
-                confirmLoading.value = false;
-            }
+            confirmLoading.value = false;
         });
     }
     loginWallt.value = false;
