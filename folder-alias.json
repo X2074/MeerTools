@@ -31,5 +31,8 @@
     },
     "src/views/contractDeployment/components": {
         "description": "合约种类"
+    },
+    "src/config/constants/chains.json": {
+        "description": "预设的chain数据"
     }
 }

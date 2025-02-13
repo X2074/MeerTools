@@ -1,0 +1,56 @@
+{
+    "QngMainnet": {
+        "id": 813,
+        "name": "Qitmeer",
+        "network": "MEER",
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Qitmeer",
+            "symbol": "MEER"
+        },
+        "rpcUrls": {
+            "public": { "http": ["https://qng.rpc.qitmeer.io"] },
+            "default": { "http": ["https://qng.rpc.qitmeer.io"] }
+        },
+        "blockExplorers": {
+            "etherscan": { "name": "Meerscan", "url": "https://qng.meerscan.io/" },
+            "default": { "name": "Meerscan", "url": "https://qng.meerscan.io/" }
+        }
+    },
+    "QngTestnet": {
+        "id": 8131,
+        "name": "Qitmeer Network Testnet",
+        "network": "MEER",
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Qitmeer Testnet",
+            "symbol": "MEER-T"
+        },
+        "rpcUrls": {
+            "public": { "http": ["https://testnet-qng.rpc.qitmeer.io"] },
+            "default": { "http": ["https://testnet-qng.rpc.qitmeer.io"] }
+        },
+        "blockExplorers": {
+            "etherscan": { "name": "Meerscan", "url": "https://testnet-qng.qitmeer.io/" },
+            "default": { "name": "Meerscan", "url": "https://testnet-qng.qitmeer.io/" }
+        }
+    },
+    "AmanaTestnet":{
+        "id": 81341,
+        "name": "Amana Testnet",
+        "network": "MEER",
+        "nativeCurrency": {
+            "decimals": 18,
+            "name": "Amana Testnet",
+            "symbol": "MEER-T"
+        },
+        "rpcUrls": {
+            "public": { "http": ["https://testnet-amana.rpc.qitmeer.io"] },
+            "default": { "http": ["https://testnet-amana.rpc.qitmeer.io"] }
+        },
+        "blockExplorers": {
+            "etherscan": { "name": "Meerscan", "url": "https://amana-testnet.meerscan.io/" },
+            "default": { "name": "Meerscan", "url": "https://amana-testnet.meerscan.io/" }
+        }
+    }
+}
