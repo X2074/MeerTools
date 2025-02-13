@@ -8,30 +8,28 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted } from "vue";
 import { Buffer } from "buffer";
-import { REMIX_URL } from "@/api/constant";
+import { REMIX_URL } from "@/config/constants/constant";
 import { downloadAllFiles } from "@/utils/fileDown";
 import { erc1155 } from "@openzeppelin/wizard";
 import { saveAs } from "file-saver";
-const solContent = ref("");
 import bus from "@/utils/bus.js";
 import useClipboard from "vue-clipboard3";
+const solContent = ref("");
 const { toClipboard } = useClipboard();
 let contarctName = ref("MyToken");
-let contarctSymbol = ref("ETK");
 let baseUrl = ref("");
 let features = ref(["updatableURI"]);
 // access是否可以取消
 const accessOptionsBol = ref(false);
-const accessControlRadio = ref("ownable");
+const accessControlRadio: any = ref("ownable");
 // 控制access是否可以取消
 const accessControlCheck = ref(true);
 const upgradeabilityRadio = ref(null);
 const contarctLicense = ref("MIT");
 const accessControl = ref("");
 const contarctSecurityContact = ref("");
-const upGradeability = ref("");
 const featuresOptions = ref([
     {
         label: "Mintable",

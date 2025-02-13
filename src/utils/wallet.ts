@@ -2,7 +2,7 @@
 import { config } from '../wagmi'
 import { ethers } from 'ethers';
 import { switchChain } from '@wagmi/core'
-import { DEFAULT_CHAINID } from '@/api/constant'
+import { DEFAULT_CHAINID } from '@/config/constants/constant'
 export const changeChain = async (id = DEFAULT_CHAINID) => {
     if (!window.ethereum) return;
     const providerEth = new ethers.providers.Web3Provider(window.ethereum);
