@@ -11,13 +11,13 @@ export default {
 import { ref, onMounted, watch, computed } from "vue";
 import { downloadAllFiles } from "@/utils/fileDown";
 import { Buffer } from "buffer";
-import { REMIX_URL } from "@/api/constant";
+import { REMIX_URL } from "@/config/constants/constant";
 import { saveAs } from "file-saver";
 import bus from "@/utils/bus.js";
 import useClipboard from "vue-clipboard3";
+import { erc20 } from "@openzeppelin/wizard";
 const { toClipboard } = useClipboard();
 const solContent = ref("");
-import { erc20 } from "@openzeppelin/wizard";
 let contarctName = ref("MyToken");
 let contarctSymbol = ref("ETK");
 let premint = ref("0");
@@ -26,13 +26,10 @@ let features = ref(["permit"]);
 const accessControlCheck = ref(false);
 let votesCheck = ref(false);
 const accessOptionsBol = ref(false);
-const accessControlRadio = ref(null);
-const upgradeabilityRadio = ref(null);
+const accessControlRadio: any = ref(null);
 const voteOptionsRadio = ref(null);
 const contarctLicense = ref("MIT");
-const accessControl = ref("");
 const contarctSecurityContact = ref("");
-const upGradeability = ref("");
 const featuresOptions = ref([
     {
         label: "Mintable",

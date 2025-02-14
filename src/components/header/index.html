@@ -9,21 +9,10 @@
         <div class="menus-item mr-38" v-for="(item,i) in menus" :key="i">
           <span v-if="item.path" @click="goPath(item.path)">{{item.name}}</span>
           <span v-else>{{item.name}}</span>
-          <img
-            v-if="item.child && item.child.length>0"
-            src="/images/icons/zoom.svg"
-            alt=""
-          />
-          <div
-            v-if="item.child && item.child.length>0"
-            class="menus-item-children"
-          >
+          <img v-if="item.child && item.child.length>0" src="/images/icons/zoom.svg" alt="" />
+          <div v-if="item.child && item.child.length>0" class="menus-item-children">
             <div class="menu-item-list">
-              <p
-                v-for="(child,c) in item.child"
-                :key="c"
-                @click="goPath(child.path)"
-              >
+              <p v-for="(child,c) in item.child" :key="c" @click="goPath(child.path)">
                 {{child.name}}
               </p>
             </div>
@@ -48,20 +37,25 @@
     <div class="wallt-login flex-center" v-else>
       {{omit(address)}}
       <div class="wallt-loginout ml-16" @click="disconnect();isLogin = false">
-        DoConnect
+        Disconnect
       </div>
     </div>
+    <!-- <div>
+      <p>选择预设网络</p>
+      <a-select v-if="chainsData && chainsData.length" class="select-box" size="small" placeholder="rpc url"
+        v-model:value="chainIdCheck" @change="changeChainId">
+        <a-select-option v-for="item in chainsData" :key="index" :value="item.id">
+          {{ item.name }}
+        </a-select-option>
+      </a-select>
+    </div> -->
   </div>
 </div>
 
 <!-- 登录 -->
 <dialogModal v-model="loginWallt" @close="loginWallt = false">
-  <div
-    class="connect-wallt pl-25 pr-25"
-    v-for="connector in connectors"
-    :key="connector.id"
-    @click="connectLogin({ connector, chainId })"
-  >
+  <div class="connect-wallt pl-25 pr-25" v-for="connector in connectors" :key="connector.id"
+    @click="connectLogin({ connector, chainId })">
     {{ connector.name }}
   </div>
 </dialogModal>

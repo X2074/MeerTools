@@ -10,7 +10,7 @@ export default {
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
 import { Buffer } from "buffer";
-import { REMIX_URL } from "@/api/constant";
+import { REMIX_URL } from "@/config/constants/constant";
 import { downloadAllFiles } from "@/utils/fileDown";
 import { erc721 } from "@openzeppelin/wizard";
 import { saveAs } from "file-saver";

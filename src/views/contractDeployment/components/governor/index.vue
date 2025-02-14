@@ -18,35 +18,30 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted } from "vue";
 import { Buffer } from "buffer";
-import { REMIX_URL } from "@/api/constant";
+import { REMIX_URL } from "@/config/constants/constant";
 import bus from "@/utils/bus.js";
 import { saveAs } from "file-saver";
 import useClipboard from "vue-clipboard3";
-const { toClipboard } = useClipboard();
-import { downloadAllFiles } from "@/utils/fileDown";
 import { governor } from "@openzeppelin/wizard";
+const { toClipboard } = useClipboard();
 const solContent = ref("");
 const contarctName = ref("MyGovernor");
 const delayDay = ref("1 day");
 const periodWeek = ref("1 week");
-const premint = ref("");
-const quorumType = ref("percent");
-const timeLockRadio = ref("openzeppelin");
-const votesRadio = ref("erc20votes");
+const quorumType: any = ref("percent");
+const timeLockRadio: any = ref("openzeppelin");
+const votesRadio: any = ref("erc20votes");
 const contarctLicense = ref("MIT");
 const proposalThreshold = ref("1");
-const tokenDecimals = ref("18");
-// 记录decimals老数据，切换cote的时候使用
-const tokenDecimalsOld = ref("");
+const tokenDecimals: any = ref("18");
 const tokenDecimalsType = ref(["updatableSettings"]);
-const tokenClockMode = ref("12");
-const tokenClockModeRadio = ref("blocknumber");
-const proposalPercent = ref("4");
+const tokenClockMode: any = ref("12");
+const tokenClockModeRadio: any = ref("blocknumber");
+const proposalPercent: any = ref("4");
 const proposalAbsolute = ref("");
 const contarctSecurityContact = ref("");
-const upGradeability = ref("");
 // timelock联动
 let timelockCheck = ref(true);
 
@@ -119,16 +114,6 @@ const dispositionText = () => {
         bus.emit("promptModalErr", "Format Error !05");
         return;
     }
-    // if (tokenDecimalsOld.value) {
-    //     if (votesRadio.value == "erc20votes") {
-    //         tokenDecimals.value = tokenDecimalsOld.value;
-    //     } else if (votesRadio.value == "erc721votes") {
-    //         tokenDecimalsOld.value = tokenDecimals.value;
-    //         tokenDecimals.value = "0";
-    //     }
-    // } else {
-    //     tokenDecimalsOld.value = tokenDecimals.value;
-    // }
     solContentChange();
 };
 

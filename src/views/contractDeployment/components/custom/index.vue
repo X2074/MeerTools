@@ -10,14 +10,14 @@ export default {
 <script lang="ts" setup>
 import { ref, onMounted, watch, computed } from "vue";
 import { Buffer } from "buffer";
-import { REMIX_URL } from "@/api/constant";
+import { REMIX_URL } from "@/config/constants/constant";
 import { downloadAllFiles } from "@/utils/fileDown";
 import { saveAs } from "file-saver";
 import bus from "@/utils/bus.js";
 import useClipboard from "vue-clipboard3";
+import { custom } from "@openzeppelin/wizard";
 const { toClipboard } = useClipboard();
 const solContent = ref("");
-import { custom } from "@openzeppelin/wizard";
 let contarctName = ref("MyContract");
 let features = ref("");
 // access是否可以取消
@@ -25,7 +25,6 @@ const accessControlCheck = ref(false);
 const accessOptionsBol = ref(false);
 const accessControlRadio = ref(null);
 const contarctLicense = ref("MIT");
-const accessControl = ref("");
 const contarctSecurityContact = ref("");
 const featuresOptions = ref([
     {
