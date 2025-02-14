@@ -28,6 +28,7 @@ import Transfer_ABI from "@/config/abi/Transfer.json";
 import erc20 from "@/config/abi/erc20.json";
 import { config } from "@/wagmi";
 import { ethers } from "ethers";
+import { nextTick } from "process";
 
 let sendHash = ref("");
 let walltAddress = ref(""); //选择的钱包地址
@@ -72,7 +73,9 @@ watch(
             loginWallt.value = true;
         }
         if (newV == "connected") {
-            getTokenList();
+            nextTick(() => {
+                getTokenList();
+            });
         }
     },
     { immediate: true }
@@ -154,8 +157,6 @@ const copy = async (Msg: any) => {
 };
 // 获取所有的币种
 const getTokenList = () => {
-    console.log(chainId.value, "chainId.value");
-
     let _tokenList = [...defaultTokenList[chainId.value]];
 
     _tokenList.sort((t1, t2) => {

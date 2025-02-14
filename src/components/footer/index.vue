@@ -59,7 +59,7 @@ menu.value = [
         target: "_blank",
       },
       { name: "Supply Query", path: "/supplyQuery", target: "_blank" },
-      { name: "Ecological Project Review", path: "", target: "_blank" },
+      // { name: "Ecological Project Review", path: "", target: "_blank" },
     ],
   },
   {
