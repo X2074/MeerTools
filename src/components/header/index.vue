@@ -53,10 +53,10 @@ const menus = [
         name: "Supply Query",
         path: "/supplyQuery",
       },
-      {
+      /*  {  //先隐藏掉
         name: "Ecological Project Review",
         path: "",
-      },
+      },  */
     ],
   },
   { name: "Block Explorer", path: "https://qng.qitmeer.io/" },
@@ -72,7 +72,6 @@ const menus = [
   { name: "qitmeer", path: "https://qitmeer.io/" },
 ];
 const goPath = (path) => {
-  console.log(111);
   if (!path) return;
   if (path.startsWith("http")) {
     window.open(path);
