@@ -250,7 +250,7 @@ const ethSend = async (account, gasPrice, token) => {
     );
     if (
         !sendData.value["balance"] ||
-        parseAmount(sendData.value["balance"] + "", token.decimals) < allAmount
+        sendData.value["allAmount"] > sendData.value["balance"]
     ) {
         bus.emit("promptModalErr", "Insufficient Balance !");
         confirmLoading.value = false;
@@ -300,10 +300,10 @@ const tokenSend = async (account, gasPrice, token) => {
     tokenAmount.forEach((item) => {
         allTokenAmount = allTokenAmount + Number(item);
     });
+
     if (
         !sendData.value["balance"] ||
-        parseAmount(sendData.value["balance"] + "", token.decimals) <
-            allTokenAmount
+        sendData.value["allAmount"] > sendData.value["balance"]
     ) {
         confirmLoading.value = false;
         bus.emit("promptModalErr", "Insufficient Balance !");
@@ -403,7 +403,7 @@ const connectLogin = (data) => {
 const lookDemo = () => {
     let data = {
         address: "0xAd9913194870d96905781C610c94b87d95594027",
-        amount: 0.02,
+        amount: 1,
     };
     allEvents.value.push(data);
 };
@@ -412,9 +412,16 @@ const onlyAllowNumbers = (event) => {
     const char = String.fromCharCode(event.which);
     console.log(char, "char");
 
-    if (!/^[0-9.]+$/.test(char)) {
+    if (!/^[0-9]+$/.test(char)) {
         event.preventDefault(); // 阻止输入非数字字符
     }
+    nextTick(() => {
+        allEvents.value.forEach((item, index) => {
+            if (!Number(item.amount)) {
+                item.amount = 1;
+            }
+        });
+    });
 };
 
 const getTokenListSearch = async (val) => {

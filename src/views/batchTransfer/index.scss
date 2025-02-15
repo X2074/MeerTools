@@ -133,6 +133,13 @@
     .table-address {
         .header {
             height: 80px;
+
+            font {
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 12px;
+                color: rgba(154, 154, 154, 1);
+            }
         }
 
         .text-demo {
