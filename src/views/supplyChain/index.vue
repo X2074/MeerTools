@@ -66,10 +66,10 @@ const getChart = () => {
     white: {
       color: "#acff43",
       align: "left",
-      padding: [5, 5],
-      fontSize: 16,
+      padding: [5, 0, 10, 10],
+      fontSize: 12,
     },
-    class1: {
+    /*     class1: {
       color: chartData[0].value,
       align: "center",
       padding: [1, 0],
@@ -98,7 +98,7 @@ const getChart = () => {
       color: chartData[5].value,
       align: "center",
       padding: [1, 0],
-    },
+    }, */
   };
   var placeHolderStyle = {
     normal: {
@@ -135,8 +135,9 @@ const getChart = () => {
       name: "",
       type: "pie",
       clockWise: false,
-      radius: [50, 80],
-      hoverAnimation: false,
+      center: ["52%", "52%"],
+      radius: [50, 75],
+      hoverAnimation: true,
       itemStyle: {
         normal: {
           label: {
@@ -145,23 +146,22 @@ const getChart = () => {
             color: "rgba(154, 154, 154, 1)",
             fontSize: "12",
             formatter: function (params) {
-              // var percent = 0;
-              /* var total = 0;
-              for (var i = 0; i < chartData.length; i++) {
-                total += chartData[i].value;
-              } */
-              // percent = ((params.value / total) * 100).toFixed(0);
               if (params.name !== "") {
-                return params.name + "\n{white|" + params.value + " MEER}";
+                return (
+                  params.name +
+                  "\n{white|" +
+                  params.value.toLocaleString() +
+                  " MEER}"
+                );
               } else {
                 return "";
               }
             },
             rich: rich,
-            padding: [-30, -30, 10, -30],
+            padding: [-15, -50, 15, -35],
           },
           labelLine: {
-            length: 10,
+            length: 20,
             length2: 60,
           },
           lineStyle: {
@@ -174,7 +174,7 @@ const getChart = () => {
   ];
   let option = {
     tooltip: {
-      show: true,
+      show: false,
     },
     legend: {
       show: false,
@@ -183,6 +183,20 @@ const getChart = () => {
       show: false,
     },
     series: seriesObj,
+    emphasis: {
+      label: {
+        // show: true,
+        fontSize: 16, // 鼠标悬浮时字体大小放大
+        rich: {
+          white: {
+            color: "#acff43",
+            align: "left",
+            padding: [5, 0, 10, 10],
+            fontSize: 18,
+          },
+        },
+      },
+    },
   };
 
   const chart = document.getElementById("J_chart");
