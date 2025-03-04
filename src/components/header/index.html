@@ -32,7 +32,7 @@
     </div>
     <div class="flex header-rignt">
       <div class="preset-network mr-16">
-        <p>{{chainIdCheckName}}
+        <p>{{chainIdCheckName || '选择预设网络'}}
           <img src="/images/icons/zoom.svg" alt="">
         </p>
         <div class="network-select" v-if="chainsData">
