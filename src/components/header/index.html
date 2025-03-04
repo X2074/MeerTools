@@ -30,24 +30,35 @@
                 </div> -->
       </div>
     </div>
-    <!-- 登录 -->
-    <div class="wallt-loginout" v-if="!isLogin" @click="loginWallt = true">
-      Connect Wallet
-    </div>
-    <div class="wallt-login flex-center" v-else>
-      {{omit(address)}}
-      <div class="wallt-loginout ml-16" @click="disconnect();isLogin = false">
-        Disconnect
+    <div class="flex header-rignt">
+      <div class="preset-network mr-16">
+        <p>{{chainIdCheckName}}
+          <img src="/images/icons/zoom.svg" alt="">
+        </p>
+        <div class="network-select" v-if="chainsData">
+          <div>
+            <p class="pl-24" :class="{'check':item.id == chainIdCheck}" v-for="item in chainsData" :key="index"
+              @click="changeChainIdFn(item.id)">{{
+              item.name }}</p>
+          </div>
+        </div>
+        <!-- <a-select v-if="chainsData" class="select-box" size="small" placeholder="rpc url" v-model:value="chainIdCheck"
+          @change="changeChainId">
+          <a-select-option :value="item.id">
+            {{ item.name }}
+          </a-select-option>
+        </a-select> -->
       </div>
-    </div>
-    <div>
-      <p>选择预设网络</p>
-      <a-select v-if="chainsData && chainsData.length" class="select-box" size="small" placeholder="rpc url"
-        v-model:value="chainIdCheck" @change="changeChainId">
-        <a-select-option v-for="item in chainsData" :key="index" :value="item.id">
-          {{ item.name }}
-        </a-select-option>
-      </a-select>
+      <!-- 登录 -->
+      <div class="wallt-loginout" v-if="!isLogin" @click="loginWallt = true">
+        Connect Wallet
+      </div>
+      <div class="wallt-login flex-center" v-else>
+        {{omit(address)}}
+        <div class="wallt-loginout ml-16" @click="disconnect();isLogin = false">
+          Disconnect
+        </div>
+      </div>
     </div>
   </div>
 </div>

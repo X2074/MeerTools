@@ -99,5 +99,66 @@
       font-size: 16px;
       color: rgba(172, 255, 67, 1);
     }
+
+
+    .preset-network {
+      border: 1px solid rgba(255, 255, 255, 1);
+      border-radius: 8px;
+      padding: 8px 16px;
+      position: relative;
+
+      &:hover {
+        .network-select>div {
+          display: block;
+          opacity: 1;
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        p {
+          img {
+            transform: rotateZ(180deg);
+          }
+        }
+      }
+
+      p {
+        font-size: 16px;
+
+        img {
+          transform: rotateZ(0deg);
+          width: 20px;
+          height: auto;
+        }
+      }
+
+      .network-select {
+        position: absolute;
+        top: 40px;
+        left: -1px;
+        padding-top: 20px;
+
+        >div {
+          width: 255px;
+          border: 1px solid rgba(255, 255, 255, 1);
+          border-radius: 8px;
+          padding: 8px 0;
+          background-color: #000;
+          opacity: 0;
+          display: none;
+          transition: opacity 0.3s ease-in-out;
+
+          p {
+            height: 36px;
+            line-height: 36px;
+            cursor: pointer;
+
+            &.check,
+            &:hover {
+              background: rgba(255, 255, 255, 0.1);
+            }
+          }
+        }
+      }
+    }
   }
 }
