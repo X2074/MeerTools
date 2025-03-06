@@ -67,4 +67,8 @@ const goTo = (link) => {
   let path = router.resolve({ path: link });
   window.open(path.href, "_blank");
 };
+const toolIndex=ref(1)
+const handleMouseEnter = (i) => {
+toolIndex.value=i+1
+}
 </script>

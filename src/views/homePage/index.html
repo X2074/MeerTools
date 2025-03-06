@@ -45,7 +45,7 @@
           blockchain community!
         </p>
       </div>
-      <div class="item-right"><img src="/images/index/dimai.svg" alt="" /></div>
+      <div class="item-right"><img src="/images/index/rent.svg" alt="" /></div>
     </a>
   </div>
   <div class="tool">
@@ -58,16 +58,18 @@
       <div class="tool-left">
         <div
           class="tool-item"
+          :class="toolIndex==(i+1)?'active':''"
           v-for="(item,i) in tool"
           :key="i"
           @click="goTo(item.link)"
+          @mouseenter="handleMouseEnter(i)"
         >
           <p class="p1">{{item.title}}</p>
           <p class="p2">{{item.txt}}</p>
         </div>
       </div>
       <div class="tool-right">
-        <img src="/images/index/tool.svg" alt="" />
+        <img :src="'/images/index/tool_'+toolIndex+'.svg'" alt="" />
       </div>
     </div>
   </div>

@@ -151,10 +151,8 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      gap: 32px;
       width: 648px;
       height: 92px;
-
       padding: 24px;
       gap: 12px;
       border-radius: 24px;
@@ -167,7 +165,7 @@
         align-items: center;
         gap: 8px;
         flex: 1;
-        min-width: 26%;
+        min-width: 32%;
         i {
           display: inline-block;
           width: 16px;
