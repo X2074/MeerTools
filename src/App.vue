@@ -23,7 +23,10 @@
     <div class="model" v-else>
         <span class="info">
             <p>
-                <span>亲爱的，我们暂时不支持移动端浏览请使用电脑浏览DimAI</span>
+                <span
+                    >The Tools is currently only accessible via desktop
+                    browsers. Mobile access is not supported at this time.</span
+                >
             </p>
         </span>
     </div>
