@@ -69,8 +69,10 @@
         var width = docEl.getBoundingClientRect().width;
         if (width / dpr > 1920) {
             width = 1920 * dpr;
+        } else if (width / dpr <= 1440 && width / dpr > 1000) {
+            width = 1440 * dpr;
         } else if (width / dpr < 1000) {
-            width = 1000 * dpr;
+            width = 1400 * dpr;
         } else {
             // 不限制最大适配范围
             width = width * dpr;
