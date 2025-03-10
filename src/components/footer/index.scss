@@ -135,3 +135,43 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .footer {
+    width: 100%;
+    margin-top: 40px;
+    padding: 0 16px;
+    .footer-body {
+      padding-top: 20px;
+
+      .mobile-sub {
+        display: flex;
+        justify-content: center;
+
+        :deep().subscribe {
+          font-size: 18px;
+
+          >input {
+            font-size: 16px;
+
+            &::-webkit-input-placeholder {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+
+      .footer-top {
+        padding-top: 40px;
+
+        .subscribe-block {
+          display: none;
+        }
+      }
+
+      .footer-bottom {
+        display: none;
+      }
+    }
+  }
+}

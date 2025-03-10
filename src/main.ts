@@ -35,7 +35,7 @@ import javascript from "highlight.js/lib/languages/javascript";
 // import yaml from "highlight.js/lib/languages/json";
 hljs.registerLanguage("javascript", javascript);
 import {
-    Checkbox, Input, Radio, Select, SelectOption, Tooltip, Popover
+    Checkbox, Input, Radio, Select, SelectOption, Tooltip, Popover,Carousel
 } from 'ant-design-vue';
 const app = createApp(App)
 app.directive('loading', loadingDirective)
@@ -49,6 +49,7 @@ app.use(router)
     .use(Radio)
     .use(Popover)
     .use(Tooltip)
+    .use(Carousel)
 app.component('dialogModal', dialogModal)
 app.use(WagmiPlugin, { config }).use(VueQueryPlugin, {})
 app.use(hljsVuePlugin)

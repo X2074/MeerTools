@@ -9,45 +9,47 @@
         <div class="menus-item mr-38" v-for="(item,i) in menus" :key="i">
           <span v-if="item.path" @click="goPath(item.path)">{{item.name}}</span>
           <span v-else>{{item.name}}</span>
-          <img v-if="item.child && item.child.length>0" src="/images/icons/zoom.svg" alt="" />
-          <div v-if="item.child && item.child.length>0" class="menus-item-children">
+          <img
+            v-if="item.child && item.child.length>0"
+            src="/images/icons/zoom.svg"
+            alt=""
+          />
+          <div
+            v-if="item.child && item.child.length>0"
+            class="menus-item-children"
+          >
             <div class="menu-item-list">
-              <p v-for="(child,c) in item.child" :key="c" @click="goPath(child.path)">
+              <p
+                v-for="(child,c) in item.child"
+                :key="c"
+                @click="goPath(child.path)"
+              >
                 {{child.name}}
               </p>
             </div>
           </div>
         </div>
-        <!-- <div class="menus-item mr-38">
-                    区块浏览器
-                </div>
-                <div class="menus-item mr-38">
-                    生态项目
-                    <img src="/images/icons/zoom.svg" alt="">
-                </div>
-                <div class="menus-item mr-38">
-                    Qitmeer官网
-                </div> -->
       </div>
     </div>
     <div class="flex header-rignt">
       <div class="preset-network mr-16">
-        <p>{{chainIdCheckName || '选择预设网络'}}
-          <img src="/images/icons/zoom.svg" alt="">
+        <p>
+          {{chainIdCheckName || '选择预设网络'}}
+          <img src="/images/icons/zoom.svg" alt="" />
         </p>
         <div class="network-select" v-if="chainsData">
           <div>
-            <p class="pl-24" :class="{'check':item.id == chainIdCheck}" v-for="item in chainsData" :key="index"
-              @click="changeChainIdFn(item.id)">{{
-              item.name }}</p>
+            <p
+              class="pl-24"
+              :class="{'check':item.id == chainIdCheck}"
+              v-for="item in chainsData"
+              :key="index"
+              @click="changeChainIdFn(item.id)"
+            >
+              {{ item.name }}
+            </p>
           </div>
         </div>
-        <!-- <a-select v-if="chainsData" class="select-box" size="small" placeholder="rpc url" v-model:value="chainIdCheck"
-          @change="changeChainId">
-          <a-select-option :value="item.id">
-            {{ item.name }}
-          </a-select-option>
-        </a-select> -->
       </div>
       <!-- 登录 -->
       <div class="wallt-loginout" v-if="!isLogin" @click="loginWallt = true">
@@ -59,14 +61,38 @@
           Disconnect
         </div>
       </div>
+      <img
+        class="switch-layout"
+        src="/images/icons/switchLayout1.svg"
+        @click="switchMenu"
+      />
     </div>
   </div>
 </div>
 
 <!-- 登录 -->
 <dialogModal v-model="loginWallt" @close="loginWallt = false">
-  <div class="connect-wallt pl-25 pr-25" v-for="connector in connectors" :key="connector.id"
-    @click="connectLogin({ connector, chainId })">
+  <div
+    class="connect-wallt pl-25 pr-25"
+    v-for="connector in connectors"
+    :key="connector.id"
+    @click="connectLogin({ connector, chainId })"
+  >
     {{ connector.name }}
   </div>
 </dialogModal>
+
+<div class="menu-block" :class="{'scale1':showMenu}">
+  <div class="close-div">
+    <img src="/images/icons/closeW.svg" alt="" @click="showMenu=false" />
+  </div>
+  <div class="flex-between mobile-top">
+    <a href="/index">
+      <img src="/images/header/logo2.png" alt="" class="logo" />
+    </a>
+    <connect></connect>
+  </div>
+  <div class="menu-items flex">
+    <Menu :menu="menus"></Menu>
+  </div>
+</div>

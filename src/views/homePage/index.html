@@ -8,6 +8,7 @@
       Exploring an Efficient, Secure, and Decentralized Blockchain Network
     </p>
   </div>
+  <img src="/images/index/first-m.svg" class="first-m" alt="" />
 </div>
 <div class="content-block">
   <div class="cards">
@@ -48,6 +49,40 @@
       <div class="item-right"><img src="/images/index/rent.svg" alt="" /></div>
     </a>
   </div>
+  <!-- cards 移动端 -->
+  <div class="banner-mobile">
+    <swiper
+      :modules="modules"
+      :slides-per-view="1"
+      :loop="true"
+      :speed="3000"
+      :space-between="10"
+      :autoplay="{ delay: 4000,stopOnLastSlide: false,disableOnInteraction: false,reverseDirection:false}"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+    >
+      <swiper-slide v-for="(banner ,i) in  bannerData" :key="i">
+        <div class="banner-mobile-item flex">
+          <div class="img">
+            <img :src="banner.img" alt="" />
+          </div>
+          <div class="banner-right">
+            <p class="b-title">{{banner.name}}</p>
+            <p class="b-txt">{{banner.text}}</p>
+            <p class="b-info">{{banner.info}}</p>
+            <div class="b-bootom">
+              <a class="b-btn" :href="banner.path" target="_blank">
+                GO
+                <img src="/images/index/arrow.svg" alt="" />
+              </a>
+              <span class="num"><em>{{i+1}}</em>/{{bannerData.length}}</span>
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper>
+  </div>
+
   <div class="tool">
     <div class="title">
       <span>Tool</span>
@@ -72,6 +107,23 @@
         <img :src="'/images/index/tool_'+toolIndex+'.svg'" alt="" />
       </div>
     </div>
+    <a-carousel autoplay :autoplaySpeed="5000" class="tool-body-m">
+      <div
+        class="tool-m-item"
+        :class="toolIndex==(i+1)?'active':''"
+        v-for="(item,i) in tool"
+        :key="i"
+        @click="goTo(item.link)"
+      >
+        <div class="tool-top">
+          <img :src="'/images/index/tool_'+(i+1)+'.svg'" alt="" />
+        </div>
+        <div class="tool-bottom">
+          <p class="tool-title">{{item.title}}</p>
+          <p class="p2">{{item.txt}}</p>
+        </div>
+      </div>
+    </a-carousel>
   </div>
 </div>
 <div class="cell1"></div>

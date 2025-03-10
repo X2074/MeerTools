@@ -3,8 +3,17 @@
 </style>
 <template src="./index.html"></template>
 <script lang="ts" setup>
-import { ref, onMounted, watch } from "vue";
+import { ref } from "vue";
 import router from "@/router";
+
+// 引入样式
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css/bundle";
+import { Autoplay, Navigation, Scrollbar, EffectFade } from "swiper";
+// // 在modules加入要使用的模块
+const modules = [Navigation, Scrollbar, Autoplay];
+
 const tool = [
   {
     title: "Faucet",
@@ -67,8 +76,43 @@ const goTo = (link) => {
   let path = router.resolve({ path: link });
   window.open(path.href, "_blank");
 };
-const toolIndex=ref(1)
+const toolIndex = ref(1);
 const handleMouseEnter = (i) => {
-toolIndex.value=i+1
-}
+  toolIndex.value = i + 1;
+};
+
+const onSwiper = (swiper) => {
+  // console.log(swiper);
+};
+const onSlideChange = () => {
+  // console.log("slide change"); 
+};
+/* const swiperNext = () => {
+  bannerAnimation01.value = false;
+  bannerAnimation02.value = false;
+  swiperSlides.value?.$el.swiper.slideNext();
+}; */
+const bannerData = [
+  {
+    name: "DimAI",
+    path: "https://dimai.ai/index",
+    img: "/images/index/dimai.svg",
+    text: "AIGC-Powered One-Stop NFT Creation Platform",
+    info: " Unleash the value of AI creation, stimulate your creativity, and create unique AI works.",
+  },
+  {
+    name: "Woowow",
+    path: "https://woowow.io/",
+    img: "/images/index/woowow.svg",
+    text: "AI Agent-Based NFT Trading Platform",
+    info: "Woowow leads the path of NFT innovation!",
+  },
+  {
+    name: "Advertising for Rent",
+    path: "https://tools.qitmeer.io",
+    img: "/images/index/rent.svg",
+    text: "Brand Display for Lease",
+    info: "Join our partnership program and amplify your brand globally among the blockchain community!",
+  },
+];
 </script>
