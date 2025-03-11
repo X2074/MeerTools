@@ -90,7 +90,16 @@
     <a href="/index">
       <img src="/images/header/logo2.png" alt="" class="logo" />
     </a>
-    <connect></connect>
+    <!-- 登录 -->
+    <div class="wallt-loginout" v-if="!isLogin" @click="loginWallt = true">
+      Connect Wallet
+    </div>
+    <div class="wallt-login flex-center" v-else>
+      {{omit(address)}}
+      <div class="wallt-loginout ml-16" @click="disconnect();isLogin = false">
+        Disconnect
+      </div>
+    </div>
   </div>
   <div class="menu-items flex">
     <Menu :menu="menus"></Menu>

@@ -51,17 +51,15 @@
       border-bottom: none;
 
       .el-collapse-item__arrow {
-        svg {
-          display: none;
-        }
         display: block;
         width: 12px;
         height: 12px;
-        fill: #fff;
-        color: #fff;
+        // color: #fff;
         background: url(/images/icons/arrow.svg) no-repeat;
         // background-size: contain;
-
+        svg {
+          display: none;
+        }
         &.is-active {
           transform: rotateZ(180deg);
         }
@@ -173,14 +171,9 @@ import { ref, defineProps } from "vue";
 import { ElCollapse, ElCollapseItem } from "element-plus";
 import { useRoute } from "vue-router";
 import "element-plus/theme-chalk/index.css";
-import bus from "@/utils/bus.js";
-const route = useRoute();
 const props = defineProps(["menu"]);
 const activeName = ref([""]);
 const currentName = ref("");
-const show_collapse = (item) => {
-  item.isActive = !item.isActive;
-};
 const clickMenu = (name) => {
   //   showMenu.value = false;
   activeName.value = name;

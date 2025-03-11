@@ -42,11 +42,13 @@ import headerCell from "@/components/header/index.vue";
 import footerCell from "@/components/footer/index.vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
-let isPc = ref(route.name == "index"?true:false);
+let isPc = ref(route.name == "index" ? true : false);
 let homePageLoad = ref(false);
 // 接收方
 bus.on("homePageLoad", (res) => {
   homePageLoad.value = res;
+  if (route.name == "index") isPc.value = true;
+  else isPc.value = false;
 });
 onMounted(() => {
   // cancleEvent();//window的阻止事件
