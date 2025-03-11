@@ -47,13 +47,15 @@ let homePageLoad = ref(false);
 // 接收方
 bus.on("homePageLoad", (res) => {
   homePageLoad.value = res;
-  if (route.name == "index") isPc.value = true;
-  else isPc.value = false;
+  checkPc();
 });
 onMounted(() => {
   // cancleEvent();//window的阻止事件
   // 阻止右键
   document.addEventListener("contextmenu", (event) => event.preventDefault());
+  window.addEventListener("resize", () => {
+    checkPc();
+  });
 });
 const checkPc = () => {
   if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
@@ -63,7 +65,11 @@ const checkPc = () => {
     }
     isPc.value = false;
   } else {
-    isPc.value = true;
+    if (window.innerWidth < 769) {
+      isPc.value = false;
+    } else {
+      isPc.value = true;
+    }
   }
 };
 watch(
