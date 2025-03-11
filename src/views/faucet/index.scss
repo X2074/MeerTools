@@ -109,3 +109,21 @@
 		}
 	}
 }
+
+
+@media screen and (max-width: 768px) {
+	div.faucet {
+		padding: 0 16px;
+		margin-top: 20px;
+
+		.search-line {
+			width: 100% !important;
+			margin: 20px auto;
+
+			.search-area {
+				display: block;
+				height: auto;
+			}
+		}
+	}
+}
