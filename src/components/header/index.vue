@@ -32,42 +32,42 @@ const { disconnect } = useDisconnect();
 <p>供应量查询</p>
 <p>生态项目监管</p> */
 const menus = ref([
-  {
-    name: "Tool module",
-    child: [
-      {
-        name: "Faucet",
-        path: "/faucet",
-      },
-      {
-        name: "Batch Transfer",
-        path: "/batchTransfer",
-      },
-      {
-        name: "Smart Contract Auto Deployment",
-        path: "/contractDeployment",
-      },
-      {
-        name: "Supply Query",
-        path: "/supplyQuery",
-      },
-      /*  {  //先隐藏掉
+    {
+        name: "Tool module",
+        child: [
+            {
+                name: "Faucet",
+                path: "/faucet",
+            },
+            {
+                name: "Batch Transfer",
+                path: "/batchTransfer",
+            },
+            {
+                name: "Smart Contract Auto Deployment",
+                path: "/contractDeployment",
+            },
+            {
+                name: "Supply Query",
+                path: "/supplyQuery",
+            },
+            /*  {  //先隐藏掉
         name: "Ecological Project Review",
         path: "",
       },  */
-    ],
-  },
-  { name: "Block Explorer", path: "https://qng.qitmeer.io/" },
-  // {
-  //     name: "Block Explorer",
-  //     child: [
-  //         {
-  //             name: "xx",
-  //             path: "",
-  //         },
-  //     ],
-  // },
-  { name: "qitmeer", path: "https://qitmeer.io/" },
+        ],
+    },
+    { name: "Block Explorer", path: "https://qng.qitmeer.io/" },
+    // {
+    //     name: "Block Explorer",
+    //     child: [
+    //         {
+    //             name: "xx",
+    //             path: "",
+    //         },
+    //     ],
+    // },
+    { name: "qitmeer", path: "https://qitmeer.io/" },
 ]);
 // 下拉列表的网络
 let chainsData = ref(null);
@@ -75,116 +75,116 @@ let chainsData = ref(null);
 let chainIdCheck = ref(8131);
 let chainIdCheckName = ref("Qitmeer Network Testnet");
 const goPath = (path) => {
-  if (!path) return;
-  if (path.startsWith("http")) {
-    window.open(path);
-  } else {
-    router.push(path);
-  }
+    if (!path) return;
+    if (path.startsWith("http")) {
+        window.open(path);
+    } else {
+        router.push(path);
+    }
 }; // 监听账户切换操作
 watchAccount(config, {
-  onChange(res) {
-    if (res.isConnected) {
-      console.log(res, "resresresresres");
-      // 过滤，看是否是预设的网络
-      let changeChainId = chainsData.value.filter((item) => {
-        if (item.id === res.chainId) return item;
-      });
-      // 如果不是，就切换为预设网络
-      if (!changeChainId || !changeChainId.length) {
-        changeChain(chainIdCheck.value);
-      }
-    } else {
-      // 第一次获取的状态是false，此处需要做特殊处理，判断是否真的未登录状态
-      // if (store.getters.token !== '') {
-      // store.dispatch('user/logout')
-      // }
-    }
-  },
+    onChange(res) {
+        if (res.isConnected) {
+            console.log(res, "resresresresres");
+            // 过滤，看是否是预设的网络
+            let changeChainId = chainsData.value.filter((item) => {
+                if (item.id === res.chainId) return item;
+            });
+            // 如果不是，就切换为预设网络
+            if (!changeChainId || !changeChainId.length) {
+                changeChain(chainIdCheck.value);
+            }
+        } else {
+            // 第一次获取的状态是false，此处需要做特殊处理，判断是否真的未登录状态
+            // if (store.getters.token !== '') {
+            // store.dispatch('user/logout')
+            // }
+        }
+    },
 });
 /**
  * 处理连接登录逻辑
  * @param {Object} data - 包含连接信息的对象
  */
 const connectLogin = (data) => {
-  // 检查数据中是否包含连接器信息，并判断连接器类型是否为钱包连接
-  if (data.connector && data.connector["type"] == "walletConnect") {
-    // 开始登录加载状态
-    confirmLoading.value = true;
-    waitForWaltConnect().then((isLoaded) => {
-      confirmLoading.value = false;
-    });
-  }
-  loginWallt.value = false;
-  // 调用连接函数进行登录
-  connect(data);
+    // 检查数据中是否包含连接器信息，并判断连接器类型是否为钱包连接
+    if (data.connector && data.connector["type"] == "walletConnect") {
+        // 开始登录加载状态
+        confirmLoading.value = true;
+        waitForWaltConnect().then((isLoaded) => {
+            confirmLoading.value = false;
+        });
+    }
+    loginWallt.value = false;
+    // 调用连接函数进行登录
+    connect(data);
 };
 
 onMounted(async () => {
-  chainsData.value = [chains["QngMainnet"], chains["QngTestnet"]];
-  // changeChain(chainIdCheck.value);
-  console.log(chainsData.value, "chainsData");
-  if (status.value == "connected") {
-    isLogin.value = true;
-  }
+    chainsData.value = [chains["QngMainnet"], chains["QngTestnet"]];
+    // changeChain(chainIdCheck.value);
+    console.log(chainsData.value, "chainsData");
+    if (status.value == "connected") {
+        isLogin.value = true;
+    }
 });
 // 监听登录状态变化
 watch(
-  () => status.value,
-  async (newV) => {
-    console.log(chainId.value, "chainId");
-    changeChainIdFn(chainId.value);
-    if (newV == "connected") {
-      isLogin.value = true;
-      // 过滤，看是否是预设的网络
-      let changeChainId = chainsData.value.filter((item) => {
-        if (item.id === chainId.value) return item;
-      });
-      // 如果不是，就切换为预设网络
-      if (!changeChainId || !changeChainId.length) {
-        changeChain(chainIdCheck.value);
-      } else {
-        chainIdCheck.value = chainId.value;
-      }
-    } else {
-      isLogin.value = false;
+    () => status.value,
+    async (newV) => {
+        console.log(chainId.value, "chainId");
+        changeChainIdFn(chainId.value);
+        if (newV == "connected") {
+            isLogin.value = true;
+            // 过滤，看是否是预设的网络
+            let changeChainId = chainsData.value.filter((item) => {
+                if (item.id === chainId.value) return item;
+            });
+            // 如果不是，就切换为预设网络
+            if (!changeChainId || !changeChainId.length) {
+                changeChain(chainIdCheck.value);
+            } else {
+                chainIdCheck.value = chainId.value;
+            }
+        } else {
+            isLogin.value = false;
+        }
     }
-  }
 );
 
 const changeChainIdFn = (id) => {
-  if (id == chainIdCheck.value) return;
-  chainIdCheck.value = id;
-  chainsData.value.forEach((item) => {
-    if (item.id === chainIdCheck.value) chainIdCheckName.value = item.name;
-  });
-  changeChain(id);
+    if (id == chainIdCheck.value) return;
+    chainIdCheck.value = id;
+    chainsData.value.forEach((item) => {
+        if (item.id === chainIdCheck.value) chainIdCheckName.value = item.name;
+    });
+    changeChain(id);
 };
 const switchMenu = () => {
-  showMenu.value = !showMenu.value;
+    showMenu.value = !showMenu.value;
 };
 //省略地址中间内容
 const omit = (address: any, len: any) => {
-  if (!len) len = 8;
-  if (address !== undefined) {
-    const newAddress =
-      address.substring(0, len) +
-      "..." +
-      address.substring(address.length - len, address.length);
-    return newAddress;
-  } else {
-    return address;
-  }
+    if (!len) len = 8;
+    if (address !== undefined) {
+        const newAddress =
+            address.substring(0, len) +
+            "..." +
+            address.substring(address.length - len, address.length);
+        return newAddress;
+    } else {
+        return address;
+    }
 };
 // 监听登录状态变化
 watch(
-  () => status.value,
-  async (newV) => {
-    console.log(newV, address.value, "address");
+    () => status.value,
+    async (newV) => {
+        console.log(newV, address.value, "address");
 
-    if (newV == "connected") {
+        if (newV == "connected") {
+        }
     }
-  }
 );
 </script>
 <style scoped lang="scss">

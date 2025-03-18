@@ -183,4 +183,17 @@ const pageChange = (e) => {
 const confirmHash = (sendHash) => {
     window.open(QITMEER_HASH + sendHash);
 };
+//省略地址中间内容
+const omit = (address: any, len: any) => {
+    if (!len) len = 8;
+    if (address !== undefined) {
+        const newAddress =
+            address.substring(0, len) +
+            "..." +
+            address.substring(address.length - len, address.length);
+        return newAddress;
+    } else {
+        return address;
+    }
+};
 </script>

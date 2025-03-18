@@ -123,7 +123,63 @@
 			.search-area {
 				display: block;
 				height: auto;
+				border: 0;
+				padding: 0;
+
+				input {
+					border: 1px solid rgb(85, 85, 85);
+					width: 100%;
+					border-radius: 8px;
+					padding-left: 8px;
+				}
+
+				div {
+					margin-top: 10px;
+					width: 100%;
+					margin-left: 0 !important;
+				}
 			}
+		}
+
+		.faucet-header {
+			font-size: 40px;
+			line-height: 40px;
+		}
+
+		.sub-title {
+			font-size: 16px;
+		}
+
+		.table-list {
+
+			table {
+				width: 100%;
+
+				td,
+				th {
+					font-size: 18px;
+				}
+			}
+
+			td,
+			th {
+				&:nth-child(1) {
+					width: 50% !important;
+				}
+
+				&:nth-child(2) {
+					width: 20% !important;
+				}
+
+				&:nth-child(3) {
+					width: 30% !important;
+					font-weight: 300 !important;
+				}
+			}
+		}
+
+		.remodel-pagination {
+			margin-bottom: 0 !important;
 		}
 	}
 }

@@ -26,7 +26,7 @@
 			<tbody>
 				<template v-for="(item,index) in allEvents">
 					<tr v-if="(index+1) > (current - 1) * 10 && (index+1) <= current * 10">
-						<td @click="confirmHash(item.tracsactionHash)">{{item.tracsactionHash}}</td>
+						<td @click="confirmHash(item.tracsactionHash)">{{omit(item.tracsactionHash,4)}}</td>
 						<td>{{item.amount}}</td>
 						<td>{{item.datetime}}</td>
 					</tr>
@@ -34,7 +34,6 @@
 			</tbody>
 		</table>
 	</div>
-
 	<!-- 分页器 -->
 	<div class="remodel-pagination text-center mt-25 mb-25" v-if="allEvents && allEvents.length>10">
 		<a-pagination :current="current" :page-size="10" @change="pageChange" :total="allEvents.length" />
